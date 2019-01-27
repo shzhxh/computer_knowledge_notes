@@ -1,0 +1,45 @@
+#### 简介
+
+管理磁盘分区的工具。它相比于`fdisk`和`cfdisk`命令的优势是，支持创建GPT，支持8ZiB的磁盘空间，默认可以有128个分区，使用了CRC校验。
+
+#### 语法
+
+```
+parted [options] [device[command[options...]...]]
+# options:
+  -h, --help	# 显示帮助信息
+  -l, --list	# 列出所有块设备的分区信息
+  -m, --machine	# 
+  -s, --script	#
+  -v, --version	# 显示版本号
+  -a, --align	# 为新创建的分区设置对齐规则(none,cylinder,minimal,optimal)
+# device:
+  指定块设备，如果没有指定，将默认使用它找到的第1个块设备
+# command [options]
+  help [command]	# 打印一般的帮助信息，或command的帮助信息
+  align-check type partition	# 检查partition是否满足type的对齐约束，type必须是"minimal"或"optimal"
+  mklabel label-type	# 创建新分区表，label-type是分区格式(aix, amiga, bsd, dvh, gpt, loop, mac, msdos, pc98, sun)
+  mkpart part-type [fs-type] start end	# 为文件系统fs-type创建分区，分区类型为part-type，从start开始，从end结束。part-type应该是"primary", "logical", "extended".
+  name partition name	# 将partition的名称设为name
+  print	# 打印分区表
+  quit	# 退出
+  rescue start end	# 恢复在start和end之间丢失的分区
+  resizepart partition end	# 改变partition的end位置
+  rm partition	# 删除partition
+  select device	# 选择device
+  set partition flag state	# 将partition上flag的状态设为state(on,off),flag可以是"boot", "root", "swap", "hidden", "raid", "lvm", "lba", "legacy_boot", "irst", "esp", "palo"。
+  unit unit	#
+  toggle partition flag	# 切换partition上flag的状态
+  version	# 打印版本和版权信息
+  
+```
+
+#### 用法
+
+```
+sudo parted /dev/sda	# 打开parted,选择目标盘sda
+(parted) mklabel gpt	# 在当前设备创建分区表
+(parted) print			# 查看设备信息
+(parted) mkpart primary 0 1396MB	# 创建一个新分区
+```
+

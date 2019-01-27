@@ -1,0 +1,1 @@
+- 自动换行：`alt+z`。或者`File > Preferences > Settings`打开用户设置，将`editor.wordWrap`改为`on`。

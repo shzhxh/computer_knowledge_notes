@@ -1,0 +1,7 @@
+diff:比较两个文件的不同之处
+	-r:递归比较两个目录里的所有文件
+	-N:将不存在的文件当成空文件
+	-u:以统一格式创建补丁文件
+用法：
+diff -ruN lab1/kern lab2/kern > lab2.patch	//递归比较lab2/kern文件夹与lab1/kern文件夹中所有文件不同之处，结果输出到lab2.patch文件中
+	//生成的.patch文件是与patch命令配合使用的

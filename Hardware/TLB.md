@@ -1,0 +1,1 @@
+- TLB(Translation Lookaside Buffer)：翻译后备缓冲器，是在MMU中的一个对PTE的小的缓存。由于MMU比L1缓存快的多，所以可以提高CPU执行的效率。但如果PTE更新了，则需要刷新TLB。

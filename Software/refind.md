@@ -1,0 +1,1 @@
+如果`sudo apt install refind`后选择不安装，可以用`dpkg-reconfigure refind`执行安装。

@@ -1,0 +1,11 @@
+- 实用工具的集合。
+- checkrestart：查找哪些进程正在使用旧版本的库。
+- needrestart：与checkrestart功能相同，得到各级维护，支持容器等新技术。
+- check-enhancements：查找那些用于增强已安装包的软件包。
+- dgrep：在包中用正则表达式搜索文件。
+- dglob：搜索软件包。
+- debget：在apt的数据库中下载一个包的.deb文件。
+- dpigs：查找占用空间最多的包。
+- debman：查看二进制文件.deb中的手册页而不必提取它。
+- debmany：查看包中的文本文件。
+
