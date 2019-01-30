@@ -10,46 +10,143 @@ gdb [选项] prog core		# 调试程序prog并指定core文件
 
 #### 命令
 
-	file			//加载调试文件
-	run			//运行被调试文件
-	continue		//继续执行
-	list			//列出代码
-	x /nfu			//查看内存
-		//u表示一个地址单元的长度，可取b,h,w,g
-		//f表示显示形式，可取x,d,u,o,t,i指令，c字符，f浮点
-		//n表示内存单元个数
-	breakpoint		//设置断点
-	delete			//删除断点
-	step			//单步执行，进入
-	next			//单步执行，不进入
-	si/ni			//同s/n,不过针对的是汇编指令（s/n针对的是源代码）
-	print			//显示变量的值
-	display			//显示数据
-	undisplay		//取消display设置
-	info			//显示各类信息
-	quit			//退出
-	help			//帮助命令
+##### 别名类
+
+其它命令的别名
+
+```
+ni		# 单步追踪指令
+rc
+rni
+rsi
+si		# 精确地单步追踪指令
+stepping
+tp
+tty
+where
+ws
+```
+
+##### 断点类
+
+使程序停在特定的地方
+
+```
+awatch
+break		
+catch
+clear
+commands
+delete
+disable
+dprintf
+enable
+ftrace
+hbreak
+ignore
+rbreak
+rwatch
+save
+skip
+strace
+tbreak
+tcatch
+thbreak
+trace
+watch
+```
+
+##### 数据类
+
+观察数据
+
+```
+display		# 程序停止的时候打印出表达式的值
+print		# 打印出表达式的值
+set
+undisplay	# 程序停止的时候不再打印出某些表达式的值
+x /FMT ADDRESS			# 查看内存,ADDRESS是所要查看内存的表达式
+	# FMT的格式是nfu
+	# u表示一个地址单元的长度，可取b字节,h半字,w字,g八字节
+	# f表示显示形式，可取x十六进制,d十进制,u无符号十进制,o八进制,t二进制,
+		# a地址，i指令，c字符，f浮点，s字符串,z十六进制且在左边补0
+	# n表示内存单元个数，如果是负数则会向前显示
+```
+
+##### 文件类
+
+指定和检查文件
+
+```
+file	# 指定调试文件
+list	# 列出指定的函数或命令
+```
+
+##### 内部的
+
+维护命令
+
+##### obscure
+
+obscure特性
+
+##### 运行类
+
+运行程序
+
+```
+target		# 连接到一个目标(机器或进程)。
+target core	# 使用一个core文件作为target
+target exec	# 使用一个可执行文件作为target
+target extended-remote	# 通过串口使用远程计算机
+target record-btrace	# 收集控制流并提供执行历史
+target record-core		# 
+target record-full		#
+target remote			# 通过串口使用远程计算机
+	# 后面跟的参数是它连接到的串口设备
+target sim	# 使用自带模拟器
+target tfile	# 使用追踪文件作为一个target
+```
+
+##### 栈类
+
+检查栈
+
+##### 状态类
+
+状态查询
+
+```
+info		# 显示各类信息
+```
+
+##### 支持类
+
+支持工具
+
+```
+help
+quit
+```
+
+##### 追踪点
+
+不通过停止程序的方式来追踪程序的执行
+
+##### 用户定义类
+
+用户自定义的命令
 
 #### 调试内核
 
-##### 方法1(调试ucore)
+##### 方法1(以调试ucore为例)
 
 ```
 打开两个窗口，一个执行qemu-system-i386 -hda bin/ucore.img -S -s，另一个执行gdb obj/bootblock.o
 target remote localhost:1234		// 与qemu建立远程连接
 ```
 
-##### 方法2(调试ucore)
-
-```
-打开两个窗口，一个执行make debug,另一个执行gdb
-
-b bootmain.c:bootmain		// 在bootmain.c的bootmain函数下断点
-p /x *(struct elfhdr *)0x10000;	// 在0x10000处按sttuct elfhdr结构显示其内容
-info breakpoint			// 显示breakpoint的信息
-```
-
-##### 方法3(调试hyperkernel)
+##### 方法2(以调试hyperkernel为例)
 
 ```
 # 打开两个窗口
@@ -62,8 +159,6 @@ gdbserver tcp::1234	# 看起来是把qemu作为服务端，用tcp协议连接
 gdb o.x86_64/hv6.elf
 target remote localhost:1234	# 连接到qemu服务端
 ```
-
-### 
 
 #### 错误与解决方法：
 

@@ -137,6 +137,9 @@ qemu-system-riscv64 [options] [disk_image]
 -serial DEV	# 将虚拟串口重定向到宿主机的字符设备DEV。图形模式下默认为vc，非图形模式下默认为stdio。
 -parallel DEV	# 将虚拟并口重定向到宿主机的设备DEV。
 -bios FILE	# 为BIOS指定文件
+-S			# 在刚开始的时候别启动CPU（需要在管理器里输入“c”才会启动CPU）
+-s			# 相当于-gdb tcp::1234，即在TCP端口1234开启一个gdbserver
+-gdb dev	# 等待gdb来连接设备dev。
 ```
 
 
