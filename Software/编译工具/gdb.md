@@ -64,6 +64,8 @@ watch
 display		# 程序停止的时候打印出表达式的值
 print		# 打印出表达式的值
 set
+set riscv	# risc-v专有命令
+set riscv use_compressed_breakpoints	# 设置是否使用压缩的断点
 undisplay	# 程序停止的时候不再打印出某些表达式的值
 x /FMT ADDRESS			# 查看内存,ADDRESS是所要查看内存的表达式
 	# FMT的格式是nfu
@@ -85,6 +87,13 @@ list	# 列出指定的函数或命令
 ##### 内部的
 
 维护命令
+
+```
+flushregs
+maintenance
+```
+
+
 
 ##### obscure
 
@@ -125,8 +134,13 @@ info		# 显示各类信息
 支持工具
 
 ```
-help
-quit
+!
+add-auto-load-scripts-path
+add-auto-load-scripts-directory
+alias		# 为已有命令取别名
+apropos		# 查找满足REGEXP的命令
+help		# 打印出命令的帮助信息
+quit		# 退出gdb
 ```
 
 ##### 追踪点

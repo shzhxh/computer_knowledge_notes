@@ -45,6 +45,8 @@ git clone https://github.com/riscv/riscv-pk
 
 cd linux
 make CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv defconfig
+make CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv menuconfig
+	# Kernel hacking -> Compile-time checks and compiler options -> Compile the kernel with debug info	加入这个选项后可以用gdb调试kernel
 make CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv -j8
 
 cd ../riscv-pk/
