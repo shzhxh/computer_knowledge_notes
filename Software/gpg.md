@@ -61,4 +61,3 @@ gpg --import mykey  # 导入钥匙
 gpg -s myfile	# 对myfile签名
 gpg --verify  myfile  # 对myfile验签
 ```
-
