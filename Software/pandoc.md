@@ -4,7 +4,11 @@ Pandoc是一个Haskell库，用于将一个标记格式转换为另一个标记�
 
 #### 语法
 
-`pandoc [options] [input-file]...`
+```
+pandoc [options] [input-file]...	# 输入文件为input-file，如不指定则为stdin，输出默认为stdout
+```
+
+
 
 #### 用法示例
 ```shell
