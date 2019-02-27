@@ -42,6 +42,33 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
+#### 共享打印机
+
+```
+sudo apt update
+sudo apt install hplip
+sudo apt install cups
+
+sudo usermod -a -G lpadmin pi
+sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak	# 备份
+sudo vim /etc/cpus/cupsd.conf
+	# 将Localhost:631改为0.0.0.0:631
+	# 在Location /, /admin, /admin/conf 下添加"Allow all"
+	
+wget http://foo2zjs.rkkda.com/foo2zjs.tar.gz
+tar xf foo2zjs.tar.gz
+cd foo2zjs
+make
+./getwdb P1005
+sudo make install
+sudo make install-hotplug
+sudo make make cups
+
+# 浏览器登陆树莓派ip:631，添加打印机
+
+# 重启树莓派
+```
+
 
 
 
