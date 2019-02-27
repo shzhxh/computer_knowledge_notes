@@ -30,8 +30,8 @@ grep	# 打印出若干符合模式的行
 help	# 打印出关于命令的帮助信息
 info	# 从显示分支，当前分支或未合并分支获取信息
 init	# 在当前目录初始化repo
-  -u URL	# 指定仓库位置
-  -b REVISION	# 指定分支或版本
+  -u URL	# 指定manifest仓库的地址
+  -b REVISION	# 指定manifest仓库的分支或版本
 manifest	# 展示检查工具
 overview	# 显示project未合并分支的概览
 prune	# 剪掉已经合并的topics
@@ -42,6 +42,8 @@ stage	# stage files for commit
 start	# 开始一个新的开发分支
 status	# 显示工作树的状态
 sync	# 将工作树更新到最新版本
+	-f 		# 即使某些项目同步失败，也会继续同步其它项目
+	-j JOBS	# 同步下载的JOBS个项目，默认下载4个
 upload	# upload changes for code review
 viersion	# 显示repo的版本
 ```

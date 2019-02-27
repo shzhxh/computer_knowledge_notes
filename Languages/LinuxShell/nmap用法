@@ -1,2 +1,0 @@
-sudo nmap -sn -PT -PI 192.168.1.0/24	
-	//扫描网段内所有ip,-sn的意思是不扫描端口,-PT通过发TCP echo包确定主机是否在线，-PI通过发ICMP echo包确定主机是否在线
