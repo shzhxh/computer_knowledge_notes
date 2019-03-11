@@ -1,10 +1,32 @@
 #### 帮助信息
 
-https://blog.csdn.net/sunweizhong1024/article/details/8055372
+[repo用法详解](https://blog.csdn.net/sunweizhong1024/article/details/8055372)：从源码的角度解释repo的用法
+
+[manifest-format](https://github.com/esrlabs/git-repo/blob/stable/docs/manifest-format.txt)：详细的manifest格式说明
 
 #### 简介
 
-获取android源码的工具。是构建于git之上的仓库管理工具，管理了多个git仓库，向版本控制系统进行上传操作，并自动化了部分安卓开发流。repo只是一个python脚本，可以放在任何地方。使用repo，可以把网络上不同位置的仓库下载到本地。
+用于管理多个git仓库。其下层调用的是git命令，本身是python脚本。
+
+其设计思想是新建一个仓库来管理要管理的仓库，这个仓库就是manifest仓库，它位于 `.repo`文件夹里。
+
+所有仓库的信息都放在manifest仓库的xml文件里，其各节点的意义如下：
+
+- remote：远程仓库地址
+
+  name：名字，alias：别名，fetch：仓库地址前缀，revision：默认分支
+
+- project：子仓库
+
+  path：子仓库路径，name：子仓库名称，group：分组，revison：分支名，clone-depth：git克隆的深度
+
+- copyfile：project的子节点
+
+  src：project的相对路径，dest：仓库的相对路径
+
+- linkfile：project的子节点，类似copyfile，只是把复制文件变为创建链接文件。
+
+- default：project没有设置时会使用默认配置。
 
 #### 语法
 
@@ -15,36 +37,41 @@ https://blog.csdn.net/sunweizhong1024/article/details/8055372
 使用`repo help <command>`获取详细信息。
 
 ```bash
-abandon	# 禁止一个开发分支
-branch	# 查看当前分支
+abandon		# 禁止一个开发分支
+branch		# 查看当前分支
 branches	# 查看当前分支
 checkout	# 检查一个分支
 cherry-pick	# cherry-pick一个分支
-diff	# 显示commit和工作树之间的区别
+diff		# 显示commit和工作树之间的区别
 diffmanifests	# 显示diff工具
 download	# 下载和检查一个分支
-forall	# 在每个project运行一个shell
+forall		# 在每个project运行同样的shell命令
+	-r, --regex
+	-i, --inverse-regex
+	-g GROUPS, --groups=GROUPS
+	-c, --command				# 要执行的命令
+	-e, --abort-on-errors
 gitc-delete	# 删除一个GITC客户端
 gitc-init	# 初始化一个GITC客户端
-grep	# 打印出若干符合模式的行
-help	# 打印出关于命令的帮助信息
-info	# 从显示分支，当前分支或未合并分支获取信息
-init	# 在当前目录初始化repo
+grep		# 打印出若干符合模式的行
+help		# 打印出关于命令的帮助信息
+info		# 从显示分支，当前分支或未合并分支获取信息
+init		# 在当前目录初始化repo
   -u URL	# 指定manifest仓库的地址
   -b REVISION	# 指定manifest仓库的分支或版本
-manifest	# 展示检查工具
+manifest	# 显示当前使用的manifest信息内容
 overview	# 显示project未合并分支的概览
-prune	# 剪掉已经合并的topics
-rebase	# 使本地分支以上游分支为基础
+prune		# 删除已经合并的分支
+rebase		# 使本地分支以上游分支为基础
 selfupdate	# 将repo更新到最新的版本
 smartsync	# 将工作树更新到最新的完善版本
-stage	# stage files for commit
-start	# 开始一个新的开发分支
-status	# 显示工作树的状态
-sync	# 将工作树更新到最新版本
+stage		# 把文件添加到暂存区中
+start		# 开始一个新的开发分支
+status		# 显示工作树的状态
+sync		# 将工作树更新到最新版本
 	-f 		# 即使某些项目同步失败，也会继续同步其它项目
 	-j JOBS	# 同步下载的JOBS个项目，默认下载4个
-upload	# upload changes for code review
+upload		# 把代码提交到gerrit code review中
 viersion	# 显示repo的版本
 ```
 
