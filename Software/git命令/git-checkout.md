@@ -24,3 +24,12 @@ git checkout (-p|--patch) [<tree-ish>] [--] [<pathspec>...]	# 使用交互界面
 
 ```
 
+#### 用法
+
+```
+# 由于github默认只复制远程的master分支，所以如果要复制远程的其它分支应如下操作  
+git checkout -b dev remote/dev  #切换到远程dev分支，并对应到本地dev分支
+
+git checkout -- <file>		# 撤销对工作区的修改
+```
+

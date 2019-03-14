@@ -39,3 +39,11 @@
 ```
 core.quotePath	# 把路径里的不常用字符用反斜杠的方式来编码，当这个变量设置为false的时候，字符均不认为是不常用的。
 ```
+
+#### 使用示例
+
+```
+# 执行git status命令不能正常显示中文
+git config --global core.quotepath false
+```
+
