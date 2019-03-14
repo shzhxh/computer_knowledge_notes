@@ -1,1 +1,0 @@
-javac -encoding GBK //如果代码是GBK编码，需指定encoding参数（运行时需要：java -Dfile.encoding="GBK")
