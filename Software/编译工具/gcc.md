@@ -38,7 +38,19 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 
 ##### 诊断信息格式选项
 
-##### Warning选项
+##### 请求或禁止Warning选项
+
+```
+-Werror		# 让所有的警告都变成错误
+-Wunused-function	# 
+-Wunused-label		# 当一个标签只声明而不使用时进行警告
+-Wunused-parameter	# 当函数参数未使用时进行警告
+-wunused-variable	# 变量只定义而未使用时进行警告
+-Wunused-value		# 当一个语句的计算结果未使用时进行警告
+-Wunused			# 所有-Wunused-*选项加到一块
+```
+
+
 
 ##### C和Objective-C专用Warning选项
 
