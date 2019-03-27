@@ -73,5 +73,10 @@ ssh -C -f -N -g -R <远程ip>:<远程端口>:<本地ip>:<本地端口> 用户名
 
 # 动态转发
 ssh -C -f -N -g -D <本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
+
+# 免密登陆
+ssh-keygen -t rsa	# 生成密钥对
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@ip	# 将公钥传输到远程机器
+	# 可以在远程机器的.ssh/authorized_keys看到刚才添加的公钥
 ```
 
