@@ -1,8 +1,18 @@
+[Linker Scripts](https://sourceware.org/binutils/docs/ld/Scripts.html)
+
+#### 脚本格式
+
+链接脚本由一系列命令组成。
+
 #### 脚本命令
 
 ##### ENTRY
 
 ENTRY(SYMBOL) ：将符号SYMBOL的值设置成入口地址。
+
+##### INCLUDE
+
+INCLUDE filename：把其它链接脚本filename链接到当前脚本中。
 
 ##### OUTPUT_ARCH
 
@@ -50,11 +60,11 @@ FLAGS标志，该标志用于设置程序段描述的p_flags域。
 
 ##### SECTIONS
 
-SECTIONS命令告诉ld如何把输入文件的sections映射到输出文件的各个section.
+SECTIONS命令告诉链接器如何把输入文件的sections映射到输出文件的sections，且会说明输出文件的sections放在内存中的什么位置。SECTIONS命令由多个sections-command组成，sections-command是如下四种之一：
 
-1. ENTRY命令
+1. ENTRY命令，详见ENTRY命令
 
-2. 符号赋值语句
+2. 符号赋值语句，详见赋值语句
 
 3. 输出section的描述
 
@@ -86,3 +96,14 @@ SECTIONS命令告诉ld如何把输入文件的sections映射到输出文件的�
    - .一些特殊的输出section关键字
 
 4. section覆盖描述
+
+#### 赋值语句
+
+#### 表达式
+
+#### 隐式的链接脚本
+
+- 如果指定的输入文件不能识别为object或archive，将会尝试把它作为链接脚本。如果此文件不能按链接脚本解析，链接器将会报错。
+- 隐式链接脚本不会取代默认链接脚本。
+- 一般来说，隐式的链接脚本仅包含符号赋值，或INPUT,GROUP，或VERSION命令。
+- 作为隐式链接脚本的输入文件，其内容会放到读取它的命令的那个位置。这会影响archive搜索。
