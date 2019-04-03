@@ -7,7 +7,7 @@
 ```
 -a	# 激活bootnum
 -A	# 不激活bootnum
--b	# 修改BootXXX
+-b, --bootnum XXX	# 修改BootXXX，注意XXX是16进制数
 -B	# 删除bootnum
 -c	# 创建bootnum并添加到bootorder
 -d	# 此盘包含loader(默认/dev/sda)

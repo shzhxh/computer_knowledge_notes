@@ -20,6 +20,10 @@ INCLUDE filename：把其它链接脚本filename链接到当前脚本中。
 
 ##### MEMORY
 
+链接器默认允许分配所有可用内存，可用`MEMORY`命令来覆盖此默认配置。
+
+`MEMORY`命令描述了目标内存区域的位置和大小。它还描述了链接器对此内存区域的权限。
+
 ```
 MEMORY {
 NAME1 [(ATTR)] : ORIGIN = ORIGIN1, LENGTH = LEN1
@@ -28,13 +32,13 @@ NAME2 [(ATTR)] : ORIGIN = ORIGIN2, LENGTH = LEN2
 }
 ```
 
-NAME:存储区域的名字。
+NAME:内存区域的名字。仅用于链接脚本内对此内存区域的引用，即在链接脚本之外此名称是无意义。
 
-ATTR:该存储区域的属性。R只读，W读写，X可执行，A可分配，I已初始化，L同I，!不满足。
+ATTR:该内存区域的属性。R只读，W读写，X可执行，A可分配，I已初始化，L同I，!反转它后面跟着的任意属性的意思。
 
-ORIGIN:区域的开始，可简写成org或o.
+ORIGIN:此内存区域的开始地址，可简写成org或o.
 
-LENGTH:区域的大小，可简写成len或l.
+LENGTH:此内存区域的大小，默认以bytes为单位，也可显式地指定K(kilobytes), M(megabytes)等单位，可简写成len或l.
 
 ##### PHDRS
 
