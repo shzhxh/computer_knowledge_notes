@@ -73,12 +73,16 @@ SECTIONS命令告诉链接器如何把输入文件的sections映射到输出文�
 3. 输出section的描述
 
    ```
-   SECTION-NAME [ADDRESS] [(TYPE)] : [AT(LMA)]
-   {
-   OUTPUT-SECTION-COMMAND
-   OUTPUT-SECTION-COMMAND
-   …
-   } [>REGION] [AT>LMA_REGION] [:PHDR HDR ...] [=FILLEXP]
+   SECTION-NAME [ADDRESS] [(TYPE)] : 
+     [AT(LMA)]
+     [ALIGN(section_align) | ALIGN_WITH_INPUT]
+     [SUBALIGN(subsection_align)]
+     [constraint]
+     {
+       OUTPUT-SECTION-COMMAND
+       OUTPUT-SECTION-COMMAND
+       …
+     } [>REGION] [AT>LMA_REGION] [:PHDR HDR ...] [=FILLEXP]
    ```
 
    SECTION-NAME：输出section的名字
@@ -87,17 +91,23 @@ SECTIONS命令告诉链接器如何把输入文件的sections映射到输出文�
 
    OUTPUT-SECTION-COMMAND为以下四种之一:
 
-   - .符号赋值语句
+   - .符号赋值语句，详见赋值语句
 
-   - .输入section描述
+   - .输入section描述(它是最基本的操作，在OUTPUT-SECTION-COMMAND中最为常见)
+
+     用于把输入文件里指定的section包含到输出文件的section里，如果不包含某些输入文件则要使用EXCLUDE_FILE。
 
      ```
      FILENAME([EXCLUDE_FILE (FILENAME1 FILENAME2 ...) SECTION1 SECTION2 ...)
      ```
 
+     输入section描述由文件名跟着圆括号内的section名组成。文件名和section名可以使用通配符模型。
+
+     EXCLUDE_FILE：用于指定不用来匹配的文件列表。
+
    - .直接包含的数据值
 
-   - .一些特殊的输出section关键字
+   - .特殊的输出section关键字
 
 4. section覆盖描述
 
