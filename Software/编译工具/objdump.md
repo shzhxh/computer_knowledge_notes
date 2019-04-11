@@ -2,6 +2,20 @@
 
 显示object文件的信息。(参考：man objdump)
 
+#### 语法
+
+```
+objdump [options] objfile...	# 显示objfile的信息，options控制显示的内容。
+```
+
+#### 选项
+
+```
+
+```
+
+
+
 #### 用法
 
 ```shell
