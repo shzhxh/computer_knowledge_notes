@@ -155,7 +155,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
 | csrrc rd, csr, rs1       | source    | CSRRC  | SYSTEM | tmp=rs1; rd=csr; csr &= !tmp |
 | csrrwi rd, csr, rs1      | uimm[4:0] | CSRRWI | SYSTEM | rd=csr; csr=uimm[4:0]        |
 | csrrsi rd, csr, rs1      | uimm[4:0] | CSRRSI | SYSTEM | rd=csr; csr\|=uimm[4:0]      |
-| csrrci rd, csr, rs1      | uimm[4:0] | CSRRCI | SYSTEM | rd=csr; csr\|=uimm[4:0]      |
+| csrrci rd, csr, rs1      | uimm[4:0] | CSRRCI | SYSTEM | rd=csr; csr \&= !uimm[4:0]   |
 
 - 计时器和计数器(伪指令)
   
@@ -203,7 +203,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
       | 0000000 | src2 | src1 | SLLW/SRLW | dest | OP-32  |
       | 0100000 | src2 | src1 | SUBW/SRAW | dest | OP-32  |
 
-      ​
+      
 
    3. Load和Store指令(增加了3条指令)
 
@@ -222,7 +222,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
    | MUL/MULH\[[S]U] rd, rs1, rs2    | MULDIV | MUL/MULH\[[S]U] | OP     | MUL将乘法的低位放入目标寄存器，MULH则是放高位          |
    | MULW rd, rs1, rs2               | MULDIV | MULW            | OP-32  | 仅用于RV64，计算源寄存器的低32位，再用MUL指令获取高32位的值 |
 
-   ​
+   
 
 2. 除法操作
 
@@ -231,7 +231,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
    | DIV[U]/REM[U] rd, rs1, rs2      | MULDIV | DIV[U]/REM[U]   | OP     | rs1/rs2。DIV提供商，REM提供余数 |
    | DIV[U]W/REM[U]W rd, rs1, rs2    | MULDIV | DIV[U]W/REM[U]W | OP-32  | 仅用于RV64,源寄存器的低32位相除。   |
 
-   ​
+   
 
 #### 7. A：原子扩展
 
@@ -391,7 +391,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
   | tail offset                  | auipc x6, offset[31:12]; jalr x0, x6, offset[11:0] | pc += offset               |
   | fence                        | fence iorw, iorw                         | 隔离内存和IO                    |
 
-  ​
+  
 
 - 访问CSR的伪指令
 
@@ -408,7 +408,7 @@ ecall是用来触发异常的，而int是用来触发中断的，感觉它们用
   | csrsi csr, imm  | csrrsi x0, csr, imm      | csr \|= imm, 立即数置位csr     |
   | csrci csr, imm  | csrrci x0, csr, imm      | csr &= !imm, 立即数清位csr     |
 
-  ​
+  
 
 #### 21. 扩展RISC-V
 

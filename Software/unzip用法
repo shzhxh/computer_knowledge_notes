@@ -1,3 +1,0 @@
-unzip -l "Weibo Data.zip"	//显示压缩文件内所包含的文件
-unzip "Weibo Data.zip"		//解压到当前文件夹
-unzip src.zip -d /usr/src/	//解压到指定目录
