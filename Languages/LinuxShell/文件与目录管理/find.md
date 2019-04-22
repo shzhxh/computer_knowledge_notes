@@ -36,6 +36,13 @@
 
 将表达式中的其它部分连接起来。
 
+```
+! expr		# 对expr的值取反
+-not expr	# 等价于"! expr" 
+```
+
+
+
 #### 不常用文件名
 
 #### 标准一致性
@@ -44,4 +51,8 @@
 
 #### 例子
 
-`find ./ -type f -name "hadoop-core*"`	//递归查找当前目录下以hadoop-core开头的文件
+```
+find ./ -type f -name "hadoop-core*"	# 递归查找当前目录下以hadoop-core开头的文件
+find -type f -not -name "*.md"			# 查找类型为文件，名称不匹配"*.md"的文件
+```
+
