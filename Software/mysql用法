@@ -1,2 +1,0 @@
-sudo apt install mysql-server	//安装mysql
-mysql -u root -p		//登陆mysql
