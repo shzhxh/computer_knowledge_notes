@@ -1,5 +1,0 @@
-描述：从系统中删除用户。
-deluser只删除用户，默认不删除home directory, mail spool 或其它属于用户的文件。
-	--remove-home：删除home directory和mail spool
-	--remove-all-files:删除所有属于用户的文件
-
