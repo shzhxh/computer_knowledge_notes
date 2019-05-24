@@ -78,5 +78,9 @@ ssh -C -f -N -g -D <本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
 ssh-keygen -t rsa	# 生成密钥对
 ssh-copy-id -i ~/.ssh/id_rsa.pub user@ip	# 将公钥传输到远程机器
 	# 可以在远程机器的.ssh/authorized_keys看到刚才添加的公钥
+	
+# 设置别名
+cd .ssh && touch config	# 创建config文件
+	# Host为别名，HostName为主机地址，User为登陆用户名，Port为端口号，IndentitiesOnly yes为固有配置
 ```
 
