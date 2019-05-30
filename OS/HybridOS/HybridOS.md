@@ -12,6 +12,35 @@
 
 ##### 设备端
 
+系统组件
+
+- 满足POSIX标准的内核：如Linux
+- 基本的运行时工具：如Busybox
+- 通用系统服务
+- HybridOS服务
+
+守护进程
+
+- 日志服务
+- 安全服务
+
+服务
+
+- WebSocket
+- HTTP
+- CoAP
+- 流服务
+- MQTT　Broker
+
+系统软件结构图
+
+- 应用层
+- 框架层：hiWebKit与HFCL、V8引擎和hybrid.js
+- 服务层：python运行时，服务，MiniGUI
+- 守护进程
+- 标准库、硬件抽象层等
+- 内核与驱动
+
 ##### 客户端
 
 客户端程序在各OS平台可以运行的核心在**hiWebKit**，它继承了**WebKit**的特性。
