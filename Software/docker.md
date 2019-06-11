@@ -67,8 +67,20 @@ volume      # Manage volumes
 
 #### 命令
 
+##### attach
+
 ```
-attach
+docker attach [options] CONTAINER	# 连接到运行中的容器
+
+# 选项
+  --detach-keys string
+  --no-stdin
+  --sig-proxy
+```
+
+
+
+```
 build	# 从Dockerfile创建一个镜像。
 commit	# 从容器创建一个镜像。
 cp
