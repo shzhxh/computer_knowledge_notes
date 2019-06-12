@@ -22,6 +22,21 @@
 
 ### shell变量
 
+- 数组
+
+  ```
+  # shell只支持一维数组
+  array_name = (val0 ... valn)	# 数组的定义方式一
+  array_name[0] = val0			# 数组的定义方式二
+  ${array_name[index]}			# 读取数组的元素
+  ${array_name[*]}				# 读取数组中的所有元素方式一
+  ${array_name[@]}				# 读取数组中的所有元素方式二
+  ${#array_name[*]}				# 获取数组长度方式一
+  ${#array_name[@]}				# 获取数组长度方式二
+  ```
+
+  
+
 ### Bash特性
 
 ### 作业控制
@@ -99,16 +114,25 @@ $	# 变量参数
 #### 循环
   1. for
 ```
+# 格式一
   for 变量名 in 列表
   do
       命令1
       命令2
       ...
   done
+  
+# 格式二
+  for ((i=0; i<10; i++))
+  {
+      命令1
+      ...
+  }
 ```
   2. until
 ```
   until 条件
+  do
     命令1
     ...
   done
