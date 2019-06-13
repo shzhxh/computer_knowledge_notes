@@ -41,3 +41,8 @@ crontab [-u user] [选项]
 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
 ```
 
+#### 问题解决
+
+1. 脚本可以手动执行而crontab没有执行。
+
+   依次排除了脚本的环境变量的问题，crontab格式的问题，cron守护进程的问题。发现最终的原因是脚本里第一行#后面少了!，此时脚本可手动执行，但在crontab不能执行。猜测原因是我的环境里有bash，而crontab的环境里没有bash，所以第一行的错误导致后面的命令均不能执行。

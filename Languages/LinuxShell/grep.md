@@ -48,6 +48,7 @@ rgrep # 等价于grep -r
 -c, --count	# 不进行正常输出，而只输出每个文件匹配的行数
 -L, --files-without-match	# 不进行正常输出，而只打印不匹配指定样式的文件名
 -l, --files-with-matches	# 不进行正常输出，而只打印匹配指定样式的文件名
+-q, --quiet, --silent		# 静默，不向标准输出写任何内容
 ```
 
 ##### 输出行前缀控制
