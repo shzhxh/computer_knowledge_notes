@@ -19,8 +19,8 @@ gpg [选项] 命令 [参数]
 -e, --encrypt  使用公钥进行非对称加密。
 -d, --decrypt  解密文件，默认输出到SDTOUT。
 --gen-key, --generate-key  生成非对称密钥。
--k, --list-keys, --list-public-keys  列出指定的密钥。
--k, --list-sectet-keys   列出指定的密钥。
+-k, --list-keys, --list-public-keys  列出指定的公钥。
+-K, --list-sectet-keys   列出指定的私钥。
 --export  导出钥匙，默认输出到stdout。
 --export-secret-keys, --export-secret-subkeys 导出私钥，默认输出到STDOUT。
 --import, --fast-import  导入钥匙
