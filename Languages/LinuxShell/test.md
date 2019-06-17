@@ -4,7 +4,9 @@
 
 #### 语法
 
-`test EXPRESSION`返回EXPRESSION的值，这个值只有两个结果：true或false。
+```
+test EXPRESSION		# 返回EXPRESSION的值，这个值只有两个结果：true或false。
+```
 
 ##### 逻辑运算
 

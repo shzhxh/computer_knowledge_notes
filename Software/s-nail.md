@@ -24,3 +24,15 @@ s-nail -s "test" xxx@qq.com < filename		# 将文件filename中的内容发送出
 s-nail -s "test" xxx@qq.com,xxx@163.com < abc	# 向多人发邮件
 ```
 
+#### 错误解决
+
+1. Please set *ssl-rand-file* to a file with sufficient entropy.
+
+   之前还能正常发送邮件，某天开始就不行了。解决方法如下：
+
+   ```
+   sudo vim /etc/s-nail.rc
+   	# 最后一行添加set ssl-rand-file=/tmp/random-file
+   ```
+
+   
