@@ -99,14 +99,21 @@ ls .repo	# 查看.repo目录
 #### 错误解决
 
 ```
+# 问题1
 现象： 执行repo sync的出现如下错误提示：git prior sync failed; rebase still in progress
 解决方法：进到出问题的目录，执行git rebase --abort，提示It looks like git-am is in progress. Cannot rebase.执行git am --abort。再回到原目录执行repo sync即可。
 原因分析：由于rebase操作还在进程中，导致sync失败。解决方法就是让rebase退出进程。
-```
 
-```
+# 问题2
 现象：执行repo sync出现如下错误提示：error.GitError: platform/art rev-list ('4c2be345d6bfc25db87f23749912ae9d98d2ad62', 'HEAD', '--'): fatal: bad object HEAD
 解决方法：删除art目录，再进行repo sync
 原因分析：可能是art目录进行了一些修改，导致git命令执行失败
+
+# 问题3
+现象：执行repo sync出现如下错误提示：access denied or repository not exported
+解决方法：清空整个工作区，重新reop sync
+原因分析：删除出错的仓库都无效，删除整个工作区才有效，无法理解此问题
 ```
+
+
 
