@@ -1,18 +1,19 @@
-可以通过命令vimtutor学习。
+可以通过命令**vimtutor**学习。
 
 #### 语法
 
 ```
-       vim [options] [file ..]
-       vim [options] -
-       vim [options] -t tag
-       vim [options] -q [errorfile]
+vim [options] [file ..]		# 编辑指定文件
+vim [options] -				# 从标准输入读取文本
+vim [options] -t tag		# 编辑tag所在文件
+vim [options] -q [errorfile]	# 编辑首先出错的文件
 ```
 
 #### 选项
 
 ```
--d	# 比较多个文件的差异。就像vimdiff那样工作。
+-d	# 比较多个文件的差异。等价于vimdiff。
+-R	# 只读模式。等价于view。
 ```
 
 #### 使用示例
@@ -98,6 +99,7 @@ V	# 选择，以行为单位
 ```
 	:vsp filename	# 纵向分屏，并打开文件filename
 	:sp  filename	# 横向分屏，并打开文件filename
+	ctrl+w+[hjkl]	# 分屏左下上右切换
 ```
 
 ##### 移动光标
