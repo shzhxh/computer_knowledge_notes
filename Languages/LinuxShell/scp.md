@@ -6,3 +6,9 @@
 
 `scp [options] [user@host1:]file1 [user@host2:]file2`
 
+#### 选项
+
+```
+-P port	# 指定远程主机的端口
+```
+

@@ -11,7 +11,6 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 #### 操作
 
 ```
-# 第一个参数只能是Acdrtux中的一个。
 # A:append
 # c:create
 # d:differences
@@ -76,7 +75,7 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 
 ```
 
-信息输出选项
+##### 信息输出选项
 
 ```
 -v, --verbose	# 输出详细信息
@@ -89,8 +88,9 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 #### 例子
 
 ```
-tar zxvf xx.tar.gz
-tar jxvf xx.tar.bz2
+tar cf abc.tar ./abc	# 给abc目录创建归档文件abc.tar
+tar xf abc.tar -C ~/	# 将abc.tar解压到用户目录
+tar tf abc.tar			# 列出abc.tar里的文件
 ```
 
 
