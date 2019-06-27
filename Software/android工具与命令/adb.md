@@ -60,7 +60,23 @@ uninstall [-k] <package>	# 从设备上移除此app package
 ##### 调试
 
 ```
-logcat		# 显示设备日志
+logcat [options] [filterspecs]		# 显示设备日志
+	# 选项
+	-c, --clear	# 清空日志并退出。若定义将日志输出到文件，则清空fileset
+	-f, --file=<file>	# 把日志输出到文件。默认是输出到标准输出
+	-s	# 将默认过虑器设为silent。等价于filterspec '*:S'
+	
+	# filterspec的格式
+	<tag>[:priority]
+	# <tag>是日志里的标签，也可用'*'表示所有的标签
+	# priority有如下选项：
+	V	详细，<tag>的默认选项
+	D	调试，'*'的默认选项
+	I	信息
+	W	警告
+	E	错误
+	F	严重错误
+	S	安静，即不进行输出
 ```
 
 
