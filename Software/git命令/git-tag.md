@@ -5,7 +5,8 @@
 #### 语法
 
 ```bash
-git tag	<-a | -s | -u keyid> <tagname>	# 创建标签
+git tag	[-a | -s | -u keyid] <tagname>	# 创建标签
+	# 如不加选项是创建一个不带msg的标签，此时不会要求用户输入tag信息。
 	# 要创建tagname不能已经存在，除非带-f选项。
 	# 会启动编辑器要求用户输入tag信息，除非使用-m msg或-F file选项。
 	
@@ -13,7 +14,7 @@ git tag -d <tagnames>			# 删除标签
 git tag -l						# 列出标签
 git tag -v <tagnames>			# 验证标签
 	
-git push origin tag	# 将标签推送到服务器
+git push origin <tagname>	# 将标签推送到服务器
 ```
 
 #### 选项
