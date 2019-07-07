@@ -19,3 +19,44 @@
    第一行指定根目录所在的分区，第二行指定内核为kernel，后面跟着的都是参数，可以看到它指定了openthos的三个分区，第三行是指定内存中的文件系统，辅助内核启动。
 
 2. 执行命令`sudo update-grub`，相当于`sudo grub-mkconfig -o /boot/grub/grub.cfg`，重新为grub生成配置文件。`grub-mkconfig`命令默认是将配置输出到标准输出的。
+
+#### 虚拟机中安装Openthos
+
+##### iso用于从cdrom中安装(BIOS)
+
+```
+# 1. 创建虚拟磁盘
+qemu-img create a.raw +20G
+sudo parted a.raw
+  mklabel msdos
+  mkpart p ext4 1 20G
+  quit
+  
+# 2. 安装
+qemu-system-x86_64 -hda a.raw -enable-kvm -m 4096 -cdrom you-download.iso -boot once=d
+
+# 3. 启动
+qemu-system-x86_64 -hda a.raw -enable-kvm -m 4096 -vga cirrus
+```
+
+
+
+##### img用于从U盘安装(UEFI)
+
+```
+# 1. 创建虚拟磁盘
+qemu-img create a.raw +20G
+sudo parted a.raw
+  mklabel gpt
+  mkpart p ext4 1 20G
+  quit
+  
+# 2. 安装
+wget https://www.kraxel.org/repos/jenkins/edk2/edk2.git-ovmf-x64-0-20180807.281.gc526dcd40f.noarch.rpm
+# 提取usr/share/edk2.git/ovmf-x64/OVMF-pure-efi.fd
+qemu-system-x86_64 -bios OVMF-pure-efi.fd -hda a.raw -enable-kvm -m 4096 -hdb you-download.img -boot once=d
+
+# 3. 启动
+qemu-system-x86_64 -hda a.raw -enable-kvm -m 4096 -vga cirrus
+```
+

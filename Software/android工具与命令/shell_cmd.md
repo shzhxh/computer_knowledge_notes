@@ -3,7 +3,7 @@
 #### pm
 
 ```
-
+pm disable <package>	# 使package不可用
 ```
 
 #### wm
@@ -17,5 +17,17 @@ wm density [reset|DENSITY]	# 设置显示密度
 	# 用法与wm size类似
 wm overscan [reset|LEFT,TOP,RIGHT,BOTTOM]	# 设置屏幕显示区域
 	# 4个参数是距离左，上，右，下的距离
+```
+
+#### getprop
+
+```
+getprop [NAME [DEFAULT]]	# 查看系统属性
+```
+
+#### setprop
+
+```
+setprop NAME VALUE			# 设置系统属性
 ```
 
