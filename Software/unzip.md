@@ -5,31 +5,35 @@
 #### 语法
 
 ```
-unzip [选项]　file[.zip] [file...]
+unzip [命令[选项]]　file[.zip] [file...] [-x xfile...] [-d exdir]
 ```
 
-#### 选项
+#### 命令
 
 ```
 -p
 -f
 -u
 -v
--x
+-x xfiles	# 不包含xfiles里的文件
 -l			# 列出文件
 -t
 -z
 -T
 -d exdir	# 将文件解压到exdir
+```
 
+#### 选项
+
+```
 -n
--o
+-o			# 不提示而直接覆盖文件
 -j
 -U
 -C
 -X
 -K
--q
+-q			# 静默模式
 -a
 -aa
 -UU
@@ -39,6 +43,8 @@ unzip [选项]　file[.zip] [file...]
 -O CHARSET	# 为DOS,Windows或OS/2的zip文件指定字符编码
 -I CHARSET	# 为UNIX的zip文件指定字符编码
 ```
+
+
 
 #### 示例
 
