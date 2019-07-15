@@ -2,6 +2,19 @@
 
 使用本地refs来更新远程refs
 
+#### 语法
+
+```
+git push [选项] [<repository> [<refspec>...]]
+	# <repository>是远程仓库。它可以是远程仓库的URL，也可以是远程仓库的名称。
+	# <refspec>...则指定本地对象更新哪个远程引用，其格式为[+]<src>:<dst>
+	  # <src>通过是本地分支名称，但也可以是一个SHA-1表达式。
+	  # <dst>则描述要更新哪个远程引用。它必须是一个实际的引用名称。
+	  # <tag> 对于tag来说，这相当于 refs/tags/<tag>:ref/tags/<tags>
+```
+
+
+
 #### 例子
 
 ```

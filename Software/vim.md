@@ -167,6 +167,16 @@ V	# 选择，以行为单位
 | softtabstop   | sts     | 按下退格键将删除指定数量的空格            |
 | (no)smarttab  | (no)sta | 首行按tab键的时侯，空格数是来自于ts还是sw |
 
+配置示例
+
+```
+# 1个tab键变成4个空格
+vim ~/.vimrc
+	set ts=4
+	set et
+	set ai
+```
+
 
 
 #### 常见错误

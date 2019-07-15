@@ -2,6 +2,14 @@
 
 将远程仓库的更改合并到当前分支中
 
+#### 语法
+
+```
+git pull [options] [repository [refsepc...]]
+```
+
+
+
 #### 用法
 
 ```
