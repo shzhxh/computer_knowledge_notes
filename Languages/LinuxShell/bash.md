@@ -12,6 +12,28 @@
 
 #### 语法
 
+##### 简单命令
+
+##### 管道
+
+##### 列表
+
+##### 复合命令
+
+##### 协进程
+
+##### 定义函数
+
+```
+[function] name [()] compound-command [redicrection]
+	# 保留字function是可选的
+	# name是函数名
+	# compound-command详见#复合命令
+	# redicrection详见#重定向
+```
+
+
+
 #### 注释
 
 #### 引用
