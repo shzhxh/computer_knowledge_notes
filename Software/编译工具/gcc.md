@@ -135,6 +135,18 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 
 解决方法：创建一个链接asm指向文件夹asm-generic
 
+**错误提示**：Instruction csrw requires absolute expression
+
+原因分析：这是由于编译器版本不正确引起的，由于riscv指令集尙处于发展阶段，所以不同版本的指令集可能是不一样的
+
+解决方法：重新编译工链，要使用指令集对应的编译器版本号
+
+**错误提示**：undefined reference to `__alltraps'
+
+原因分析：没把包含`__alltraps`的源文件加入编译系统，导致链接器找不到对`__alltraps`的引用
+
+解决方法：修改Makefile，把相应源文件加入编译系统
+
 #### 安装gcc-riscv32(Ubuntu 16.04 x86_64)
 
 ##### 准备
@@ -262,7 +274,7 @@ export RISCV=/path/to/install/riscv/toolchain
 
 ##### 错误解决
 
-出错提示：`error: invalid use of incomplete type ‘scm_t_port {aka struct scm_t_port}’`
+错误提示：`error: invalid use of incomplete type ‘scm_t_port {aka struct scm_t_port}’`
 
 原因分析：新版本的guile不再提供对scm_t_port的定义
 

@@ -121,9 +121,9 @@ pacman -S --help	# 查询安装软件包的方法
 
 #### 错误解决
 
-1. 错误提示：error: failed to commit transaction (conflicting files)。
+**错误提示**：error: failed to commit transaction (conflicting files)。
 
-   原因分析：这是文件冲突，pacman不会主动覆盖已经存在的文件。
+原因分析：这是文件冲突，pacman不会主动覆盖已经存在的文件。
 
-   解决方法：将冲突的文件删除，重命名或转移到其它文件夹。
+解决方法：将冲突的文件删除，重命名或转移到其它文件夹。
 
