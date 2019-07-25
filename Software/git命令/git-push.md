@@ -13,12 +13,24 @@ git push [选项] [<repository> [<refspec>...]]
 	  # <tag> 对于tag来说，这相当于 refs/tags/<tag>:ref/tags/<tags>
 ```
 
+#### 选项
+
+```
+-d, --delete	# 删除远程仓库的refs。refs可以一个分支，也可以是一个标签。
+-f, --force		# 
+```
+
 
 
 #### 例子
 
 ```
 # 如果修改了远程仓库，又修改了本地仓库，则提交的时候会出错。如果对远程仓库的修改不重要，则可强制覆盖远程仓库  
-  git push orgin master:master --force  
+  git push -f orgin master:master 
+
+# 重命名远程分支。没有直接重命名远程分支的命令，只能采用迂回的办法。
+	# 1. 删除远程分支
+	# 2. 本地分支改名
+	# 3. 把改名后的本地分支推送到远程
 ```
 

@@ -43,7 +43,11 @@ mklabel		# 创建disklabel
 mktable		# 创建分区表
 mkpart		# 创建分区
 name		# 为分区命名
-print		# 打印指定信息
+print [args]	# 没有参数则显示当前设备的分区表，可选参数如下：
+	devices	: 显示所有的块设备
+	free	: 显示当前块设备未分配空间的信息
+	list,all: 显示所有块设备的分区表
+	NUMBER	: 显示NUMBER号分区的详细信息
 quit		# 退出
 rescue		# 恢复丢失分区
 resizepart	# 改变分区大小
