@@ -147,6 +147,18 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 
 解决方法：修改Makefile，把相应源文件加入编译系统
 
+**错误提示**：a label can only be part of a statement and a declaration is not a statement
+
+原因分析：一个标签的后面只能跟语句而不能跟声明，我的问题在于switch语句里声明了一个变量
+
+解决方法：把变量声明放到switch语句的外面
+
+**错误提示**：multiple definition of XXX
+
+原因分析：我碰到的问题是在头文件里实现了函数，当多个二进制文件链接到一块的时候会产生冲突
+
+解决方法：在头文件里声明函数，在其它c文件里实现这个函数。变量定义应该也会产生这个问题，所以不要在头文件里定义变量，而只声明变量。
+
 #### 安装gcc-riscv32(Ubuntu 16.04 x86_64)
 
 ##### 准备

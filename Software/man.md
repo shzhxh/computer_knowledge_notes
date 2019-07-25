@@ -14,6 +14,14 @@ man是通过章节来整理各个手册的。
 - 第8章，系统管理员命令
 - 第9章，内核例程
 
+#### 语法
+
+```
+man -k [apropos options] <regexp>...	# 通过关键字regexp搜索手册名和简短描述，regexp是正则表达式。等价于"apropos <regexp>..."
+```
+
+
+
 #### 使用示例
 
 - man的用法：`man man`
@@ -24,4 +32,3 @@ man是通过章节来整理各个手册的。
   > reverse line feeds:反向换行
   > -b: Do not output any backspaces
   > -x: Output multiple spaces instead of tabs
-
