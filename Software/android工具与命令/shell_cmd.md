@@ -12,7 +12,11 @@ dumpsys activity [packagename]	# 显示服务activity的信息，即查看正在
 dumpsys battery					# 查看电量信息
 dumpsys cpuinfo					# 查看CPU信息
 dumpsys meminfo					# 查看内存信息
-dumpsys package
+dumpsys package [options] [cmd]...	# 查看包的信息
+	# cmd可以是：
+	l[ibraries] : 列出已经共享库
+	... ...
+	<pkg_name> : 关于包pkg_name的信息
 dumpsys window | grep mFocused	# 查看处于最上层的窗口信息，可得到包名和活动名
 ```
 

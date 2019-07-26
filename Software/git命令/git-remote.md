@@ -16,9 +16,11 @@ rename <old> <new>	# 将远程仓库的名称从old改为new
 remove <name>		# 删除对远程仓库name的追踪
 set-head <name>		# 为远程仓库设置或删除默认分支
 set-branches <name> <branch>	# 改变远程仓库的分支列表
+show <name>			# 显示远程仓库name与本地仓库之间分支的对应关系
 get-url <name>		# 检索远程分支的url
 set-url <name> <newurl>			# 改变远程分支的url
-prune <name>		# 删除与远程分支name相关的陈旧引用 
+prune [-n] <name>	# 删除与远程分支name相关的陈旧引用 
+	-n, --dry-run	# 只显示要删除的分支而不实际删除它们 
 ```
 
 #### 用法

@@ -52,3 +52,10 @@
 -W
 --warn-undefined-variables
 ```
+
+#### 示例
+
+```
+make SHELL="/bin/bash -x"	# 要了解详细的编译过程，但"make -n"又失效的时候，可试试这条命令
+```
+
