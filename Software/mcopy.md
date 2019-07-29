@@ -7,7 +7,7 @@
 ```bash
 mcopy [-bspanvmQT] [-D clash_option] sourcefile targetfile
 	# 从文件sourcefile复制到文件targetfile
-mcopy [-bspanvmQT] [-D clash_option] sourcefile [ sourcefiles... ] targetdirectory
+mcopy [-bspanvmQT] [-D clash_option] sourcefiles targetdirectory
 	# 从多个文件sourcefiles复制到目录targetdirectory
 mcopy [-tnvm] MSDOSsourcefile
 	# 将文件MSDOSsourcefile复制到当前文件夹下

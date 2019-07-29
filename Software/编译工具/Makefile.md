@@ -1,11 +1,3 @@
-#### 参考资料
-
-[Makefile Conventions](http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions)
-
-[Makefiles](https://www.gnu.org/software/make/manual/html_node/Makefiles.html#Makefiles)
-
-[跟我一起写Makefile](http://wiki.ubuntu.com.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile)
-
 #### 总述
 
 	Makefile = 显示规则 + 隐晦规则 + 变量定义 + 文件指示 + 注释
@@ -31,7 +23,7 @@
 - '+='表示给变量追加值
 - override用于设置命令行里由make指定的参数
 - define关键字用于设置多行变量，末尾以endef结束。
-- '\$@'目标文件集，'\$<'第一个依赖文件，'\$^'所有依赖文件
+- '\$@'，'\$<'，'\$^'详见 [自动化变量](#自动化变量)
 - $(var: a=b)：获取变量var的值，用b代替词尾的a
 
 #### 条件判断
@@ -129,4 +121,29 @@ $(warning >text ...>)
 
 	.SUFFIXES: .c .h .S 定义自己的后缀
 
+##### 自动化变量
+
+```
+$@		# 目标文件集
+$%
+$<		# 第一个依赖文件
+$?
+$^		# 所有依赖文件的集合
+$+		# 所有依赖文件的集合，但不去除重复目标
+$*		# 
+
+$(<D)	# 依赖文件集里的第一个目录的名字
+$(<F)	# 依赖文件集里的第一个文件的名字
+```
+
+
+
 #### 更新函数库文件
+
+#### 参考资料
+
+- [Makefile Conventions](http://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions)
+
+- [Makefiles](https://www.gnu.org/software/make/manual/html_node/Makefiles.html#Makefiles)
+
+- [跟我一起写Makefile](http://wiki.ubuntu.com.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile)

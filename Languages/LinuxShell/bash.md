@@ -87,6 +87,13 @@
 #### shell内建命令
 
 ```
+: [args]
+. <filename> [args]
+source <filename> [args]
+alias [-p] [name[=value] ...]
+bg [jobspec ...]
+bind
+... ...
 pushd [dir]	# 指定目录栈的栈顶，并切换到栈顶所指的目录；如果不加任何参数，则交换最顶端两个参数的位置。
   # -n参数只将目录加入栈中，而不切换目录
   # +N则会把第N个目录加入栈顶(从左边数起，从0开始)
@@ -96,8 +103,15 @@ popd	# 删除目录栈中的某个目录；如果不加任何参数，则删除�
   # -n参数只删除栈顶的目录，而不切换目录
   # +N则会删除第N个目录(从左边数起，从0开始)
   # -N则会删除第N个目录(从右边数起，从0开始)
+... ...
+wait [-n] [n ...]
 ```
 
 
 
 #### 受限的shell
+
+#### 参考资料
+
+1. [bash手册](http://www.gnu.org/software/bash/manual/bash.html)
+2. `man bash`

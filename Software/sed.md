@@ -8,7 +8,7 @@
 #### 用法
 
 ```
-set [option] command [input-file]
+sed [option] command [input-file]
 ```
 
 
