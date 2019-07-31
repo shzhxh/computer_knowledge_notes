@@ -121,7 +121,13 @@ xfs
 #### 示例
 
 ```bash
-mount -t type device dir	# mount的标准形式，将设备device上type类型的文件系统挂载到目录dir上
-mount /tmp/disk.img /mnt -t vfat -o loop=/dev/loop3	# 将回环设备loop3对应到文件disk.img，然后在/mnt上挂载这个设备
-mount /tmp/disk.img /mnt -o loop	# 使用了-o loop选项但没有指定具体的回环设备，将会试着分配一个未使用的回环设备
+# mount的标准形式，将设备device上type类型的文件系统挂载到目录dir上
+	mount -t type device dir
+# 将回环设备loop3对应到文件disk.img，然后在/mnt上挂载这个设备
+	mount /tmp/disk.img /mnt -t vfat -o loop=/dev/loop3
+# 使用了-o loop选项但没有指定具体的回环设备，将会试着分配一个未使用的回环设备
+	mount /tmp/disk.img /mnt -o loop
+# 挂载img文件
+	fdisk -l abc.img	# 计算起始位置：起始扇区*扇区大小
+	sudo mount -o loop,offset=起始位置　abc.img /mnt
 ```

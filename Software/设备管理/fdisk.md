@@ -1,9 +1,15 @@
-管理磁盘分区表
-
 ```
 fdisk -l [devices]		# 列出指定设备分区表，如不指定设备则使用/proc/partitions
-fdisk [options] device
+fdisk [options] device	# 管理磁盘分区表
 ```
+
+#### 选项
+
+```
+-u, --units[=unit]	# 
+```
+
+
 
 #### fdisk命令
 
