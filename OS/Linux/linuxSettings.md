@@ -22,7 +22,18 @@
 /home	//用户目录
 /root	//系统管理员目录
 /lost+found	//文件系统发生错误时，放置遗失片断
-/proc	//内存中数据
+/proc	# 记录着内核的数据结构，动态地存在于内存中
+	/proc/数字	# 数字代表了对应的进程，描述的是相关进程的信息
+	/proc/cpuinfo	# CPU信息
+	/proc/dma		# DMA通道信息
+	/proc/filesystems	# 文件系统信息
+	/proc/interrupts	# 中断信息
+	/proc/ioports		# IO端口信息
+	/proc/meminfo		# 内存信息
+	/proc/net
+	/proc/scsi			# SCSI设备的信息
+	/proc/sys
+	/proc/version		# 内核版本
 /sys	//内核相关信息
 ```
 
@@ -59,7 +70,7 @@ p	//数据输送文件
    pacman -S fcitx fcitx-im fcitx-table-extra fcitx-configtool
    ```
 
-   ​
+   
 
 #### 硬盘分区
 
