@@ -81,6 +81,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub user@ip	# 将公钥传输到远程机器
 	
 # 设置别名
 cd .ssh && touch config	# 创建config文件
-	# Host为别名，HostName为主机地址，User为登陆用户名，Port为端口号，IndentitiesOnly yes为固有配置
+	# Host为别名，HostName为主机地址，User为登陆用户名，Port为端口号，IdentitiesOnly yes为固有配置
+	# 注：如遇到Bad owner or permissions on XXX/config，要把config修改为600权限。
 ```
 
