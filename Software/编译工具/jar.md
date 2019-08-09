@@ -5,7 +5,7 @@
 #### 语法
 
 ```
-
+jar {cuxti}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] <files>
 ```
 
 #### 操作参数

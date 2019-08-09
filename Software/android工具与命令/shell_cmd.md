@@ -59,6 +59,7 @@ am start-service [options] <INTENT>		# 打开一个服务，它应该和"am star
 ```
 # 包管理器
 pm disable <package>	# 使package不可用
+pm enable <package>		# 使package可用
 pm clear <package>		# 删除package的所有数据
 pm install				# 安装软件
 pm uninstall			# 卸载软件

@@ -90,10 +90,15 @@ android_media_MediaScanner_native_init(JNIEnv *env)
 
 ##### 3 数据类型
 
-  java数据类型在JNI层中一般会在前面加个j，如jobject(java中的对象)、jint(java中的int类型)。
+  java数据类型在JNI层中一般会在前面加个j，如jobject(java中的对象)、jint(java中的int类型)、jstring(java.lang.String实例)。
 
 ##### 4 JNIEnv
 
 `JNIEnv*`是虚拟机内部的结构体，代表JNI环境，包含了一些JNI系统函数。
 
 #### native层
+
+#### 参考文档
+
+- 《深入理解Android卷1》邓凡平
+- [Java Native Interface Specification](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html)
