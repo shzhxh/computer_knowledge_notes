@@ -62,6 +62,8 @@ pm disable <package>	# 使package不可用
 pm enable <package>		# 使package可用
 pm clear <package>		# 删除package的所有数据
 pm install				# 安装软件
+pm list package			# 打印已安装包的名称
+	-3	# 只显示第3方包的名称
 pm uninstall			# 卸载软件
 	-k					# 卸载后保留数据和缓存目录
 ```

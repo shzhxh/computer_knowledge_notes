@@ -1,8 +1,6 @@
 #### 简介
 
-* 来源：[runoob.com](http://www.runoob.com/linux/linux-comm-sed.html)
-
-* 用于文本过滤和转换的流编辑器(Stream Editor)。
+用于文本过滤和转换的流编辑器(Stream Editor)。流编辑器是对输入流(文件或管道)进行基本的文本转换。
 
 
 #### 用法
@@ -55,3 +53,7 @@ sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`
 # 
 sed -n 's/ magicmagicmagic/ /p' file1 > file2
   ```
+
+#### 参考文档
+
+- [runoob.com](http://www.runoob.com/linux/linux-comm-sed.html)

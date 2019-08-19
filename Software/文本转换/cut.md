@@ -24,3 +24,11 @@ cut <-b | -c | -f> [options] [files]
   -M	# 从行首到M
 ```
 
+#### 示例
+
+```
+cut -b 3-5 file	# 显示文件file里每行的第3到第5个字节
+cut -c 3 file	# 显示文件file里每行的第3个字符
+cut -d ' ' -f 2	file	# 显示文件file里每行的第2个域，域之间以空格为分隔符
+```
+
