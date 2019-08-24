@@ -50,6 +50,13 @@ git log [options] [revision range] [path]
 
 #### 通用DIFF选项
 
+```
+-p, -u, --patch	# 生成补丁，见#生成补丁
+--stat[=<width>[,<name-width>[,<count>]]]	# 生成diffstat。
+```
+
+
+
 #### 使用-P生成补丁
 
 #### 合并DIFF格式
