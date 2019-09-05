@@ -159,3 +159,7 @@ substr(s,i,[,n])	# 返回从第i的字符开始，最多n个字符的子串。�
 awk '{print $0}' demo.txt	# 打印demo.txt的内容
 ```
 
+#### 参考
+
+- [AWK简明教程](https://coolshell.cn/articles/9070.html)
+- `man awk`

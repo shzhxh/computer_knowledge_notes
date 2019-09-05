@@ -13,15 +13,14 @@ sed [option] command [input-file]
 
 #### 选项
 
-  -e \<script>或--expression=\<script>：用指定的script命令处理输入文件。
-
-  -f <script文件>或--file=<script文件>：用指定的script文件处理输入文件。
-
-  -n或--quiet或--silent：不打印过程，只显示结果。
-
-  --version：打印版本信息。
-
-  --help：打印帮助文件。
+```
+-e <script>或--expression=<script>	# 用指定的script命令处理输入文件。
+-f <script文件>或--file=<script文件>	# 用指定的script文件处理输入文件。
+-i[SUFFIX], --in-place[=SUFFIX]	# 先输出到临时文件，再重命名为原文件。SUFFIX是给将原文件名加上SUFFIX，这样原文件就不会被覆盖。
+-n或--quiet或--silent		# 不打印过程，只显示结果。
+--version					# 打印版本信息。
+--help						# 打印帮助文件。
+```
 
 #### 命令
 
@@ -29,7 +28,7 @@ sed [option] command [input-file]
 
   c\text：用text替换指定的行  
 
-  d：删除定位行
+  d：删除指定的行
 
   i\text：插入文本text
 
@@ -57,3 +56,4 @@ sed -n 's/ magicmagicmagic/ /p' file1 > file2
 #### 参考文档
 
 - [runoob.com](http://www.runoob.com/linux/linux-comm-sed.html)
+- [sed简明教程](https://coolshell.cn/articles/9104.html)
