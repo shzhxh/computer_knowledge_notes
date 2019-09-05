@@ -10,5 +10,8 @@ makepkg -si
 git clone https://aur.archlinux.org/ttf-wps-fonts.git
 cd ttf-wps-fonts
 makepkg -si
+
+# 安装字体方法二
+suod cp -r fonts_dir /usr/share/fonts	# 直接把字体文件夹复制到对应目录下即可
 ```
 
