@@ -8,6 +8,22 @@
 git pull [options] [repository [refsepc...]]
 ```
 
+#### 选项
+
+##### 与合并相关
+
+```
+-r, --rebase[=false|true|preserve|interactive]	# 如为true，则在抓取之后将当前分支重置到上游分支之上。如为false，则将当前分支合并到上游分支。如为preserve，则会向git rebase传递--preserve-merges选项，这样本地提交就不会被破坏掉。如为interactive，则开启交互模式。
+```
+
+
+
+##### 与抓取相关
+
+```
+
+```
+
 
 
 #### 用法
