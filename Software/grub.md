@@ -6,8 +6,6 @@ sudo  grub-install --target=x86_64-efi --efi-directory=/mnt
 sudo update-grub
 ```
 
-
-
 #### 简单配置
 
 1. `grub-mkconfig`可以用来生成grub.cfg文件。但是功能有限。
@@ -21,6 +19,33 @@ sudo update-grub
    - **GRUB_CMDLINE_LINUX_DEFAULT**：除非将GRUB_DISABLE_RECOVERY设置为`true`，否则每个内核都会生成两个入口：默认入口和覆盖模式。此命令的作用就是在GRUB_CMDLINE_LINUX后，只在默认模式下添加命令行参数。
 3. 编辑/etc/grub.d文件夹中的文件或创建/boot/grub/custom.cfg，可以进行更灵活的配置。
 4. 直接修改grub.cfg文件是不建议的。
+
+#### 命令
+
+```
+boot	# 启动已加载的操作系统。
+set [envvar=value]	# 将环境变量envvar的值设置为value，如不给定参数则列出当前的环境变量
+unset envvar	# 释放环境变量envvar
+lsmod	# 列出已加载的模块
+insmod	# 调用指定的模块
+linux	# 装载指定的内核文件，并传递内核启动参数。
+initrd	# 只能紧跟在linux命令之后，为指定的内核传递init ramdisk路径。
+search	# 通过文件(--file)、卷标(--label)、UUID(--fs-uuid)来搜索设备。
+ls [args]	# 如不给定参数，则列出所有grub可见的设备；如给定的参数是一个分区，则显示该分区的信息；如给定的参数是一个绝对路径，则显示该路径下的所有文件。 
+```
+
+#### 内置变量
+
+```
+cmdpath	# core.img所在目录的绝对路径，该绝对路径要包含设备名称
+default	# 默认的菜单项。可使用菜单的titile, id 或 数值顺序。
+timeout	# 设置菜单等待时间。如为0则直接启动default指定的菜单，如为-1则永久等待手动选项。
+fallback	# 如默认菜单项启动失败，则使用该变量指定的菜单项启动。
+prefix	# grub目录的绝对路径，这样才可以从该目录下加载各文件和模块
+root	# 指定根设备的名称
+```
+
+
 
 #### 使系统开机进入纯命令模式
 

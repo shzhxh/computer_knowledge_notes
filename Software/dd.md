@@ -12,7 +12,7 @@ dd option				# 打印帮助信息或版本信息
 #### 操作数
 
 ```
-bs=BYTES	# 一次读写BYTES字节
+bs=BYTES	# 一次读写BYTES字节(默认512)
 cbs=BYTES	# 一次转换bYTES字节
 conv=CONVS	# 用指定的参数转换文件（notrunc:不截短输出文件）
 count=N		# 拷贝的块的数量（注：由ibs=指定一个块占多少个字节）
@@ -24,7 +24,7 @@ of=FILE		# 输出到FILE，而不是stdout
 oflag=FLAG
 seek=N		# 从输出文件的N个块后再复制
 skip=N		# 从输入文件的N个块后再复制
-status=LEVEL
+status=LEVEL	# 输出到stderr的信息。none只显示错误信息，noxfer不显示最终的传输统计信息，progress显示传输统计信息。
 ```
 
 - N和BYTES可以带后缀：
@@ -44,5 +44,11 @@ status=LEVEL
 ```
 --help		# 打印帮助信息
 --version	# 输出版本信息
+```
+
+#### 示例
+
+```
+sudo dd if=*.img of=/dev/* bs=4M status=progress	# 创建U盘启动盘
 ```
 

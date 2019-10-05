@@ -70,7 +70,9 @@ rgrep # 等价于grep -r
 ##### 文件与目录选择
 
 ```
--a, --text
+-a, --text		# 等价于 --binary-files=test，像处理文本文件一样处理二进制文件
+--binary-files=<TYPE>	# 
+-I		# 等价于 --binary-files=without-match, 不处理二进制文件
 -r, --recursive	# 递归搜索，对于符号链接只有在命令行里指定了才会追踪它
 -R, --dereference-recursive	# 递归搜索，会追踪所有的符号链接
 ```

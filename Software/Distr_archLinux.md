@@ -111,18 +111,28 @@
 ##### 1. 制作启动盘
 
 ```bash
+# step1 : 把镜像里的内容复制到U盘里
 mkdir -p /mnt/{iso,usb}
 mount -o loop archlinux-2017.04.01-x86_64.iso /mnt/iso
-mount /dev/sdb /mnt/usb
+mount /dev/sdb /mnt/usb	# 注意：/dev/sdb必须是fat32分区
 cp -a /mnt/iso/* /mnt/usb
 sync
 umount /mnt/iso
 
-vim /mnt/usb/loader/entries/archiso-x86_64.conf # 对于UEFI引导，需要保证标签名一致
+# step2 : 对于UEFI引导，需要保证卷标或UUID一致。那么就有三种改法：
+# 1 修改fat32分区的卷标
+cat loader/entries/archiso-x86_64.conf	# 通过archisolabel找到巻标名
+# 2 修改配置文件里archisolabel对应的卷标名
+# 3 设置配置文件里的UUID，将配置文件里的archisolabel修改为archisodevice
+blkid -s UUID /dev/sdb	# 查看UUID
+
+# step3 : 重装syslinux
 cp /usr/lib/syslinux/modules/efi64/*.c32 /mnt/usb/arch/boot/syslinux/
+	# 用本机的syslinux模块覆盖原有的*.c32，这是为了避免版本差异导致启动失败
 extlinux --install /mnt/usb/arch/boot/syslinux
 umount /mnt/usb
-# 将/dev/sdb分区设置为bootable
+
+# step4 : 将/dev/sdb分区设置为bootable
 ```
 
 ##### 2. 安装
