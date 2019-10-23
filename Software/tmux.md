@@ -1,3 +1,12 @@
+#### tmux的原理
+
+tmux使用c/s结构，主要包括如下模块：
+
+- server：输入tmux命令就开启了一个server
+- session会话：一个server可包含多个session
+- window：一个session可以包含多个window
+- pane面板：一个window可以包含多个pane
+
 #### 激活控制台
 
 ```
