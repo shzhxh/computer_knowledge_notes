@@ -69,10 +69,13 @@ sudo apt install vim-gtk		# 对于Ubuntu安装vim-gtk可使vim支持系统剪切
 
 ```
 /	# 搜索，从上向下
-？	# 搜索，从下向上
+?	# 搜索，从下向上
+/\C	# 搜索，大小写敏感
+/\c	# 搜索，大小写不敏感
 # ignorecase和smartcase可以控制搜索时大小写敏感的问题
 	:set ignorecase		# 大小写不敏感
 	:set ignorecase!	# 大小写敏感
+	:set noignorecase	# 大小写敏感
 	:set ignorecase?	# 查询是否设置了ignorecase
 ```
 

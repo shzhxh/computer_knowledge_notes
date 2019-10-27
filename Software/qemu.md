@@ -235,7 +235,7 @@ check	# 对磁盘镜像文件进行一致性检查
 commit
 compare
 convert	# 转化镜像的格式
-create	# 创建镜像文件
+create [-q] [--object objectdef] [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] filename [size]	# 创建镜像文件
 dd
 info	# 查看镜像的信息
 map
@@ -248,11 +248,17 @@ resize		# 改变镜像的大小
 ##### 命令选项
 
 ```
-filename
-fmt
-size
+filename	# 磁盘镜像的文件名
+size	# 镜像的大小。默认单位为byte，可带后缀K,M,G,T,P,E。
+-b backing_file
+-F backing_fmt	# 第二个镜像的格式。
+-f fmt			# 第一个镜像的格式。大多数情况下都可以自动检测
+-o options	# 格式的定义。是由逗号分割的键值对的列表。使用"-o ?"查看所有支持的键值对。
+--object objectdef	# 对用户可创建对象的定义。详见qemu手册
 output_filename
 output_fmt
+-q	# 静默模式。不打印任何输出。
+-u	# 允许不安全的backing链。
 ```
 
 ##### 镜像文件的格式

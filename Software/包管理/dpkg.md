@@ -23,6 +23,8 @@ dpkg [options] <action>	# 管理debian包
 
 ```
 -l, --list <packages>	# 列出符合package的包
+-s, --status <packages>	# 打印指定包的状态
+-L, --listfiles <packages>	# 列出指定包安装在系统中的文件
 ```
 
 

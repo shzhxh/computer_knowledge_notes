@@ -52,9 +52,9 @@ sudo parted a.raw
   quit
   
 # 2. 安装
-wget https://www.kraxel.org/repos/jenkins/edk2/edk2.git-ovmf-x64-0-20180807.281.gc526dcd40f.noarch.rpm
-# 提取usr/share/edk2.git/ovmf-x64/OVMF-pure-efi.fd
-qemu-system-x86_64 -bios OVMF-pure-efi.fd -hda a.raw -enable-kvm -m 4096 -hdb you-download.img -boot once=d
+sudo apt install ovmf
+cp /usr/share/ovmf/OVMF.fd .
+qemu-system-x86_64 -bios OVMF.fd -hda a.raw -enable-kvm -m 4096 -hdb you-download.img -boot once=d
 
 # 3. 启动
 qemu-system-x86_64 -hda a.raw -enable-kvm -m 4096 -vga cirrus

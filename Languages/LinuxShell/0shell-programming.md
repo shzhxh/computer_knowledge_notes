@@ -160,3 +160,18 @@ $!		# 后台运行的最后一个进程的pid
 $-		# shell使用的当前选项
 $_		# 上条命令的最后一个参数
 ```
+
+##### 在变量中切割字符串
+
+```
+${parameter:-word}
+${parameter:=word}
+${parameter:?word}
+${parameter:+word}
+${#parameter}		# 获取字符串的长度
+${parameter%word} 	# 最小限度从后面截取word
+${parameter%%word} 	# 最大限度从后面截取word
+${parameter#word} 	# 最小限度从前面截取word
+${parameter##word} 	# 最大限度从前面截取word
+```
+
