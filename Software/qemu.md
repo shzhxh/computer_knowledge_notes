@@ -136,10 +136,55 @@ qemu-system-riscv64 [options] [disk_image]
 ```
 -serial DEV	# 将虚拟串口重定向到宿主机的字符设备DEV。图形模式下默认为vc，非图形模式下默认为stdio。
 -parallel DEV	# 将虚拟并口重定向到宿主机的设备DEV。
+-monitor <dev>	# 把控制台重定向到宿主机的设备dev。图形模式下默认设备是"vc"，非图形模式下默认设备是"stdio"。
 -bios FILE	# 为BIOS指定文件
 -S			# 在刚开始的时候别启动CPU（需要在管理器里输入“c”才会启动CPU）
 -s			# 相当于-gdb tcp::1234，即在TCP端口1234开启一个gdbserver
 -gdb dev	# 等待gdb来连接设备dev。
+```
+
+#### QEMU monitor
+
+QEMU的控制台。"Ctrl+Alt+2"进入控制台，"Ctrl+Alt+1"进入QEMU界面。也可用-monitor选项把控制台重定向到某个设备。
+
+##### 辅助类命令
+
+```
+info	# 显示虚拟机的运行信息
+help	# 查询某个命令的帮助信息
+```
+
+##### 调试类命令
+
+```
+gdbserver	# 启动qemu内置的gdbserver
+x		# 打印虚地址的值
+xp		# 打印实地址的值
+print	# 数学运算或引用某寄存器的值
+sum		# 计算某个内存区域的校验和
+memsave	# 内存转储
+```
+
+##### 控制类命令
+
+```
+savevm	# 创建快照
+loadvm	# 还原快照
+delvm	# 删除快照
+commit	# 将缓存中对块设备的操作，立即写到块设备上
+system_reset	# 重启
+system_powerdown	# 关机
+stop/cont	# 进入/退出挂起状态
+quit	# 退出qemu
+```
+
+##### 设备类命令
+
+```
+change	# 更改虚拟机的配置
+mouse_move	# 移动鼠标
+mouse_button	# 按下鼠标左键
+sendkey	# 键盘操作
 ```
 
 

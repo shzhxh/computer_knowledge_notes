@@ -57,6 +57,6 @@ cp /usr/share/ovmf/OVMF.fd .
 qemu-system-x86_64 -bios OVMF.fd -hda a.raw -enable-kvm -m 4096 -hdb you-download.img -boot once=d
 
 # 3. 启动
-qemu-system-x86_64 -hda a.raw -enable-kvm -m 4096 -vga cirrus
+qemu-system-x86_64 -bios OVMF.fd -hda a.raw -enable-kvm -m 4096 -vga cirrus
 ```
 

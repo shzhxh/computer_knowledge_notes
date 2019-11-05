@@ -1,3 +1,22 @@
+#### 系统设置
+
+```
+# 更换源
+sudo pacman-mirrors -i -c China -m rand
+sudo pacman -Syy
+
+# 支持中文输入法
+sudo pacman -S fcitx-im fcitx-configtool fcitx-cloudpinyin
+```
+
+
+
+#### 忘记登陆密码
+
+- 方法一：给内核传single参数，使用passwd命令修改密码
+
+- 方法二：给内核传init=/bin/bash参数，用mount命令把根分区重新挂载为可读写，使用passwd命令修改密码，再把根分区重新挂载为只读
+
 #### 错误解决
 
 ##### error: unknown filesystem
@@ -19,3 +38,8 @@
 
   
 
+##### failed to start remount boot and kernel file system
+
+- 描述：启动的时候有如上提示
+- 原因分析：我的/etc/fstab里根分区的UUID错误
+- 解决方法：通过blkid找到正确的UUID，然后修改/etc/fstab
