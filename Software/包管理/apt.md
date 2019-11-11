@@ -22,3 +22,14 @@
 sudo apt install ubuntu-desktop		# install unity
 sudo apt install xxxx:i386			# 安装软件包并指定其架构为i386
 ```
+
+#### 解决错误
+
+##### Failed to fetch
+
+```
+# 错误提示：安装 libssl-dev的时候提示：Failed to fetch http://security.ubuntu.com ...
+# 解决方法：先运行apt update，再安装
+# 原因分析：可能是包对应的网址修改了，所以需要apt update更新数据库
+```
+

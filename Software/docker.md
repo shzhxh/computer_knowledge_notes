@@ -47,10 +47,7 @@ docker [--help|-v|--version]
 
 ```
 builder     # Manage builds
-config      # Manage Docker configs
-container   # Manage containers
 engine      # Manage the docker engine
-image       # Manage images
 network     # Manage networks
 node        # Manage Swarm nodes
 plugin      # Manage plugins
@@ -65,7 +62,114 @@ volume      # Manage volumes
 
 
 
+##### config
+
+```
+docker config <cmd>	# 管理docker的配置
+# 命令：
+  create	# 创建配置
+  inspect	# 显示配置信息
+  ls		# 列出配置
+  rm		# 删除配置
+```
+
+
+
+##### container
+
+```
+docker container <cmd>	# 管理容器
+# 命令
+  attach
+  commit
+  cp
+  create	# 详见docker create
+  diff
+  exec
+  export
+  inspect
+  kill
+  logs
+  ls
+  pause
+  port
+  prune
+  rename
+  restart
+  rm
+  run
+  start
+  status
+  stop
+  top
+  unpause
+  update
+  wait
+```
+
+
+
+##### image
+
+```
+docker image <cmd>	# 管理镜像
+# 命令，可用docker image <cmd> --help获取详情
+  build
+  history
+  import
+  inspect
+  load
+  ls		# 列出镜像
+  prune
+  pull		# 把镜像拉到本地
+  push		# 
+  rm		# 删除镜像
+  save
+  tag
+```
+
+
+
 #### 命令
+
+```
+build	# 从Dockerfile创建一个镜像。
+commit	# 从容器创建一个镜像。
+cp
+diff
+events
+exec	# 在运行的容器中执行一个命令。
+	-i, --interactive	# 始终保持STDIN打开,即使没有附加
+	-t, --tty			# 分配一个伪TTY
+export	# 将一个容器文件系统输出为压缩文件。
+history	# 查看某个镜像下的所有层。
+import
+info
+inspect	# 返回docker对象的底层信息。
+kill	# 杀死一个或多个运行中的容器。
+login
+logout
+logs
+pause	# 暂停一个或多个容器中的进程。
+port
+ps		# 列出所有运行着的容器。加-a则列出所有的容器。
+pull
+push
+rename
+restart	# 重启容器。
+rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
+run		# 相当于create + start
+search
+stats
+stop	# 停止一个或多个运行中的容器。
+tag
+top
+unpause
+version
+wait
+```
+
+
 
 ##### attach
 
@@ -78,49 +182,66 @@ docker attach [options] CONTAINER	# 连接到运行中的容器
   --sig-proxy
 ```
 
-
+##### create
 
 ```
-build	# 从Dockerfile创建一个镜像。
-commit	# 从容器创建一个镜像。
-cp
-create	# 创建容器。实际上是为指定的镜像添加了一个可读写层。
-diff
-events
-exec	# 在运行的容器中执行一个命令。
-	-i, --interactive	# 始终保持STDIN打开,即使没有附加
-	-t, --tty			# 分配一个伪TTY
-export	# 将一个容器文件系统输出为压缩文件。
-history	# 查看某个镜像下的所有层。
-images	# 列出所有的顶层镜像。加-a则列出所有的镜像。
-import
-info
-inspect	# 返回docker对象的底层信息。
-kill	# 杀死一个或多个运行中的容器。
-load
-login
-logout
-logs
-pause	# 暂停一个或多个容器中的进程。
-port
-ps		# 列出所有运行着的容器。加-a则列出所有的容器。
-pull
-push
-rename
-restart	# 重启容器。
-rm		# 移除一个或多个容器。
-rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
-run		# 相当于create + start
-save	# 将一个或多个镜像写到一个压缩文件里
-search
-start	# 启动一个或多个已停止的容器。
+docker create [options] <image> [cmd] [args]	# 创建容器。实际上是为指定的镜像添加了一个可读写层。
+
+# 选项
+  -i, --interactive	# 保持STDIN开启
+  --name <string>	# 给容器分配一个名字 
+  -t, --tty	# 分配伪TTY
+  -v, --volume list	# 本地目录挂载到容器里
+```
+
+##### load
+
+```
+docker load [options]	# 从tar文件或STDIN装载镜像
+
+# 选项
+ -i, --input <file>	# 读取tar文件(默认STDIN)
+ -q, --quiet		# 静默模式
+```
+
+##### rm
+
+```
+docker rm [options] <containers> # 删除容器
+# 选项
+  -f, --force	# 强制删除运行着的容器
+  -l, --link	# 删除指定链接(link)
+  -v, --volumes	# 删除与容器相关的卷(volumes)
+```
+
+##### save
+
+```
+docker save [options] <images>	# 把镜像保存为tar文件
+# 选项
+  -o, --output <file>	# 输出到文件(默认STDOUT)
+```
+
+##### start
+
+```
+docker start [options] <containers>	# 启动一个或多个已停止的容器。
 	-a, --attach	# 附加STDIN/STDERR和forward信号
 	-i, --interactive	# 附加容器的STDIN
-stats
-stop	# 停止一个或多个运行中的容器。
-tag
-top
-unpause
-version
-wait
 ```
+
+
+
+#### 使用示例
+
+```
+# 使用前准备
+sudo usermod -aG docker $USER
+sudo systemctl start docker
+
+docker save -o oto8.tar oto_repo	# 把docker镜像oto_repo保存为oto8.tar
+docker load -i oto8.tar	# 从oto8.tar载入镜像
+docker create -it --name szx-8.1 -v /data/data:/root/szx oto_repo bash	# 从镜像oto_repo创建容器szx-8.1
+
+```
+
