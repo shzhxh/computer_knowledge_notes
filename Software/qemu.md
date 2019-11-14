@@ -87,12 +87,18 @@ qemu-system-riscv64 [options] [disk_image]
 -display
 -nographic	# 禁用图形输出并将串行I/O重定向到控制台
 -vga TYPE	# 模拟VGA显卡，可选的TYPE有cirrus, std, vmware, qxl, tcx, cg3, virtio, none
+	cirrus	:GD5446显卡。Windows系统从win95之后都能识别和使用此显卡。为qemu 2.2之前的默认显卡。
+	std		:标准VGA显卡。为qemu 2.2之后的默认显卡。
+-vnc display[,options]	# 使用此选项，可以让qemu把vga显示重定向到vnc显示：<display>。
+  host:d	# 只允许主机host通过端口d进行tcp连接。d是vnc端口，实际的tcp端口一般是5900+d。host可以省略，此时允许所有主机的连接。
 ```
 
 ##### 网络选项
 
 ```
 -netdev user,id=str[,...]	# 设置宿主网络为用户模式，这样就不需要超级用户的权限了。
+  hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport
+  	# 把主机端口hostport重定向到客户机端口guestport
 -netdev tap,id=str[,...]	# 设置宿主网络为tap模式
 -netdev bridge,id=str[,...]
 -netdev l2tpv3,id=str,...
@@ -258,7 +264,7 @@ PLIC是平台级中断控制器。SiFive PLIC对全局中断进行优先级划�
 ##### 语法
 
 ```
-qemu-img [standard options] command [command options]
+qemu-img [standard options] <command> [command options]	# 管理镜像
 ```
 
 ##### 标准选项
@@ -280,7 +286,7 @@ check	# 对磁盘镜像文件进行一致性检查
 commit
 compare
 convert	# 转化镜像的格式
-create [-q] [--object objectdef] [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] filename [size]	# 创建镜像文件
+create [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] <filename> [size]	# 创建镜像文件
 dd
 info	# 查看镜像的信息
 map
@@ -304,6 +310,14 @@ output_filename
 output_fmt
 -q	# 静默模式。不打印任何输出。
 -u	# 允许不安全的backing链。
+
+# snapshot子命令
+
+# compare子命令
+
+# convert子命令
+
+# dd子命令
 ```
 
 ##### 镜像文件的格式
@@ -314,5 +328,18 @@ qcow2
 other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 ```
 
+#### 问题的解决
 
+##### 问题一
 
+问题描述：
+
+- 安装好系统的镜像文件，启动的时候黑屏无反应。
+
+解决方法：
+
+- 加上`-enable-kvm`选项
+
+原因分析：
+
+- 不开kvm硬件加速的情况下，可能cpu执行慢或代码进入了某种死循环中。

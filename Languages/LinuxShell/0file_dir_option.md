@@ -1,17 +1,17 @@
 #### 特殊目录：
 
 ​	.	//当前目录
-	..	//上一层目录
-	-	//上一个目录
-	~	//当前用户的用户目录
-	~a	//用户a的用户目录
+​	..	//上一层目录
+​	-	//上一个目录
+​	~	//当前用户的用户目录
+​	~a	//用户a的用户目录
 
 #### 目录操作：
 
 ​	cd	// change directory
-	pwd	// print working directory
-	mkdir	// make directory
-	rmdir	// remove directory
+​	pwd	// print working directory
+​	mkdir	// make directory
+​	rmdir	// remove directory
 
 #### 文件与目录管理：
 
@@ -21,7 +21,7 @@
 
 ​	cat, tac, nl, more, less, head, tail, od, file
 change file timestamps:
-	touch
+​	touch
 
 #### 修改系统隐藏权限：
 
@@ -34,8 +34,8 @@ change file timestamps:
 #### 文件特殊权限：
 
 ​	SUID
-	SGID
-	SBIT
+​	SGID
+​	SBIT
 
 #### 命令与文件搜寻：
 
@@ -50,11 +50,26 @@ change file timestamps:
 ##### 基本用法
 
 1. `<`重定向输入
+
 2. `>`重定向输出
+
 3. `>!`如果存在则覆盖
+
 4. `>&`屏幕输出的所有信息都放在指定文件中
+
 5. `>>`追加到文件中
+
 6. `>>&`屏幕上的信息追加到文件中
+
+7. `<<`将两个delimiter之间的document作为输入传递给command
+
+   ```
+   command << delimiter
+   document
+   delimiter
+   ```
+
+   
 
 ##### 用法示例
 

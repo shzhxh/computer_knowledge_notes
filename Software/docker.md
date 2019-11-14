@@ -5,7 +5,10 @@ Docker镜像和容器命令行接口(CLI)。是通过CLI与daemon交互的，共
 #### 安装
 
 ```
-sudo apt-get remove docker docker-engine docker.io	# 卸载旧版本
+# 方法一：从系统仓库安装
+sudo apt-get install docker docker-engine docker.io
+
+＃ 方法二：从第三方仓库安装
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
