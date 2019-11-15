@@ -96,6 +96,8 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 网络选项
 
 ```
+-nic [tap|user|...] [,...] [,mac=] [,model=]	# 此选项是一个快捷方式，用来一次性配置on-board guest NIC和主机网络的后端。主机网络的后端的选项和-netdev的选项是一样的。
+-nic none	# 意味着不配置任何网络设备。它本来覆盖默认配置。默认配置是主机网络后端为user的默认NIC。当没有提供其它网络选项的时候会激活默认配置。
 -netdev user,id=str[,...]	# 设置宿主网络为用户模式，这样就不需要超级用户的权限了。
   hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport
   	# 把主机端口hostport重定向到客户机端口guestport
@@ -107,7 +109,7 @@ qemu-system-riscv64 [options] [disk_image]
 -netdev vhost-user,id=str,...	# vhost-user网络设备
 -netdev hubport,id=str,...	# 创建hub端口
 -net nic[,...]	# 配置或创建网卡
--net [user|tap|bridge|socket][,...]	＃ 指定连接方式，和对应的-netdev选项是等价的
+-net [user|tap|bridge|socket][,...][,name=<name>]	＃ 配置宿主机网络的后端（其选项和对应的-netdev选项是一样的），并将其连接到虚拟hub0（默认hub）。name用来指定hub端口的名字。
 ```
 
 ##### 字符设备选项
@@ -285,8 +287,13 @@ bench
 check	# 对磁盘镜像文件进行一致性检查
 commit
 compare
-convert	# 转化镜像的格式
-create [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] <filename> [size]	# 创建镜像文件
+
+# 转化镜像的格式
+convert	[-f fmt] [-O output_fmt] <filename> <output_filename>
+
+# 创建镜像文件
+create [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] <filename> [size]	
+
 dd
 info	# 查看镜像的信息
 map
@@ -332,14 +339,8 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 
 ##### 问题一
 
-问题描述：
+问题描述：安装好系统的镜像文件，启动的时候黑屏无反应。
 
-- 安装好系统的镜像文件，启动的时候黑屏无反应。
+解决方法：加上`-enable-kvm`选项
 
-解决方法：
-
-- 加上`-enable-kvm`选项
-
-原因分析：
-
-- 不开kvm硬件加速的情况下，可能cpu执行慢或代码进入了某种死循环中。
+原因分析：不开kvm硬件加速的情况下，可能cpu执行慢或代码进入了某种死循环中。
