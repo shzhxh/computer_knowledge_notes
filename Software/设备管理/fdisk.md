@@ -6,6 +6,7 @@ fdisk [options] device	# 管理磁盘分区表
 #### 选项
 
 ```
+-l, --list	# 列出指定设备的分区表
 -u, --units[=unit]	# 
 ```
 

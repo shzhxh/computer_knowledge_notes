@@ -1,13 +1,19 @@
-- 简介
+#### 简介
 
-  压缩或解压的工具
+压缩或解压的工具
 
-- 语法
+#### 语法
 
-  ```
-  xz [option] [file]
-  ```
+```
+xz [option] [file]
+```
 
-- 选项
+#### 选项
 
-  -d	# 解压
+```
+-z, --compress	# 压缩
+-d, --decompress, --uncompress	# 解压
+```
+
+
+

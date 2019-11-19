@@ -335,6 +335,10 @@ qcow2
 other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 ```
 
+#### 参考资料
+
+- QEMU新的-nic选项：[中文翻译版](https://zhuanlan.zhihu.com/p/41258581)、[英文版](https://www.qemu.org/2018/05/31/nic-parameter/)
+
 #### 问题的解决
 
 ##### 问题一
