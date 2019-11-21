@@ -40,6 +40,7 @@
 
 ```
 -delete		# 删除文件。成功返回ture，失败则返回一个非零的值。使用-delete会自动打开-depth选项，所以应显示地指定-depth以避免意外发生。由于使用-delete就意味着也使用了-depth，所以-delete和-prune是不能一块使用的。
+-exec <cmd>	# 
 ```
 
 
