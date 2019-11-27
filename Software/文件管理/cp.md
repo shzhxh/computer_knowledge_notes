@@ -11,6 +11,7 @@ cp [OPTION] -t DIRECTORY SOURCE	# 将若干SOURCE复制到目录DIRECTORY
 ```
 -a, --archive	# 等价于-dR --preserve=all，其意义为递归的复制，但不追踪符号链接，且要保留所有的属性
 -d	# 等价于--no-dereference --preserve=links
+-f, --force	# 强制覆盖
 -P, --no-dereference	# 不追踪符号链接
 --preserve[=ATTR_LIST]	# 保留指定属性(默认:mode,ownership,timetamps)，还有附加属性(context,links,xattr,all)
 -R: 等价于 -r 或 --recursive，递归地复制

@@ -27,6 +27,7 @@ status	# 检查服务状态
 ##### Unit文件命令
 
 ```
+list-unit-files [patterns]	# 
 enable	# 使某项服务自动启动。其作法是加载一组符号链接，然后重载系统管理器的配置。
 disable	# 使某项服务不自动启动。其作法是删除相应的符号链接，从而使enable或link命令失效。
 ```

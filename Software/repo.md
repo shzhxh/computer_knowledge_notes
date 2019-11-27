@@ -60,6 +60,9 @@ init		# 在当前目录初始化repo
   -u URL	# 指定manifest仓库的地址
   -b REVISION	# 指定manifest仓库的分支或版本
 manifest	# 显示当前使用的manifest信息内容
+  -r, --revision-as-HEAD	# 保存当前HEAD的版本
+  --suppress-upstream-revision	# 
+  -o, --output-file=<file>	# 将输出保存到xml文件
 overview	# 显示project未合并分支的概览
 prune		# 删除已经合并的分支
 rebase		# 使本地分支以上游分支为基础
