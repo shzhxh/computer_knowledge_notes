@@ -42,11 +42,16 @@ qemu-system-riscv64 [options] [disk_image]
 -hdc FILE	# 相当于 -drive file=FILE,index=2,media=disk
 -hdd FILE	# 相当于 -drive file=FILE,index=3,media=disk
 -cdrom FILE	# 相当于 -drive file=FILE,index=2,media=cdrom
--blockdev
+-blockdev	# 定义一个块设备驱动器。
+	# 对所有块驱动器都有效的选项
+	# file的选项
+	# raw的选项
+	# qcow2的选项
+	# 其它选项
 -drvie option[,option[,option[,...]]]
 	# -drive可以使用-blockdev的所有选项，另外，还可以使用如下选项：
 	file=FILE	# 指定磁盘镜像
-	if=			# 指定接口类型，可用类型有ide,scsi,sd,mtd,floppy,pflash,virtio,none
+	if=			# 指定drive要连接的接口类型，可用类型有ide,scsi,sd,mtd,floppy,pflash,virtio,none
 	bus= ,unit=	# 通过bus number和unit id指定连接位置
 	index=	# 通过编号指定连接位置
 	media=	# 指定媒介类型，disk或cdrom
@@ -54,7 +59,7 @@ qemu-system-riscv64 [options] [disk_image]
 	snapshot=	#
 	cache=	#
 	aio=	#
-	format=	#
+	format=<fmt>	# 指定磁盘格式，这样就不会再探测磁盘格式了。
 	serial=	#
 	addr=	#
 	werror=, rerror=	#
@@ -229,6 +234,18 @@ sendkey	# 键盘操作
   # spike_v1.10 Spike开发板(priv 1.10)
   # spikes_v1.9.1 Spike开发板(priv 1.9.1)
   # virt	VirtIO开发板(priv 1.10)
+-devece	# 对于riscv来说，可选设备如下
+	# 存储设备
+	virtio-blk-device：使用virtio-bus总线
+		driver=<str>:指定块设备的名称
+	# 网络设备
+	virtio-net-device:使用virtio-bus总线
+	# 输入设备
+	# 显示设备
+	virtio-gpu-device:使用virtio-bus总线
+	# 其它设备
+	# 未分类的设备
+	loader:desc "Generic Loader"
 ```
 
 ##### 五种开发板的比较
