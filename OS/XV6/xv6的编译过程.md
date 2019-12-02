@@ -18,7 +18,7 @@ make qemu
 
 1. bootasm.S和bootmain.c编译为bootblock
 2. bio.c, console.c, exec.c, file.c, fs.c, ide.c, ioapic.c, kalloc.c, kbd.c, lapic.c, log.c, main.c, mp.c, picirq.c, pipe.c, proc.c, sleeplock.c, spinlock.c, string.c, swtch.S, syscall.c, sysfile.c, sysproc.c, trapasm.S, trap.c, uart.c, vectors.pl, vm.c, entry.Sentryother.S, initcode.S编译为kernel
-3. 将boolblock和kernel装入kernel.img里
+3. 将bootblock和kernel装入kernel.img里。bootblock放在第一个扇区里(即MBR)，这样BIOS就从MBR开始执行了，而kernel则从第2个扇区开始放入。
 
 #### kernel(对于riscv)
 

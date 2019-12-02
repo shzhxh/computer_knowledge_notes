@@ -2,11 +2,19 @@
 
 bootblock->entry.S->main.c
 
-##### bootblock的执行过程
+##### 1. 从MBR开始执行
 
-关中断，开启A20地址线，开启保护模式，设置段选择子，将内核载入内存。
+从bootasm.S的`start`标记处开始，关中断，开启A20地址线，开启保护模式，设置段选择子，调用bootmain函数。
 
-##### main函数的执行过程
+`bootmain`函数在bootmain.c，其作用是将内核载入内存。然后跳转到内核的入口开始执行，内核的入口为`_start`。
+
+##### 2. 内核的入口_start
+
+`_start`在entry.S，开启分页，然后跳转到main函数开始执行。
+
+##### 3. main函数
+
+`main`函数在main.c，是内核的主控函数。
 
 1. 在`kalloc.c`里实现kinit1函数(不需要锁的物理页分配)，其原理是把前4M的物理页放到一个单向链表里。kinit1和kinit2调用freerange将内存加入空闲链表中, freerange则是通过对每一页调用kfree实现该功能。一个PTE只能指向一个4096字节对齐的物理地址(即是4096的倍数),因此freerange用PGROUNDUP来保证分配器只会释放对齐的物理地址。分配器原本一开始没有内存可用,正是对kfree的调用将可用内存交给了分配器来管理。
 
@@ -96,5 +104,7 @@ bootblock->entry.S->main.c
 
 ##### 3. main函数
 
-文件位置：kernel/main.c，这是整个内核的总控函数，目的是。
+文件位置：kernel/main.c，这是整个内核的总控函数。如果当前的核编号为0，则为主控核，执行一系列的硬件初始化工作，然后执行scheduler函数进入处理器调度。如果当前的核编号不为0，则初始化当前核的数据结构，然后执行scheduler函数进入处理器调度。
+
+
 
