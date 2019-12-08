@@ -141,9 +141,6 @@ commit	# 从容器创建一个镜像。
 cp
 diff
 events
-exec	# 在运行的容器中执行一个命令。
-	-i, --interactive	# 始终保持STDIN打开,即使没有附加
-	-t, --tty			# 分配一个伪TTY
 export	# 将一个容器文件系统输出为压缩文件。
 history	# 查看某个镜像下的所有层。
 import
@@ -196,6 +193,16 @@ docker create [options] <image> [cmd] [args]	# 创建容器。实际上是为指
   -t, --tty	# 分配伪TTY
   -v, --volume list	# 本地目录挂载到容器里
 ```
+
+##### exec
+
+```
+docker exec	# 在运行的容器中执行一个命令。
+	-i, --interactive	# 始终保持STDIN打开,即使没有附加
+	-t, --tty			# 分配一个伪TTY
+```
+
+
 
 ##### load
 
