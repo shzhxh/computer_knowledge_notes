@@ -49,7 +49,8 @@ $(findstring)
 $(firstword)
 $(patsubst PATTERN,REPLACEMENT,TEXT)
 	# 将TEXT中符合PATTERN的单词替换为PEPLACEMENT
-$(sort)
+$(sort <list>)
+	# 给字符串<list>中的单词按升序排序，返回排序后的字符串。
 $(strip)
 $(subst)
 $(wildcard <PATTERN...>)	 
