@@ -193,44 +193,76 @@ binit 缓冲区缓存。binit会从一个静态数组buf中构建出一个有NBU
 
 ##### 10. procinit
 
-进程表。
+文件位置kernel/proc.c，初始化进程表。
+
+- 初始化进程的自旋锁pid_lock
+- xv6设定的最大PCB个数为64，对于每一个PCB都为其分配4K的栈空间，这些栈的虚拟地址是从TRAMPOLINE开始往下排的(TRAMPLINE指向的是虚拟地址空间里最顶端的那个页)，这些虚拟地址都保存在各自PCB的kstack标记处。proc[]是PCB所在的数组，数组的每一个元素都是一个PCB。
+- 最后，使用kvminithart函数刷新PLB，使如上虚拟地址到物理地址的映射生效。
 
 ##### 11. trapinit
 
-trap向量。
+文件位置kernel/trap.c，初始化trap对应的锁。
+
+- 只有一条语句，就是初始化自旋锁tickslock。
 
 ##### 12. trapinithart
 
-安装内核trap向量
+文件位置kernel/trap.c，安装内核trap vecor。
+
+- 向stvec寄存器写入kernelvec的地址。kernelvec是中断处理例程的入口，在kernel/kernelvec.S，它保存当前寄存器的值，然后执行中断处理函数kerneltrap，从kerneltrap返回后执行sret返回。
 
 ##### 13. plicinit
 
-设置中断控制器
+文件位置kernel/plic.c，设置中断控制器。
+
+- 向PLIC的UART0和VIRTIO0中断使能位写入1，使对应的中断生效。
 
 ##### 14. plicinithuart
 
-为设备中断申请PLIC
+文件位置kernel/plic.c，为设备中断申请PLIC。
+
+- 向PLIC里当前核对应的寄存器写入数据，使能当前核的UART0和VIRTIO0中断，且设置当前核的priority threshold为0。**TODO**：请解释清plic寄存器的用法。
 
 ##### 15. binit
 
-buffer cache
+文件位置kernel/bio.c，初始化buffer cache。
+
+- bcache是buffer cache的数据结构。首先初始化buffer cache的自旋锁bcache.lock。
+- bcache.head是双向链表的结点，用来把数组buf的各个元素链接起来。最终，bcache.head指向了数组的尾部。
 
 ##### 16. iinit
 
-inode cache
+文件位置kernel/fs.c，初始化inode cache。
+
+- icache是inode cache的数据结构。它包含了inode cache的自旋锁和数组inode。这个函数初始化自旋锁icache.lock和各个inode的睡眠锁(sleep lock)。
 
 ##### 17. fileinit
 
-文件表
+文件位置kernel/file.c，初始化文件表。
+
+- ftable是文件表的数据结构。它包含了文件表的自旋锁ftable.lock和数组file。这个函数仅仅是初化文件表的自旋锁ftable.lock。
 
 ##### 18. virtio_disk_init
 
-虚拟出来的硬盘
+文件位置kernel/virtio_disk.c，初始化硬盘。
+
+- **TODO**：请解释清disk寄存器的用法。
 
 ##### 19. userinit
 
 第一个用户进程。
 
+- 为用户进程分配资源，并将其状态改为RUNNABLE。当内核开始调度的时候第一个用户进程就开始执行了。
+
 ##### 20. __sync_synchronize
 
+gcc内建函数，告诉编译器在这个点之后不要移动内存读写指令(load和store)，这样可以用来确保锁不会被破坏。
+
 ##### 21. scheduler
+
+每个核都会运行这个函数，在所有进程里找状态为RUNNABLE的进程然后进行它。
+
+- 数组cpus[]的元素是cpu的数据结构，mcpu()返回的是当前cpu所对应的那个cpus[]里的元素。
+- intr_on()使能当前核的中断。
+- acquire和release分别用于锁的请求和释放。
+- swtch用于切换上下文，“返回”用户态。
