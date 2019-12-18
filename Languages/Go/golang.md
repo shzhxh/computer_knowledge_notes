@@ -1,8 +1,41 @@
 #### 关键字
 
-25个关键字，36个预定义标识符
+25个关键字
 
-range关键字用于for循环中迭代数组、切片、通道或集合的元素。
+- 包管理
+
+  package, import
+
+- 变量和常量的声明
+
+  var, const, struct, interface, map, type, chan
+
+- 函数的定义与返回
+
+  func, return
+
+- 流程控制
+
+  break, case, continue, for, fallthrough, else, if, switch, goto, default
+
+  - defer，延迟语句，会在函数退出前执行defer指定的命令。
+  - go，用于并行
+  - range关键字用于for循环中迭代数组、切片、通道或集合的元素。
+  - select，用于选择不同类型的通迅
+
+36个预定义标识符
+
+- 常量
+
+  true, false, iota, nil
+
+- 数据类型
+
+  bool, byte, int[8 | 16 | 32 | 64], uinit[8 | 16 | 32 | 64], uintptr, string, float[32 | 64]
+
+- 内联函数名
+
+  append, print, println, real, recover, cap, close, complex[64 | 128],copy, imag, len, make,new,  panic
 
 #### 数据类型
 
@@ -78,6 +111,14 @@ if, switch, select
 #### 循环语句
 
 for(break, continue, goto)
+
+```
+for init; condition; post {}	# 类似于C语言的for循环
+for condition {}		# 类似于C语言的while循环
+for key, value := range oldMap {}	# 使用range的for循环
+```
+
+
 
 #### 函数
 

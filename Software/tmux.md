@@ -7,6 +7,32 @@ tmux使用c/s结构，主要包括如下模块：
 - window：一个session可以包含多个window
 - pane面板：一个window可以包含多个pane
 
+#### 语法
+
+```
+tmux [options] [command [flags]]
+```
+
+
+
+#### 命令
+
+##### 窗户端与会话
+
+```
+attach, attach-session [-dEr] [-c working-dir] [-t target-session]
+	# 如在tmux外部，则在当前终端创建一个新的client并把它附加到target-session。如在tmux内部，则切换到当前client。
+
+ls, list-sessions [-F format]
+	# 列出server管理着的所有会话
+```
+
+
+
+##### 窗口与面板
+
+##### 键绑定
+
 #### 激活控制台
 
 ```
@@ -14,6 +40,12 @@ ctrl + b
 ```
 
 #### 系统操作
+
+```
+d		# 脱离当前会话(通过tmux attach可重新进入脱离的会话)
+```
+
+
 
 #### 窗口操作
 
