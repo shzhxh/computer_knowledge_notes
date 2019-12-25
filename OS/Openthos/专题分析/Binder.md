@@ -1,6 +1,6 @@
 #### 简介
 
-Binder用于进程间通信。java层Binder架构是native层Binder架构的封装。
+Android系统从整体上来看是C/S架构，涉及三种实体：Client端，Server端，全局性的ServiceManager。Binder用于进程间通信，如上三个实体的任意两者之间通信都使用的是Binder。java层Binder架构是native层Binder架构的封装。
 
 #### framework层
 
@@ -49,3 +49,7 @@ register_android_os_Binder负责Binder框架的初始化。其实就是提前获
 ##### Binder的工作原理
 
 ##### AIDL的原理
+
+#### 参考文档
+
+- 《深入理解Android卷一》——邓凡平

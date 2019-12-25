@@ -13,6 +13,18 @@ tmux使用c/s结构，主要包括如下模块：
 tmux [options] [command [flags]]
 ```
 
+#### 选项
+
+可以通过变量的值来控制tmux的外观和行为。有三类选项：server选项、session选项和window选项。
+
+```
+set, set-option [-aFgoqsuw] [-t target-session | target-window] <option> <value>
+	mouse [on | off]	# 如设置为on则允许鼠标事件。详见#鼠标支持。
+set-window-option [-aFgoqu] [-t target-window] <option> <value>
+show-options [-gqsvw] [-t target-session | target-window] [option]
+show-window-options [-gv] [-t target-window] [option]
+```
+
 
 
 #### 命令
@@ -72,5 +84,16 @@ o		# 切换面板
 翻页键		# 翻页模式
 ```
 
+#### 命令模式
 
+```
+:	# 进入命令模式
+```
+
+#### 配置
+
+```
+# 配置文件在~/.tmux.conf
+
+```
 

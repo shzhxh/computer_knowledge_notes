@@ -5,5 +5,6 @@
 getevent	# 获取事件
 sendevent device typecode value	# 模拟事件
 input keyevent <keycode>	# 模拟常用按键
+cat /proc/asound/pcm	# 列出声卡信息
 ```
 

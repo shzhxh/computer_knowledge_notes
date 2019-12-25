@@ -17,9 +17,33 @@ lkp脚本的作用就是分发子命令，即在指定目录下，为子命令�
 
 ##### 打包
 
-运行`lkp pack <bm_name>`执行的一系列操作，包括下载、编译、打包。由于lkp命令的执行是分别从bin, sbin,tools, lkp-exec分别查找对应命令尝试执行，而仅在sbin目录下有pack命令，所以`lkp pack`真正执行的是`sbin/pack`命令。
+运行`lkp pack <bm_name>`执行的一系列操作，包括下载、编译、安装、打包。由于lkp命令的执行是分别从bin, sbin,tools, lkp-exec分别查找对应命令尝试执行，而仅在sbin目录下有pack命令，所以`lkp pack`真正执行的是`sbin/pack`命令。
 
 1. 首先要定义变量LKP_SRC
+
+2. usage函数介绍了pack命令的用法
+
+   ```
+   pack [options] <BM_NAME>
+   	# options
+   	-a <arch>
+   	-c
+   	-d <distro>
+   	-s <dest>
+   	-f
+   ```
+
+3. 用getopts命令在while循环里解析传过来的参数
+
+4. 通过source命令引入一些函数，由于自定义的脚本是最后引入的，所以自定义脚本可以覆盖前面的脚本。
+
+5. download函数完成下载
+
+6. build函数完成编译
+
+7. install函数完成安装
+
+8. pack_pkg函数完成打包
 
 ##### 本地运行
 

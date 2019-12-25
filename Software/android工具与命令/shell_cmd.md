@@ -110,3 +110,18 @@ start [services]	# 开启服务，如不指定服务则开启netd/surfaceflinger
 stop [services]		# 关闭服务,如不指定服务则关闭netd/surfaceflinger/zygotes
 ```
 
+##### service
+
+```
+service [-h|?]		# 查看帮助信息
+service list		# 查看服务(service)列表
+service check <SERVICE>	# 检查服务<SERVICE>是否存在
+service call <SERVICE> <CODE> [options]	# 使用服务<SERVICE>
+	# options:
+	i32 <N>	# 写入发送包(send parcel)的是32位整数<N>
+	i64	<N>	# 写入发送包(send parcel)的是64位整数<N>
+	f <N>	# 写入发送包(send parcel)的是32位单精度浮点数<N>
+	d <N>	# 写入发送包(send parcel)的是64位双精度浮点数<N>
+	s16 <STR>	# 写入发送包(send parcel)的是UTF-16字符串<STR>
+```
+
