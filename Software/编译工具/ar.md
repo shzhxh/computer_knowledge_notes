@@ -3,12 +3,52 @@
 #### 语法
 
 ```shell
-ar [-X32_64][-]p[mod][--plugin name] [--target bfdname][relpos] [count] archive [member...]
-# r：向库中插入文件，如果存在则覆盖。
-# c：创建一个库。
-# v：显示详细信息。
-# s: 为archieve创建或更新一个索引。注意：s选项只能单独使用。
+ar [-X32_64] [-]p[mod] [--plugin name] [--target bfdname] [relpos] [count] archive [member...]
 ```
+
+#### 选项
+
+```
+-X32_64
+--plugin <name>
+--target <bfdname>
+@<file>
+```
+
+##### mod的形式
+
+```
+# 如下选项只能出现一个
+d
+m
+p
+q
+r	# 向库中插入文件，如果存在则覆盖。
+s
+t
+x
+
+# 如下选项可以出现多个
+a
+b
+c	# 创建一个archieve。
+D
+f
+i
+l
+N
+o
+p
+s	# 为archieve创建或更新一个索引。注意：s选项只能单独使用。
+S
+T
+u
+U
+v	# 显示详细信息。
+V	# 显示版本号
+```
+
+
 
 #### rv64版
 

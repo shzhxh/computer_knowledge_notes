@@ -99,4 +99,4 @@ bpfmt -w .	# 递归地重新格式化当前目录下的所有的Android.bp文件
 
 #### 参考文档
 
-- [Soong build system](https://source.android.com/setup/build)
+- [Soong build system](https://source.android.google.cn/setup/build)
