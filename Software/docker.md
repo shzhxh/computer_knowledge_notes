@@ -85,7 +85,7 @@ docker container <cmd>	# 管理容器
 # 命令
   attach
   commit
-  cp
+  cp		# 详见docker cp
   create	# 详见docker create
   diff
   exec
@@ -138,7 +138,6 @@ docker image <cmd>	# 管理镜像
 ```
 build	# 从Dockerfile创建一个镜像。
 commit	# 从容器创建一个镜像。
-cp
 diff
 events
 export	# 将一个容器文件系统输出为压缩文件。
@@ -181,6 +180,22 @@ docker attach [options] CONTAINER	# 连接到运行中的容器
   --no-stdin
   --sig-proxy
 ```
+
+##### cp
+
+```
+# 是docker container cp的别名
+# 注：docker里的路径要使用绝对路径
+docker cp [options] <container>:<src_path> <dest_path|->	# 从容器复制到本地
+docker cp [options] <src_path|-> <>container>:<>dest_path>	# 从本地复制到容器
+
+# 选项
+-a, --archive[=false]	# archieve模式(复制所有的uid/gid信息)
+-L, --follow-link[=false]	# 复制<src_path>里的符号链接
+-h, --help[=false]		# 帮助信息
+```
+
+
 
 ##### create
 

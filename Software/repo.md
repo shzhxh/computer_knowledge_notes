@@ -10,24 +10,6 @@
 
 其设计思想是新建一个仓库来管理要管理的仓库，这个仓库就是manifest仓库，它位于 `.repo`文件夹里。
 
-所有仓库的信息都放在manifest仓库的xml文件里，其各节点的意义如下：
-
-- remote：远程仓库地址
-
-  name：名字，alias：别名，fetch：仓库地址前缀，revision：默认分支
-
-- project：子仓库
-
-  path：子仓库路径，name：子仓库名称，group：分组，revison：分支名，clone-depth：git克隆的深度
-
-- copyfile：project的子节点
-
-  src：project的相对路径，dest：仓库的相对路径
-
-- linkfile：project的子节点，类似copyfile，只是把复制文件变为创建链接文件。
-
-- default：project没有设置时会使用默认配置。
-
 #### 语法
 
 `repo [command] [options]`
@@ -72,7 +54,8 @@ stage		# 把文件添加到暂存区中
 start		# 开始一个新的开发分支
 status		# 显示工作树的状态
 sync		# 将工作树更新到最新版本
-	-f 		# 即使某些项目同步失败，也会继续同步其它项目
+	-f, --force-broken 	# 即使某些项目同步失败，也会继续同步其它项目
+	--force-sync	# 覆盖已存在的git目录(影响的是.repo/projects目录下的工作树)
 	-j JOBS	# 同步下载的JOBS个项目，默认下载4个
 upload		# 把代码提交到gerrit code review中
 viersion	# 显示repo的版本
@@ -114,7 +97,59 @@ ls .repo	# 查看.repo目录
 解决方法：清空整个工作区，重新reop sync
 原因分析：删除出错的仓库都无效，删除整个工作区才有效，无法理解此问题
 
+#### manifest.xml的格式
 
+所有仓库的信息都放在manifest仓库的xml文件里，其各节点的意义如下：
+
+- **annotation**
+
+- **copyfile**：project的子节点
+
+  src：project的相对路径，
+
+  dest：仓库的相对路径
+
+- **default**：project没有设置时会使用默认配置。
+
+- **extend-project**
+
+- **include**
+
+- **linkfile**：project的子节点，类似copyfile，只是把复制文件变为创建链接文件。
+
+- **manifest**
+
+- **manifest-server**
+
+- **project**：子仓库
+
+  path：子仓库路径，
+
+  name：子仓库名称，
+
+  group：本项目所属的组，
+
+  revison：分支名，
+
+  clone-depth：git克隆的深度
+
+- **remote**：远程仓库地址
+
+  name：名字，
+
+  alias：别名，
+
+  fetch：仓库地址前缀，
+
+  revision：默认分支
+
+- **remove-project**
+
+  删除指定的项目(project)，这样同一manifest文件后续的项目就可以用不同的源(source)来替换这个项目了。这在本地的manifest文件里是很有用的，这样用户就可以用自己定义的项目来替代原有的项目了。
+
+#### 参考文档
+
+- [manifest-format](https://gerrit.googlesource.com/git-repo/+/refs/heads/master/docs/manifest-format.md)
 
 
 
