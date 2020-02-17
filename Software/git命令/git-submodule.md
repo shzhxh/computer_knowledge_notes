@@ -1,4 +1,39 @@
-#### 子模块
+```
+git submodule <command> [options]	# 初始化，更新或分析子模块
+```
+
+#### 命令
+
+##### add
+
+##### status
+
+##### init
+
+##### deinit
+
+##### update
+
+```
+update [options] [--] [<path>...] 
+# 更新已注册的模块，使用的方法是克隆子模块并更新子模块的工作树。
+# 如果子模块还没有初始化，并且只是使用.gitmodules里的设置，可使用--init选项自动初始化子模块。
+# --recursive的作用是，递归地更新子模块里的子模块。
+```
+
+
+
+##### summary
+
+##### foreach
+
+##### sync
+
+##### absorbgitdirs
+
+#### 选项
+
+#### 示例
 
 可以查看.gitmodules文件查看文件夹与子模块的对应关系
 

@@ -1,7 +1,8 @@
 #### 用于原子内存访问的内建函数
 
 ```
-__sync_synchronize(...)		// 产生完整的内存屏障(issues a full memory barrier)
+__sync_synchronize(...)		// 产生完整的内存屏障(issues a full memory barrier)。即，告诉编译器和处理器不要把load和store放在此点之后。(对于自旋锁来说，以保证临界区的内存引用发生在获取锁之后）
+__sync_lock_test_and_set(type *ptr, type value, ...)	// 这个内建函数完成的，不是传统的test-and-set操作，而是原子交换操作。它把value写入*ptr，并返回*ptr之前的值。许多平台只对这样的锁提供最低限度的支持，并且不支持完整的交换操作。即，平台支持的有效value可能只有1。实际存储在*ptr里的值取决于具体的实现。这个内建函数不是完整的屏障(full barrier)，而是获取屏障(aquire barrier)。这意味着内建函数之后的引用不能移动到内建函数之前，但之前的内存store可能还不是全局可见的，且之前的内存load可能还没有得到满足。
 ```
 
 
