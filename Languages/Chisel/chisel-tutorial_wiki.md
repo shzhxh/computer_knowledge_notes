@@ -1493,17 +1493,269 @@ io.z := tab(Cat(io.x, io.y))
 
 #### 一个路由器电路的例子
 
+##### 介绍——一个Chisel路由器
+
+本章带你进行一个非常详细的，几乎逐行地观察一个路由器的实现和测试代码的实现。同时，还会提供关于特定主题的进一步讨论的链接，特别是什么是Chisel和什么是Scala之间的关系。
+
+> 本章的目标主要是提供一个Chisel的阅读知识，如何看待代码和对代码进行分解。其他文档将更详细地描述Chisel代码的开发。
+
+我们的路由器将提供三个操作：
+
+- Rout:输入包将根据包头被路由到特定的输出。输出是可配置的。
+- Write:设置路由表，即将包头映射到特定的输出。
+- Read:使路由表可读。
+
+这个路由器有流量控制，所以只有当输入有效且接收输出就绪时，操作才会执行。让我们开始吧。
+
+##### 源文件
+
+既然你已经读到这里了，那么您可能已经了解了Chisel项目的组织结构。本章是关于两个文件:
+
+- `src/main/scala/examples/Router.scala`
+- `src/test/scala/examples/RouterTests.scala`
+
+```scala
+  1  // See LICENSE for license details.
+  2
+  3  package examples
+  4
+```
+
+第1行的`//`是注释的前缀。
+
+第3行指定了包名。包名应该反映所包含文件的目录层次结构。详见 [Scala: Things you should know](https://github.com/ucb-bar/chisel3/wiki/Scala-Things-You-Should-Know/#packages)
+
+```scala
+  5  import chisel3._
+  6  import chisel3.util.{DeqIO, EnqIO, log2Ceil}
+```
+
+`import`告诉scala编译器查找非本地定义的内容。第5行导入了chisel3的大部分功能，`_`在这个上下文中是一个通配符，指示编译器可以访问chisel3包中的所有公共代码。始终从这一行开始是一个很好的办法。像IntelliJ这样的ide会尝试自动导入一些东西，在这个过程中有时会导入替代的`import Chisel.<…>`。在import中的大写的Chisel启用向后兼容模式，允许使用一些不赞成的构造。**重要提示**:除非您有非常明确的理由使用兼容模式，否则请始终使用chisel3而不是Chisel。第6行从chisel3.util包中导入一些额外的特定类。稍后再详细介绍。
+
+##### 一个伙伴对象
+
+```scala
+  8  object Router {
+  9    val addressWidth    = 32
+ 10    val dataWidth       = 64
+ 11    val headerWidth     =  8
+ 12    val routeTableSize  = 15
+ 13    val numberOfOutputs =  4
+ 14  }
+```
+
+在这里，我们使用一个伙伴对象`Router`来定义一些对我们项目有用的常量。伙伴对象是一个自动实例化的**singleton**。这是个放常数的好地方。在本例中，声明了许多常量，`val addressWidth = 32`。`val`说，`addressWidth`不能改变，即它是一个常数。这个常量可以在其他地方引用为`Router.addressWidth`。在第36行中，名称`Rounter`除了用作对象名之外，还可以用作类名。
+
+> 我们将对`val`和`var`定义的符号使用通用的术语**变量**，即使`val`定义的符号不能改变。
+
+##### 一个Bundle
+
+在我们开始之前，快速浏览一下 [A simple class example](https://github.com/ucb-bar/chisel3/wiki/Scala-Things-You-Should-Know#a-simple-class-example)可能是个好主意。
+
+```scala
+ 16  class ReadCmd extends Bundle {
+ 17    val addr = UInt(Router.addressWidth.W)
+ 18  }
+```
+
+最后，我们有了一些真正的Chisel(与Scala相反)。在这里，我们定义一个Scala类`ReadCmd`。
+
+让我们把它分解一下。
+
+- `class ReadCmd`定义了`ReadCmd`。
+
+- `extends Bundle`说的是这个类是`Bundle`的子类(或者说`ReadCmd`继承了`Bundle`的特性)。
+
+  + `Bundle`定义在Chisel库里，用于创建硬件元素的集合。
+  + bundles的一个主要用途是定义IO端口。
+
+- 后面的花括号包含类的软件组件。在本例中只有一行
+
+  + 创建了一个成员变量`addr`。
+
+  + `addr`是一个对`UInt`的引用，从这里开始使用了魔法。
+
+    `UInt`是一个硬件类型，代表了无符号整数。
+
+    `UInt`有一个宽度参数。由于历史和实际原因，此参数不是整数，而必须是**宽度**。
+
+    记法```Router.addressWidth.W```包含了一个整数值`Router.addressWidth`，使用`.W`作为Int类型到Chisel `Width`类型的简写转换。
+
+##### 更多的数据bundle
+
+```scala
+ 20  class WriteCmd extends ReadCmd {
+ 21    val data = UInt(Router.addressWidth.W)
+ 22  }
+ 23
+ 24  class Packet extends Bundle {
+ 25    val header = UInt(Router.headerWidth.W)
+ 26    val body   = UInt(Router.dataWidth.W)
+ 27  }
+```
+
+这些直接来自上面的`ReadCmd`。注意:`WriteCmd`包扩展了`ReadCmd`包，这意味着它继承了`Bundle`和`ReadCmd`的属性。`WriteCmd`最后有两个数据字段，`data`和`addr`。`Packet`有两个Chisel元素。
+
+##### 路由器IO
+
+```scala
+ 30    * The router circuit IO
+ 31    * It routes a packet placed on it's input to one of n output ports
+ 32    *
+ 33    * @param n is number of fanned outputs for the routed packet
+ 34    */
+ 35  class RouterIO(n: Int) extends Bundle {
+ 36    val read_routing_table_request   = DeqIO(new ReadCmd())
+ 37    val read_routing_table_response  = EnqIO(UInt(Router.addressWidth.W))
+ 38    val load_routing_table_request   = DeqIO(new WriteCmd())
+ 39    val in                           = DeqIO(new Packet())
+ 40    val outs                         = Vec(n, EnqIO(new Packet()))
+ 41  }
+```
+
+好吧，事情变得更有趣了。首先，我们看到了一条注释，它是关于时间的，但我们试图保持简洁的东西在这里。`RouterIO`是`Router`模块IO端口的定义。我们开始吧
+
+- 类`RouterIO`有一个参数`n`，根据注释，这是扇出的数量。也许在一个更完美的世界中，一个具有完美的自动变量名完成的世界中，n应该被命名为`numberOfFannedOutputs`。在Bundle中使用`n`来创建所需的输出。
+
+- 关于`read_routing_table_request`：
+
+  + 我们使用Scala的`new`关键字创建了一个`ReadCmd`的实例。
+
+  + 更有趣的是我们把`new ReadCmd()`封装在`DeqIO`里。
+
+    `DeqIO`添加`Ready/Valid`流控制或解耦行为
+
+    `Router`模块将使用流控制来对来自外部世界的读请求进行排队。
+
+    `DeqIO`有两个布尔变量，其中`valid`是输入端口，`ready`是输出端口
+
+    `DeqIO`有两个方法，其中`deq()`将返回传入的`ReadCmd`，`nodeq()`在ready时断言为`false`。
+
+- 关于`read_routing_table_response`：
+
+  + `EnqIO`添加`valid`和`ready`到一个`UInt`端口，但方向相反。
+  + `EnqIO`有两个方法，其中`enq()`在端口上放了一个UInt，`noenq()`在valid里为`false`。
+
+- `load_routing_table_request`为解耦的`load_routing_table`端口提供端口
+
+- `in`为将要被路由的读取包定义了解耦端口
+
+- `out`定义了将要被路由的输入包的输出
+
+  `Vec`是一个Chisel的集合，它允许一组相同类型的元素。
+
+  `n`被用来创建适当数量的端口
+
+  每个元素都是队列里的解耦端口，这个端口带有一个packet, ready和valid端口。
+
+##### 现在到了DUT
+
+```scala
+ 43  /**
+ 44    * routes packets by using their header as an index into an externally loaded and readable table,
+ 45    * The number of addresses recognized does not need to match the number of outputs
+ 46    */
+ 47  class Router extends Module {
+```
+
+与前面一样，我们将创建一个Scala类，在本例中该类继承自Chisel `Module`类。`Module`是硬件描述的生成器，类似于Verilog里的模块。`Modules`应定义IO端口，复位和时钟行为，以及电路实现。
+
+```scala
+ 48    val depth = Router.routeTableSize
+ 49    val n     = Router.numberOfOutputs
+ 50    val io    = IO(new RouterIO(n))
+ 51    val tbl   = Mem(depth, UInt(BigInt(n).bitLength.W))
+```
+
+前几行定义了一些变量，它们实际上与Router对象中包含的更详细的参数的别名相差无几。这是传递参数的一种方式，我们已经在RouterIO中看到了另一种方式，将参数作为参数传递给类创建。我们将在下面看到这一点。参数传入模块的方式在某种程度上取决于个人喜好。一般来说，像Rocket这样更大、更复杂的系统都有强大而复杂的参数化方案，它们具有隐式默认值和局部覆盖的表示法。
+
+```scala
+ 53    when(reset) {
+ 54      io.read_routing_table_request.nodeq()
+ 55      io.load_routing_table_request.nodeq()
+ 56      io.read_routing_table_response.noenq()
+ 57      io.in.nodeq()
+ 58      io.outs.foreach { out => out.noenq() }
+ 59    }
+```
+
+从`when(reset)`开始，`when`在硬件中相当于if语句。`when`代码块的内容(大括号中的内容)将与when块外部的硬件组件的任何连接一起生成，when块基于必要的muxes(在本例中是`reset`，代表重置的Bool信号)进行门控。`reset`是一个隐式的IO Bool输入端口，它是由`Module`提供的(还可以使用其他类型的`Module`，它们不会自动提供这些端口)
+
+```scala
+ 66    .elsewhen(io.load_routing_table_request.valid) {
+ 67      val cmd = io.load_routing_table_request.deq()
+ 68      tbl(cmd.addr) := cmd.data
+ 69      printf("setting tbl(%d) to %d\n", cmd.addr, cmd.data)
+ 70    }
+```
+
+这里的`.elsewhen`非常类似于`else if`，代码块连接将根据条件由muxes进行门控。在本例中，这个条件就是断言load_routing_table.valid信号。
+
+`cmd`创建了对`deq()`返回值的本地引用。Dequeue是解耦接口上的一个简单方便的方法，它设置ready，并返回一个对解耦接口的数据部分的引用。
+
+`tbl(cmd.addr) := cmd.data`将指定地址cmd.addr处的内存设置为指定的输出cmd.data。因为这是在一个`.elsewhen`块中，只有当条件为真时，连接才会发生。这里还有另一个`printf`，可能是开发人员在调试过程中使用的。
+
+> 关于`.elsewhen`前面的圆点。via伙伴对象when有一个`apply`方法，这个方法需要一个Bool参数和一个代码块参数。`apply`方法返回一个类的实例`WhenContext`。`WhenContext`实例有一个方法`elsewhen`，与when一样，它需要一个Bool和一个代码块。在**FIRRTL**生成时，这些额外的块以一种依赖于所有之前连接的when和elsewhen块的否定的方式发出。当方法跟在同一行上时，在方法前面不需要点，但是出于风格的原因，这个开发人员选择将elsewhen放在它自己的行上。因此，scala编译器需要将elsewhen前面的圆点识别为方法。
+
+```scala
+ 71    .elsewhen(io.in.valid) {
+ 72      val pkt = io.in.bits
+ 73      val idx = tbl(pkt.header(log2Ceil(Router.routeTableSize), 0))
+ 74      when(io.outs(idx).ready) {
+ 75        io.in.deq()
+ 76        io.outs(idx).enq(pkt)
+ 77        printf("got packet to route header %d, data %d, being routed to out(%d)\n", pkt.header, pkt.body, tbl(pkt.header))
+ 78      }
+ 79    }
+ 80  }
+```
+
+最后的`.elsewhen`被`io.in.valid`门控。`pkt`获取对传入包中的数据的引用。在这里没有使用`deq()`方法，因为在与包头关联的输出准备好进入队列之前，我们不想对输入断言ready。`idx`算出索引(idx)，这个索引在当前路由表里与包头相关联。`tbl(pkt.header(log2Ceil(Router.routeTableSize), 0))`正在做一些值得注意的事情。`tbl`(路由表)正在被包头索引，header的括号里参数是用来作为索引的header位的规范，`pkt.header`上的隐式应用方法的参数包括(高起始位、低结束位)。`log2Ceil`根据适应路由表的参数化大小所需的比特数计算高。
+
+一旦索引被计算，`when(io.outs(idx).ready)`检查那个输出端口的ready位，如果成立，`io.in.deq()`在输入端口上断言ready，指示该值已经被处理。接下来，`io.outs(idx).enq(pkt)`将包放在选定的输入上，并在该端口上断言有效。
+
 #### 路由器测试器
 
 ### 常见问题
 
+#### 如何看电路的VCD输出？
 
+这是一个快速的方法。我们将利用verilator后端在默认情况下创建vcd输出文件这一事实，因此我们将使它运行，而不是默认的解释器后端。
 
+使用如下命令运行Adder
 
+```bash
+./run-examples.sh Adder --backend-name verilator
+```
 
+vcd文件在`test_run_dir/examples.Launcher.*/*.vcd`。
 
+也可以添加自己的驱动程序调用，这将允许您访问由教程启动程序隐藏的大量选项。
 
+修改Adder的测试程序`AdderTests.scala`，在末尾添加一个新测试类：
 
+```scala
+class MyAdderTester extends ChiselFlatSpec {
+  behavior of "Adder"
+  it should "run while creating a vcd" in {
+    Driver.execute(Array("-fiwv"), () => new Adder(10)) { c =>
+      new AdderTests(c)
+    }
+  }
+}
+```
+
+在命令行下运行测试
+
+```bash
+sbt 'test-only examples.MyAdderTester'
+```
+
+由于`-fiwv`标志被传递到后端，您将从解释器获得一个vcd输出。
+
+使用这种方法将输出到一个不同的目录`test_run_dir/examples.MyAdderTester*/*.vcd`。
+
+感兴趣的话，尝试将`-fiwv`标志更改为`--help`，并查看选项的全面列表。
 
 
 

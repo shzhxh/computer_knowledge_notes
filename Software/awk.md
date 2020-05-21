@@ -98,6 +98,7 @@ if (condition) statement [else statement]
 ##### I/O语句
 
 ```
+next		# 停止处理当前的输入记录，读取下一个输入记录继续处理。
 print		# 打印当前记录
 print expr-list	# 打印表达式expr-list
 print expr-list > file	# 将打印出来的表达式重定向到文件

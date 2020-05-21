@@ -68,6 +68,8 @@ sudo apt install vim-gtk		# 对于Ubuntu安装vim-gtk可使vim支持系统剪切
 ##### 搜索
 
 ```
+*		# 向后查找光标所在处的单词
+#		# 向前查找光标所在处的单词
 f<char>	# 向后搜索<char>,光标出现在<char>后面
 t<char>	# 向后搜索<char>，光标出现在<char>前面
 F<char>	# 向前搜索<char>,光标出现在<char>后面
@@ -158,11 +160,28 @@ V	# 选择，以行为单位
 	ctrl+g	//显示在文件中的位置与文件信息
 ```
 
+##### 编辑文件
+
+```
+:e[dit] [++opt] [+cmd]	# 编辑当前文件。可用于重新编辑当前文件的情况。
+:e[dit]! [++opt] [+cmd]	# 放弃当前缓冲区里的修改，强制编辑当前文件。
+	# [++opt]里的opt可以是如下内容：
+	ff, fileformat		# 覆盖'fileformat'
+	enc, encoding		# 覆盖'fileencoding'
+	bin, binary			# 设置'binary'
+	nobin, bobinary		# 重新设置'binary'
+	bad		# 定义碰到坏字符后采取的行为
+	edit	# 
+```
+
+
+
 ##### 文件保存
 
 ```
-	:w filename	//另存为
-	:w !sudo tee %	// 以超级用户的身份保存文件。%代表当前文件名，tee命令把stdin保存到文件中
+:w[rite] [++opt]	# 把缓冲区的内容写入到当前文件。对于[++opt]来说，仅++bin, ++nobin, ++ff和++enc有效。
+:w filename			# 另存为
+:w !sudo tee %		# 以超级用户的身份保存文件。%代表当前文件名，tee命令把stdin保存到文件中
 ```
 
 ##### 执行外部命令

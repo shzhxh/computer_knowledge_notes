@@ -18,16 +18,68 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 标准选项
 
 ```
--h	# 打印帮助信息
--version	# 打印版本信息
--machine [type=]name[,prop[=value][,...]]	# 选择要模拟的机器
--cpu	# 选择CPU模型
 -accel	# 选择加速器的模型
--smp	# 模拟多核CPU
--device driver[,prop[=value][,...]]		# 添加设备(基于driver)，prop=value是设置driver的属性
+-audiodev [driver=]driver,id=id[,prop[=value][,...]]
+	# 添加一个音频后端driver，其id为id。
+	# 可用的prop有：
+	# id=identifier : 标识音频后端
+	# timer-period=period : 设置音频子系统的计时器周期。默认10000(10ms)
 -boot # 定义启动顺序
--m	# 指定内存大小，默认128M。
+-cpu	# 选择CPU模型
+-device driver[,prop[=value][,...]]
+	# 添加设备(基于driver)，prop=value是设置driver的属性
+	# 可用的prop有：
+	## Controller/Bridge/Hub设备
+	# usb-host:bus usb-bus
+	## USB设备
+	# qemu-xhci:bus PCI
+	## 存储设备
+	# virtio-9p-pci:bus PCI, "virtio-9p"的别名
+	# virtio-blk-pic:bus PCI, 是"virtio-blk"的别名
+	## 网络设备
+	# e1000 : bus PCI,"e1000-82540em"的别名,desc "Intel Gigabit Ethernet"
+	## 输入设备
+	# isa-serial:bus ISA
+	# usb-kbd:bus usb-bus
+	# usb-mouse:bus usb-bus
+	## 显示设备
+	## 声音设备
+	## Misc设备
+	# ich9-intel-hda:bus PCI, desc "Intel HD Audio Controller (ich9)
+	# intel-hda:bus PCI, desc "Intel HD Audio Controller (ich6)"
+	# intel-iommu : bus系统，desc "Intel IOMMU (VT-d) DMA Remapping device"
+	# vhost-vsock-pci : bus PCI
+	## CPU设备
+	## 未分类的设备
+-global driver.property=value
+-global driver=driver, property=property, value=value
+	# 对driver的property设置一个默认的value。此选项用于为自动生成的设备设置属性，对于不是自动生成的设备应使用-device选项。
+	# 对于q35设备，需要设置"-global ICH9-LPC.disable_s3=1 -global ICH9-LPC.disable_s4=1"
+	# 对于i440FX设备，需要设置"-global PIIX4_PM.disable_s3=1 -global PIIX4_PM.disable_s4=1"
+-k language
+	# 指定键盘布局，默认为en-us。
+-M, -machine [type=]name[,prop[=value][,...]]
+	# 选择要模拟的机器
+	# 可用的prop有：
+	# accel选择加速器，支持的加速器有kvm,xen,hax,hvf,whpx或tcg。默认tcg
+	# kernel_irqchip选择加速irq芯片的支持，选项有on,off或split。默认off
+	# vmport
+	# kvm_shadow_mem
+	# dump-guest-core
+	# mem-merge
+	# igd-passthru
+	# aes-key-wrap
+	# dea-key-wrap
+	# suppress-vmdesc
+	# nvdimm
+	# enforce-config-section
+	# memory-encryption
+-m megs	# 指定内存大小为megs，默认128M。
+-name string1[,process=string2][,debug-threads=on|off]
+	# 设置客户机的名称，string1是窗口名，string2是进程名
+-smp n	# 设置CPU的个数为n，默认为1。
 -soundhw	# 使能并使用声卡。
+-version	# 打印版本信息
 ```
 
 
@@ -35,48 +87,56 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 块设备选项
 
 ```
+-cdrom FILE	# 相当于 -drive file=FILE,index=2,media=cdrom
+-blockdev
+	# 定义一个块设备驱动器。
+	## 对所有块驱动器都有效的选项
+	## file的选项
+	## raw的选项
+	## qcow2的选项
+	## 其它选项
+-drvie option[,option[,option[,...]]
+	# 定义一个新的驱动器。相当于-blockdev和-device的快捷写法。
+	## -drive可以使用-blockdev的所有选项，另外，还可以使用如下选项：
+	# file=FILE	 指定磁盘镜像
+	# if=		 指定drive要连接的接口类型，可用类型有ide,scsi,sd,mtd,floppy,pflash,virtio,none
+	# bus= ,unit=	 通过bus number和unit id指定连接位置
+	# index=	 通过编号指定连接位置
+	# media=	 指定媒介类型，disk或cdrom
+	# cyls=, heads=, secs= [,trans=]	
+	# snapshot=	
+	# cache=	
+	# aio=	
+	# format=<fmt>	指定磁盘格式，这样就不会再探测磁盘格式了。
+	# serial=	
+	# saddr=	
+	# swerror=, rerror=	
+	# scopy-on-read=	
+	# sbps=, bps_rd=, bps_wr=	
+	# sbps_max=, bps_rd_max=, bps_wr_max=	
+	# siops=, iops_rd=, iops_wr=	
+	# siops_max=, iops_rd_max=, iops_wr_max=	
+	# siops_size=
+	# sgroup=
+-fsdev local,id=id,path=path,security_model=security_model
+-fsdev proxy,id=id,socket=socket
+-fsdev proxy,id=id,sock_fd=sock_fd
+-fsdev synth,id=id
+	# 定义一个新的文件系统设备
+	# local：对文件系统的访问是由QEMU完成的
+	# proxy：对文件系统的访问是由virtfs-proxy-helper完成的
+	# synth：Synthetic filesystem, only used by QTests. 
 -fda	# 软盘
 -fdb	# 软盘
 -hda FILE	# 相当于 -drive file=FILE,index=0,media=disk
 -hdb FILE	# 相当于 -drive file=FILE,index=1,media=disk
 -hdc FILE	# 相当于 -drive file=FILE,index=2,media=disk
 -hdd FILE	# 相当于 -drive file=FILE,index=3,media=disk
--cdrom FILE	# 相当于 -drive file=FILE,index=2,media=cdrom
--blockdev	# 定义一个块设备驱动器。
-	# 对所有块驱动器都有效的选项
-	# file的选项
-	# raw的选项
-	# qcow2的选项
-	# 其它选项
--drvie option[,option[,option[,...]]]
-	# -drive可以使用-blockdev的所有选项，另外，还可以使用如下选项：
-	file=FILE	# 指定磁盘镜像
-	if=			# 指定drive要连接的接口类型，可用类型有ide,scsi,sd,mtd,floppy,pflash,virtio,none
-	bus= ,unit=	# 通过bus number和unit id指定连接位置
-	index=	# 通过编号指定连接位置
-	media=	# 指定媒介类型，disk或cdrom
-	cyls=, heads=, secs= [,trans=]	#
-	snapshot=	#
-	cache=	#
-	aio=	#
-	format=<fmt>	# 指定磁盘格式，这样就不会再探测磁盘格式了。
-	serial=	#
-	addr=	#
-	werror=, rerror=	#
-	copy-on-read=	#
-	bps=, bps_rd=, bps_wr=	#
-	bps_max=, bps_rd_max=, bps_wr_max=	#
-	iops=, iops_rd=, iops_wr=	#
-	iops_max=, iops_rd_max=, iops_wr_max=	#
-	iops_size=
-	group=
--mtdblock
--sd
--pflash
--snapshot
 -hdachs
--fsdev
-
+-mtdblock
+-pflash
+-sd
+-snapshot
 ```
 
 ##### USB选项
@@ -89,14 +149,46 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 显示选项
 
 ```
--display
+-display spice-app
+-display sdl
+-display gtk[,grab_on_hover=on|off][,gl=on|off]
+-display vnc=<display>
+-display egl-headless
+-display none
+	# 选择display的后端类型，默认为'-display gtk'
+	# gtk的意思是在GTK窗口中显示视频输出。该接口提供了下拉菜单和其它UI元素来控制VM。
+	# none的意思是不显示视频输出。它类似于-nographic选项的作用，但不会重定向串口或并口的数据。
+-full-screen	# 以全屏启动
 -nographic	# 禁用图形输出并将串行I/O重定向到控制台
--vga TYPE	# 模拟VGA显卡，可选的TYPE有cirrus, std, vmware, qxl, tcx, cg3, virtio, none
-	cirrus	:GD5446显卡。Windows系统从win95之后都能识别和使用此显卡。为qemu 2.2之前的默认显卡。
-	std		:标准VGA显卡。为qemu 2.2之后的默认显卡。
+-vga [cirrus|std|vmware|qxl|xenfb|tcx|cg3|virtio|none]
+	# 选择显卡类型
+	# cirrus指的是GD5446显卡。Windows系统从win95之后都能识别和使用此显卡。为qemu 2.2之前的默认显卡。
+	# std是标准VGA显卡。为qemu 2.2之后的默认显卡。
+	# none指的是没有显卡。
 -vnc display[,options]	# 使用此选项，可以让qemu把vga显示重定向到vnc显示：<display>。
   host:d	# 只允许主机host通过端口d进行tcp连接。d是vnc端口，实际的tcp端口一般是5900+d。host可以省略，此时允许所有主机的连接。
 ```
+
+##### i386 target only
+
+```
+-smbios file=binary
+	# 从binary文件加载SMBIOS条目
+-smbios type=0
+	# 定义SMBIOS type 0字段
+-smbios type=1
+	# 定义SMBIOS type 1字段
+-smbios type=2
+	# 定义SMBIOS type 2字段
+-smbios type=3
+	# 定义SMBIOS type 3字段
+-smbios type=4
+	# 定义SMBIOS type 4字段
+-smbios type=17
+	# 定义SMBIOS type 17字段
+```
+
+
 
 ##### 网络选项
 
@@ -120,7 +212,7 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 字符设备选项
 
 ```
--chardev
+-chardev socket,id=id,path=path
 ```
 
 ##### 蓝牙选项
@@ -147,13 +239,16 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 调试选项
 
 ```
--serial DEV	# 将虚拟串口重定向到宿主机的字符设备DEV。图形模式下默认为vc，非图形模式下默认为stdio。
--parallel DEV	# 将虚拟并口重定向到宿主机的设备DEV。
--monitor <dev>	# 把控制台重定向到宿主机的设备dev。图形模式下默认设备是"vc"，非图形模式下默认设备是"stdio"。
 -bios FILE	# 为BIOS指定文件
+-enable-kvm	# 开启KVM虚拟化支持
+-gdb dev	# 等待gdb来连接设备dev。
+-monitor <dev>	# 把控制台重定向到宿主机的设备dev。图形模式下默认设备是"vc"，非图形模式下默认设备是"stdio"。
+-nodefaults	
+	# 不要创建默认设备
+-parallel DEV	# 将虚拟并口重定向到宿主机的设备DEV。
+-serial DEV	# 将虚拟串口重定向到宿主机的字符设备DEV。图形模式下默认为vc，非图形模式下默认为stdio。
 -S			# 在刚开始的时候别启动CPU（需要在管理器里输入“c”才会启动CPU）
 -s			# 相当于-gdb tcp::1234，即在TCP端口1234开启一个gdbserver
--gdb dev	# 等待gdb来连接设备dev。
 ```
 
 #### QEMU monitor
@@ -213,7 +308,8 @@ sendkey	# 键盘操作
 	-kernel		// 指定内核镜像。
 	-m 1G		//使用1G内存
 	-M q35,accel=kvm:tcg,kernel-irqchip=split
-		// 使用机器类型intel q35，使用加速器kvm:tcg，加速器的in-kernel irqchip支持为split。
+		# 使用机器类型intel q35，使用加速器kvm:tcg，加速器的in-kernel irqchip支持为split。
+		# Qemu支持的Intel机器类型仅有两种，一个是i440FX，一个是Q35。i440FX诞生于1996年，是北桥芯片，其对应的南桥芯片是PIIX。Q35是2007年推出的芯片组，它即包括了北桥芯片(MCH)，也包括了南桥芯片(ICH9)。Q35相较于i440FX的最大差异在于它支持PCIe。
 	-net nic	//创建一个新网卡，默认是e1000。
 	-net user	//使用用户模式的网络栈，无需管理员权限。
 	-net tap,ifname=tap0,script=no,downscript=no
@@ -354,7 +450,9 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 
 #### 参考资料
 
+- [Qemu4.2.0用户文档](https://qemu.weilnetz.de/doc/qemu-doc.html#Display-options)
 - QEMU新的-nic选项：[中文翻译版](https://zhuanlan.zhihu.com/p/41258581)、[英文版](https://www.qemu.org/2018/05/31/nic-parameter/)
+- [Qemu虚拟化之Machine Type](https://remimin.github.io/2019/07/09/qemu_machine_type/)
 
 #### 问题的解决
 
