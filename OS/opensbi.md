@@ -1,6 +1,6 @@
 #### 简介
 
-OpenSBI是运行在M态的固件，用以支持H态或S态的程序，如hypervisor、bootloader或通用操作系统。
+[OpenSBI](https://github.com/riscv/opensbi.git)是运行在M态的固件，用以支持H态或S态的程序，如hypervisor、bootloader或通用操作系统。
 
 #### OpenSBI库用法
 

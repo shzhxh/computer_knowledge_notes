@@ -54,6 +54,7 @@ stage		# 把文件添加到暂存区中
 start		# 开始一个新的开发分支
 status		# 显示工作树的状态
 sync		# 将工作树更新到最新版本
+	-c, --current-branch # 只从服务器获取当前分支
 	-f, --force-broken 	# 即使某些项目同步失败，也会继续同步其它项目
 	--force-sync	# 覆盖已存在的git目录(影响的是.repo/projects目录下的工作树)
 	-j JOBS	# 同步下载的JOBS个项目，默认下载4个
