@@ -1,6 +1,7 @@
 #### 安装
 ```shell
-./configure --target-list=riscv32-softmmu
+mkdir build
+../configure --target-list=riscv32-softmmu,riscv64-softmmu
 sudo make install
 ```
 > ERROR: glib-2.22 gthread-2.0 is required to compile QEMU
@@ -361,6 +362,16 @@ sendkey	# 键盘操作
 - `virt` - 16550A UART, VirtIO, device-tree
 
   VirtIO板模拟了完整的计算机系统，方便操作系统的开发。它实现了VirtIO MMIO传输，支持VirtIO块设备和VirtIO网络设备，还有16550a UART用于控制台访问。这样qemu原生的各种块设备和网络实现都可用了。
+  
+  ```
+  # 查看virt machine的硬件配置信息
+  sudo apt install device-tree-compiler
+  qemu-system-riscv64 -M virt -M dumpdtb=riscv64-virt.dtb -bios default
+  dtc -I dtb -O dts -o riscv64-virt.dts riscv64-virt.dtb
+  view riscv64-virt.dts
+  ```
+  
+  
 
 ##### 设备树
 

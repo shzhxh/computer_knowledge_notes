@@ -1,13 +1,16 @@
-[git内部原理](https://www.open-open.com/lib/view/open1328070620202.html#articleHeader3)
+#### 参考资料
+
+- [git内部原理](https://www.open-open.com/lib/view/open1328070620202.html#articleHeader3)
+- [git底层数据结构和原理](https://yq.aliyun.com/articles/761686)
 
 #### 重要概念
 
 - 分支：每次提交都是一个点，相邻的两次提交连成线，多条线连成一条路径，每条路径就是一个分支。
 - HEAD：当前工作区所在的位置，这个位置可以是任意的某个提交。
-- 工作区：仓库所在的目录，包括除.git目录外的所有文件和目录。
-- 暂存区：使用`git add` 命令把工作区的内容放到暂存区，暂存区在.git目录里。
-- 本地仓库：使用`git commit`命令把暂存区的内容放到本地仓库，本地仓库也在.git目录里。
-- 远程仓库：使用`git push`命令把本地仓库里的内容放在远程仓库。
+- 工作区(workspace)：仓库所在的目录，包括除.git目录外的所有文件和目录。
+- 暂存区(index)：使用`git add` 命令把工作区的内容放到暂存区，暂存区在.git目录里。
+- 本地仓库(local repository)：使用`git commit`命令把暂存区的内容放到本地仓库，本地仓库也在.git目录里。
+- 远程仓库(remote repository)：使用`git push`命令把本地仓库里的内容放在远程仓库。
 - blob：在git内存储的不是文件名而仅仅是文件的内容，这种对象被称为blob。
 - tree：在tree里存储的是blob或其它tree，类似于数据结构里树的非叶子结点，这种对象被称为tree。
 - commit：保存了tree的创建者、创建时间和注释的信息，这种对象被称为commit。
@@ -47,7 +50,7 @@ git-describe	#
 git-diff	# 打印各种差别
 git-fetch	# 从其它仓库下载对象和引用
 git-format-patch
-git-gc
+git-gc		# 清除不必要的文件并优化本地仓库
 git-grep
 git-gui
 git-init	# 初始化仓库
@@ -165,15 +168,22 @@ git的用户接口分两层：
 
 `.git`目录包含了git存储和操作的所有内容，是理解git原理的核心。其结构如下：
 
-- branchs/：新版本的git不再使用此目录。
-- hooks/：客户端或服务器端勾子脚本。
-- info/：保存了一份不希望在`.gitignore`文件中管理的忽略模式 (ignored patterns) 的全局可执行文件。
-- **refs/**：存储指向数据的提交对象的指针，是git的核心部分。
-- **objects/**：存储所有的数据内容，是git的核心部分。
-- config：项目特有的配置选项。
-- description：仅供gitweb程序使用。
-- **index**：保存了暂存区的信息，是git的核心部分。
-- **HEAD**：指向当前分支，是git的核心部分。
+| 目录或文件     | 描述                                                         |
+| -------------- | ------------------------------------------------------------ |
+| COMMIT_EDITMSG | 文本文件，最后一次commit的注释                               |
+| config         | 项目特有的配置选项。                                         |
+| description    | 仅供gitweb程序使用。                                         |
+| FETCH_HEAD     | 文本文件，本地仓库的每个分支最后一次和远程仓库交互时的commit id |
+| **HEAD**       | 文本文件，其内容是当前工作区所在的分支，是git的核心部分。    |
+| **index**      | 保存了暂存区的信息，可以用`git ls-files`命令查看其内容，是git的核心部分。 |
+| ORIG_HEAD      | 文本文件，在进行风险操作(reset,merge,rebase)时，保存HEAD指向的commit id |
+| packed-refs    | 如执行了`git gc`命令，refs目录中将会删除某些文件，为保证效率，这些被删除的文件的内容将会保存到packed-refs文件里 |
+| branchs/       | 目录，新版本的git不再使用此目录。                            |
+| hooks/         | 目录，客户端或服务器端勾子脚本。                             |
+| info/          | 保存了一份不希望在`.gitignore`文件中管理的忽略模式 (ignored patterns) 的全局可执行文件。 |
+| logs/          | 保存了各个分支的提交日志                                     |
+| **objects/**   | 存储所有的数据内容，是git的核心部分。                        |
+| **refs/**      | 存储指向数据的提交对象的指针，是git的核心部分。              |
 
 内容寻址文件系统是一个key-value数据存储系统。
 
