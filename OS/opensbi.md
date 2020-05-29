@@ -129,6 +129,13 @@ OpenSBI也提供了可启动的运行时固件，那些固件链接到了libplat
 - 缺点
   - 一旦OpenSBI或BOOTLOADER改变，就必须重新生成FW_PAYLOAD镜像
   - 无法从之前的启动阶段(LOADER)传递参数给FW_PAYLOAD
+- 配置选项
+  + **FW_PAYLOAD_OFFSET** - 基于FW_TEXT_BASE的位移，payload二进制将从FW_TEXT_OFFSET链接到最终的FW_PAYLOAD固件二进制镜像。如没有定义FW_PAYLOAD_ALIGN则此参数必须使用。如果错误定义了FW_PAYLOAD_OFFSET或FW_PAYLOAD_ALIGN，或者两者都没有定义，则会产生编译错误。
+  + **FW_PAYLOAD_ALIGN** - 地址对齐约束，payload二进制将被链接在基本固件二进制的后面，从而形成最终的FW_PAYLOAD固件二进制镜像。如没有定义FW_PAYLOAD_OFFSET则此参数必须使用。如果同时定义了FW_PAYLOAD_OFFSET或FW_PAYLOAD_ALIGN，则会使用FW_PAYLOAD_OFFSET而忽略FW_PAYLOAD_ALIGN。
+  + **FW_PAYLOAD_PATH** 镜像文件的路径。如没有指定此参数，则会自动生成一个简单的测试payload。它在打印出一条信息后就进到一个无限循环里。
+  + **FW_PAYLOAD_FDT_PATH** 到FDT二进制文件的路径，它最终会嵌入到固件二进制的*.text* 段里。如果没有定义这个选项，且平台也没有定义它的文件（参考FW_PAYLOAD_FDT），则固件会期望上一个启动阶段来把FDT作为参数传递过来。
+  + **FW_PAYLOAD_FDT** 平台代码自己定义的FDT的路径。文件名必须满足平台*objects.mk*文件里 DTB文件的名称(*platform-dtb-y*条目)。此选项将会导致*FW_PAYLOAD_FDT_PATH*被自动设置。在 `make` 命令行里定义FW_PAYLOAD_FDT_PATH将会使此选项失效，命令行里定义的那个DTB文件将会构建到最终的固件里。
+  + **FW_PAYLOAD_FDT_ADDR** 在进行下一个启动阶段之前，FDT的放置地址。这个FDT可能是上个启动阶段传递的，也可能是FW_PAYLOAD_FDT_PATH定义的，它会嵌入到*.text*段里。如果没有提供这个参数，固件会把上个阶段传递的FDT地址直接传递给下个阶段。
 
 ##### FW_JUMP
 
