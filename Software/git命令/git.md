@@ -49,7 +49,7 @@ git-commit	# 向仓库中提交
 git-describe	# 
 git-diff	# 打印各种差别
 git-fetch	# 从其它仓库下载对象和引用
-git-format-patch
+git-format-patch	# 生成补丁
 git-gc		# 清除不必要的文件并优化本地仓库
 git-grep
 git-gui
@@ -60,7 +60,7 @@ git-mv		# 移动文件
 git-notes	# 
 git-pull	# fetch并合并远程仓库(或本地分支)
 git-push	# 更新远程仓库
-git-rebase
+git-rebase	# 从某个基点开始重新添加提交
 git-reset	# 将HEAD重置到指定的状态
 git-revert	# 重置一些已知提交
 git-rm		# 从工作树或暂存区中删除文件

@@ -37,6 +37,7 @@ riscv64-unknown-elf-ld [options] file...
 -L, --library-path=<searchdir>	# 把searchdir添加到一个路径列表里去，ld将在这个列表里搜索库和控制脚本。
 -m EMULATION		# 设置emulation，可以用-V或--verbose列出所有的emulation。
 -nostdlib			# 只在命令行明确指定的目录下搜索库
+-r, -i, --relocatable	# 生成可重定位输出
 -v, --version		# 打印版本号。
 -V					# 打印版本号，且列出所支持的emulations。
 
@@ -46,7 +47,19 @@ riscv64-unknown-elf-ld [options] file...
 
 ##### 支持的target
 
+```
+elf64-littleriscv elf32-littleriscv elf64-little elf64-big elf32-little elf32-big srec symbolsrec verilog tekhex binary ihex plugin
+```
+
+
+
 ##### 支持的emulation
+
+```
+elf64lriscv elf64lriscv_lp64f elf64lriscv_lp64 elf32lriscv elf32lriscv_ilp32f elf32lriscv_ilp32
+```
+
+
 
 ##### emulation定义的选项
 
