@@ -3,25 +3,25 @@
 目录配置：（FHS)(四种类型：static,variable,shareable,unshareable)
 
 ```
-/bin	//常用命令
-/sbin	//系统管理员才会用到的命令
-/lib	//开机及常用命令的函数库
-/usr	//unix software resouce:软件放置处
-/opt	//第三方软件
-/srv	//网络服务
-/tmp	//放临时文件
-/etc	//配置文件
-	/etc/passwd	//用户信息
-	/etc/shadow	//密码信息
-	/etc/group	//组信息	
-/boot	//开机与内核
-/dev	//设备文件
-/var	//variable:与系统动作过程有关
-/media	//放置可移除的设备
-/mnt	//暂时挂载
-/home	//用户目录
-/root	//系统管理员目录
-/lost+found	//文件系统发生错误时，放置遗失片断
+/bin	#常用命令
+/sbin	#系统管理员才会用到的命令
+/lib	#开机及常用命令的函数库
+/usr	#unix software resouce:软件放置处
+/opt	#第三方软件
+/srv	#网络服务
+/tmp	#放临时文件
+/etc	#配置文件
+	/etc/passwd	#用户信息
+	/etc/shadow	#密码信息
+	/etc/group	#组信息	
+/boot	#开机与内核
+/dev	#设备文件
+/var	#variable:与系统动作过程有关
+/media	#放置可移除的设备
+/mnt	#暂时挂载
+/home	#用户目录
+/root	#系统管理员目录
+/lost+found	#文件系统发生错误时，放置遗失片断
 /proc	# 记录着内核的数据结构，动态地存在于内存中
 	/proc/数字	# 数字代表了对应的进程，描述的是相关进程的信息
 	/proc/cpuinfo	# CPU信息
@@ -34,7 +34,7 @@
 	/proc/scsi			# SCSI设备的信息
 	/proc/sys
 	/proc/version		# 内核版本
-/sys	//内核相关信息
+/sys	#内核相关信息
 ```
 
 #### 文件种类
@@ -42,13 +42,13 @@
 文件三种权限：rwx
 
 ```
-d	//directory文件
--	//一般文件
-l	//link文件
-b	//block设备，一般在/dev目录下
-c	//character设备，一般在/dev目录下
-s	//socket文件，例/var/run目录下
-p	//数据输送文件
+d	#directory文件
+-	#一般文件
+l	#link文件
+b	#block设备，一般在/dev目录下
+c	#character设备，一般在/dev目录下
+s	#socket文件，例/var/run目录下
+p	#数据输送文件
 ```
 
 
