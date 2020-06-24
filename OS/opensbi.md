@@ -58,7 +58,6 @@
   make docs	# 生成的refman.pdf在build/doc/latex目录
   ```
 
-  
 
 #### OpenSBI平台支持
 
@@ -219,7 +218,11 @@ make PLATFORM=kendryte/k210 intall	# 创建install/platform/kendryte/k210/目录
 
 一般来说，生成的镜像是32位的还是64位的，取决于提供的交叉编译工具链。但也可以通过参数`PLATFORM_RISCV_XLEN`来指定所需的宽度。
 
+#### 源码分析
 
+opensbi从`_start`开始执行，位置在`firmware/fw_base.S`。`MOV_3R`用于保存`a0,a1,a2,a3`这三个寄存器的值，这是为下一条指令`call fw_boot_hart`做准备，因为`fw_boot_hart`要用到这个三寄存器。
 
+`fw_boot_hart`的作用是返回当前核的`Hart ID`。它前期进行了两个判断，一是魔数要匹配，二是版本号不能高于最高值，任意一个条件不满足，都会进到死循环`_bad_dynamic_info`里。`Hart ID`保存在`a0`里，然后函数返回。实际上`a0`返回的值是`-1`，**不理解这一点**。
 
+接下来把`a0`的值保存在`a6`里，然后恢复`a0,a1,a2`的值。如`Hart ID`为`-1`，说明需要挑选出一个boot hart，则执行`_try_lottery`；如`Hart ID`不为`a0`，说明当前核不是boot hart，则执行`_wait_reloate_copy_done`。
 
