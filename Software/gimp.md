@@ -1,3 +1,7 @@
+降低躁点
+
+Filters->Blur->Selective Gaussian Blur
+
 剪切
 
 拉伸
