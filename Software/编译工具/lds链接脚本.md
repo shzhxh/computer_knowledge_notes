@@ -1,5 +1,3 @@
-[Linker Scripts](https://sourceware.org/binutils/docs/ld/Scripts.html)
-
 #### 脚本格式
 
 链接脚本由一系列命令组成。
@@ -121,3 +119,7 @@ SECTIONS命令告诉链接器如何把输入文件的sections映射到输出文�
 - 隐式链接脚本不会取代默认链接脚本。
 - 一般来说，隐式的链接脚本仅包含符号赋值，或INPUT,GROUP，或VERSION命令。
 - 作为隐式链接脚本的输入文件，其内容会放到读取它的命令的那个位置。这会影响archive搜索。
+
+#### 参考资料
+
+[Linker Scripts](https://sourceware.org/binutils/docs/ld/Scripts.html)
