@@ -34,3 +34,7 @@ make install
 #### Markdown语法
 
 下标：File > Preference > Markdown > Syntax Support开启。
+
+[emoji](https://www.webfx.com/tools/emoji-cheat-sheet/)
+
+[数学符号](https://blog.csdn.net/weixin_43159148/article/details/88621318)
