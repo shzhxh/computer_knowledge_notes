@@ -6,21 +6,22 @@
 * 创建硬链接结点的硬链接计数器会加1,而创建软链接不会。
 * 删除软链接不会影响原文件，但所有硬链接被删除后文件本身也会被删除。
 
-#### 作用
-创建文件之间的链接
+#### 语法
+```bash
+ln [OPTION] [-T] <TARGET> <LINK_NAME>   # 使用名称LINK_NAME创建对TARGET的链接
+ln [OPTION] <TARGET>                  # 在当前目录下创建对TARGET的链接
+ln [OPTION] <TARGET> <DIRECTORY>     # 在DIRECTORY目录下创建所有TARGET的链接
+ln [OPTION] -t <DIRECTORY> <TARGET>  # 在DIRECTORY目录下创建所有TARGET的链接
+# 注：默认创建硬链接，使用--symbolic才能创建软链接。
+```
 
-#### 语法(共有4种形式)
-`ln [OPTION]... [-T] TARGET LINK_NAME   (1st form)`
-`ln [OPTION]... TARGET                  (2nd form)`
-`ln [OPTION]... TARGET... DIRECTORY     (3rd form)`
-`ln [OPTION]... -t DIRECTORY TARGET...  (4th form)`
-- 第1种形式，使用名称LINK_NAME创建对TARGET的链接
-- 第2种形式，在当前目录下创建对TARGET的链接
-- 第3、4种形式，在DIRECTORY目录下创建所有TARGET的链接（意思就是TARGET可以不止一个）
+#### 参数
 
-#### 用法
-* 直接使用ln命令创建的是硬链接，使用ln -s创建的是软链接。
-* `-t`是指定链接所在的目录，而`-T`是指定链接到的文件。
+```bash
+-s, --symolic	# 创建软链接
+-t, --target-directory=<DIR>	# 将创建的链接放到DIR目录
+-T, --no-target-directory	# 将LINK_NAME视为普通文件而非目录
+```
 
 #### 示例
 

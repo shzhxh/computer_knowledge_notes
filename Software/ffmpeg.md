@@ -24,7 +24,7 @@ ffmpeg [全局选项] [输入文件选项] -i <输入文件> [输出文件选项
 
 ```
 -i <url>	# 指定输入文件
--c [:steam] <codec>	# 在输入文件之前时，指定解码器；在输出文件之前，指定编码器。如<codec>为copy，则仅输出不重新编码。
+-c [:steam] <codec>, -codec[:stream] <codec>	# 在输入文件之前时，指定解码器；在输出文件之前，指定编码器。如<codec>为copy，则仅输出不重新编码。
 -q[:stream] <q> (output,per-stream)	# 指定输出的品质。<q>的意义依赖于视频所用的编码格式。
 -ss <position> (input/output)	# 当作为输入选项，则定位到输入文件的<position>。当作为输出选项，会解码输入文件但放弃结果，直到<position>为止。关于<position>详见ffmpeg-utils手册的Time duration section。
 -t <duration> (input/output)	# 当作为输入选项，表示从输入文件读取数据的长度为<duration>；当作为输出选项，表示写入输出文件的数据长度为<duration>。
@@ -40,6 +40,7 @@ ffmpeg [全局选项] [输入文件选项] -i <输入文件> [输出文件选项
 ```
 -r [:stream_specifier] <fps> (input/output, per-stream)
 	# 设置帧率
+-vcodec <codec>		# 设置视频的codec，相当于"-codec:v"
 -vn		# 去除音频流
 -vframes <number> (output)	# 指定输出的帧数。
 ```
@@ -51,6 +52,7 @@ ffmpeg [全局选项] [输入文件选项] -i <输入文件> [输出文件选项
 ##### 音频选项
 
 ```
+-acodec <codec>		# 设置音频的codec，相当于"-codec:a"
 -an		# 去除音频流
 ```
 
