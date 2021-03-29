@@ -15,6 +15,8 @@ test	# 对包执行单元和集成测试。用`--`分隔，传给cargo的放前�
 	# 传给cargo的参数
 	[TESTNAME]	# 只运行名字里包含TESTNAME的测试
 	-j,--jobs <N>	# 构建二进制的作业数量。此参数不影响运行测试的线程数。
+	--test <NAME>	# 只测试tests目录下文件名为NAME.rs的代码
+	--tests			# 测试tests目录下所有的文件
 	# 传给二进制文件的参数
 	--test-threads=<N>	# 指定运行测试的线程数量。
 	--nocapture	# 测试成功时默认截获输出的内容，使用此选项可禁用截获输出的行为。
