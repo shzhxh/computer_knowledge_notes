@@ -25,6 +25,7 @@ ffmpeg [全局选项] [输入文件选项] -i <输入文件> [输出文件选项
 ```
 -i <url>	# 指定输入文件
 -c [:steam] <codec>, -codec[:stream] <codec>	# 在输入文件之前时，指定解码器；在输出文件之前，指定编码器。如<codec>为copy，则仅输出不重新编码。
+-filter[:stream_specifier] <filtergraph> (output,per-stream)	# 创建filtergraph以过滤流(stream)，
 -q[:stream] <q> (output,per-stream)	# 指定输出的品质。<q>的意义依赖于视频所用的编码格式。
 -ss <position> (input/output)	# 当作为输入选项，则定位到输入文件的<position>。当作为输出选项，会解码输入文件但放弃结果，直到<position>为止。关于<position>详见ffmpeg-utils手册的Time duration section。
 -t <duration> (input/output)	# 当作为输入选项，表示从输入文件读取数据的长度为<duration>；当作为输出选项，表示写入输出文件的数据长度为<duration>。
@@ -41,7 +42,8 @@ ffmpeg [全局选项] [输入文件选项] -i <输入文件> [输出文件选项
 -r [:stream_specifier] <fps> (input/output, per-stream)
 	# 设置帧率
 -vcodec <codec>		# 设置视频的codec，相当于"-codec:v"
--vn		# 去除音频流
+-vn		# 去除视频流
+-vf <filtergraph> (output)	# 创建filtergraph以过滤流(stream)，相当于"-filter:v"
 -vframes <number> (output)	# 指定输出的帧数。
 ```
 
@@ -87,6 +89,9 @@ ffmpeg -ss 01:23:45 -i input -vframes 1 -q:v 2 output.jpg	# 从1小时23分45秒
 # 截取视频
 ffmpeg -ss [start] -i <input> -t [duration] -c copy <output>	# 截取视频，从start开始，持续时间duration
 ffmpeg -ss [start] -i <input> -to [end] -c copy <output>	# 截取视频，从start开始，到end结束
+
+# 从图片帧生成视频
+ffmpeg -i *.png -c:v libx264 -vf "fps=25,format=yuv420p" out.mp4
 ```
 
 

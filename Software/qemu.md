@@ -8,6 +8,11 @@ sudo make install
  `sudo apt install libglib2.0-dev`
 > ERROR: pixman >= 0.21.8 not present.
  `sudo apt install libpixman-1-dev`
+#### 名词解释
+
+- 前端：qemu里运行的操作系统所能看到的设备。比如e1000网卡。
+- 后端：宿主机所能看到的qemu上的设备。比如网络设备的后端，user和tap等。
+
 #### 语法
 
 ```
@@ -27,8 +32,9 @@ qemu-system-riscv64 [options] [disk_image]
 	# timer-period=period : 设置音频子系统的计时器周期。默认10000(10ms)
 -boot # 定义启动顺序
 -cpu	# 选择CPU模型
--device driver[,prop[=value][,...]]
-	# 添加设备(基于driver)，prop=value是设置driver的属性
+-device <driver>[,prop[=value][,...]]
+	# 添加设备。设备名为driver，prop=value用于设置该设备的属性。一个有效的属性取决于该设备本身。
+	# 使用"-device help"获取可用的设备名。使用"-device <drive>,help"获取某个设备的可用属性。
 	# 可用的prop有：
 	## Controller/Bridge/Hub设备
 	# usb-host:bus usb-bus
@@ -90,14 +96,14 @@ qemu-system-riscv64 [options] [disk_image]
 ```
 -cdrom FILE	# 相当于 -drive file=FILE,index=2,media=cdrom
 -blockdev
-	# 定义一个块设备驱动器。
+	# 创建一个新的块驱动器结点。
 	## 对所有块驱动器都有效的选项
 	## file的选项
 	## raw的选项
 	## qcow2的选项
 	## 其它选项
--drvie option[,option[,option[,...]]
-	# 定义一个新的驱动器。相当于-blockdev和-device的快捷写法。
+-drive <option>[,option[,option[,...]]
+	# 创建一个新的驱动器。相当于-blockdev和-device搭配使用的快捷写法。
 	## -drive可以使用-blockdev的所有选项，另外，还可以使用如下选项：
 	# file=FILE	 指定磁盘镜像
 	# if=		 指定drive要连接的接口类型，可用类型有ide,scsi,sd,mtd,floppy,pflash,virtio,none
@@ -194,20 +200,24 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 网络选项
 
 ```
--nic [tap|user|...] [,...] [,mac=] [,model=]	# 此选项是一个快捷方式，用来一次性配置on-board guest NIC和主机网络的后端。主机网络的后端的选项和-netdev的选项是一样的。
--nic none	# 意味着不配置任何网络设备。它本来覆盖默认配置。默认配置是主机网络后端为user的默认NIC。当没有提供其它网络选项的时候会激活默认配置。
+-nic [tap|user|...] [,...] [,mac=] [,model=]	# 此选项是一个快捷方式，用来一次性配置网络的前端和后端。网络的后端的选项和-netdev的选项是一样的。
+-nic none	# 意味着不配置任何网络设备。它用来覆盖默认配置。默认配置是前端为默认网卡，后端为user。当没有提供其它网络选项的时候会激活默认配置。
 -netdev user,id=str[,...]	# 设置宿主网络为用户模式，这样就不需要超级用户的权限了。
   hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport
   	# 把主机端口hostport重定向到客户机端口guestport
--netdev tap,id=str[,...]	# 设置宿主网络为tap模式
+-netdev tap,id=<str>[,...]	# 设置网络后端为TAP，它的ID为str。
+	fd=<h>			# 用以指定一个已经打开的TAP接口的句柄，这个句柄为<h>。
+	ifname=<name>	# 指定接口的名字为<name>。如不指定，OS会自动分配一个。
+	script=<file>	# 使用网络脚本<file>来配置此后端网络。默认配置脚本为/etc/qemu-ifup。如不使用配置脚本应写成"script=no"。
+	downscript=<dfile>	# 使用网络脚本<dfile>来取消对此后端网络的配置。默认取消配置的脚本是/etc/qemu-ifdown。如不使用取消配置的脚本应写成"downscript=no"。
 -netdev bridge,id=str[,...]
 -netdev l2tpv3,id=str,...
 -netdev socket,id=str[,...]	# 
 -netdev vde,id=ID[,...]	# 配置VDE后端
 -netdev vhost-user,id=str,...	# vhost-user网络设备
 -netdev hubport,id=str,...	# 创建hub端口
--net nic[,...]	# 配置或创建网卡
--net [user|tap|bridge|socket][,...][,name=<name>]	＃ 配置宿主机网络的后端（其选项和对应的-netdev选项是一样的），并将其连接到虚拟hub0（默认hub）。name用来指定hub端口的名字。
+-net nic[,...]	# 配置或创建网卡(即网络的前端)。古老的配置方式，建议用"-device"或"-nic"取代它。
+-net [user|tap|bridge|socket][,...][,name=<name>]	＃ 配置宿主机网络的后端（其选项和对应的-netdev选项是一样的），并将其连接到虚拟hub0（默认hub）。name用来指定hub端口的名字。古老的配置方式，建议用"-netdev"或"-nic"取代它。
 ```
 
 ##### 字符设备选项
@@ -325,24 +335,25 @@ sendkey	# 键盘操作
 
 ```
 -machine 	// 选择要模拟的机器，可选机器如下
-  # none	空机器
-  # sifive_e 满足SiFive E SDK的开发板
-  # sifive_u 满足SiFive U SDK的开发板
-  # spike_v1.10 Spike开发板(priv 1.10)
-  # spikes_v1.9.1 Spike开发板(priv 1.9.1)
-  # virt	VirtIO开发板(priv 1.10)
+  none		# 空机器
+  sifive_e		 # 满足SiFive E SDK的开发板
+  sifive_u		 # 满足SiFive U SDK的开发板
+  spike_v1.10	 # Spike开发板(priv 1.10)
+  spikes_v1.9.1	 # Spike开发板(priv 1.9.1)
+  virt		# VirtIO开发板(priv 1.10)
 -devece	# 对于riscv来说，可选设备如下
-	# 存储设备
+  # 存储设备
 	virtio-blk-device：使用virtio-bus总线
 		driver=<str>:指定块设备的名称
-	# 网络设备
+  # 网络设备
 	virtio-net-device:使用virtio-bus总线
-	# 输入设备
-	# 显示设备
+  # 输入设备
+  # 显示设备
 	virtio-gpu-device:使用virtio-bus总线
-	# 其它设备
-	# 未分类的设备
+  # 其它设备
+  # 未分类的设备
 	loader:desc "Generic Loader"
+	virtio-rng-device:使用PCI总线
 ```
 
 ##### 五种开发板的比较

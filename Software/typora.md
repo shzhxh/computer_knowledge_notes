@@ -16,7 +16,8 @@ sudo apt-get install typora
 
 #### 下载二进制安装
 
-1. 下载https://typora.io/linux/Typora-linux-x64.tar.gz，可以使用离线下载
+1. 下载https://typora.io/linux/typora_0.9.96_amd64.deb
+   > 或者下载https://typora.io/linux/Typora-linux-x64.tar.gz，可以使用离线下载
 2. 解压后，双击里面的Typora文件即可运行
 3. 可以在/usr/share/applications文件夹里创建一个desktop文件，使其可以在启动菜单中显示
 
