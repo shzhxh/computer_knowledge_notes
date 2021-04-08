@@ -1,24 +1,27 @@
 #### 简介
 
-一个可增长的数组类型，此数组类型的实例通过堆来分配。
+一个可持续增长的数组类型，它的内容是在堆中分配的，写作`Vec<T>`。
+
+vector可分配到的最大空间是`isize::MAX`字节。
+
+#### 示例
+
+```rust
+// 创建Vec
+
+// 向Vec里增加值
+
+// 从Vec里删除值
+
+// 对Vec的索引
+```
 
 #### 结构体
 
-- Drain - 
+- Drain
+- Intolter
+- Splice
+- Vec
 
-- Intolter - 
 
-- Splice - 
-
-- Vec - 一个可增长的数组类型。写法为`Vec<T>`。
-
-  ```rust
-  pub struct Vec<T, A = Global>
-  where
-      A: Allocator,
-      { /* fields omitted */ }
-  
-  /* 方法 */
-  pub fn len(&self) -> usize	// 返回此vector里元素的个数，即它的“长度”。
-  ```
 
