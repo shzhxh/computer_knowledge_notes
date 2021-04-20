@@ -24,6 +24,12 @@
 
 作用于命令行中所有位置的Tests和Actions操作，总是返回true。
 
+```bash
+-maxdepth <levels>	# 指定要查找的文件夹的层数
+```
+
+
+
 ##### Tests
 
 基于文件的属性返回true或false。

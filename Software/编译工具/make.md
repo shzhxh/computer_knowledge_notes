@@ -20,7 +20,7 @@
 
 #### OPTIONS
 
-```
+```bash
 -b, -m
 -B, --always-make
 -C dir, --directory=dir	# 更改目录为dir
@@ -42,8 +42,8 @@
 -q, --question	# 不运行任何命令，也不打印任何东西，只返回一个退出的状态。如果编译目标已经更新则返回0，否则返回其它数字。
 -r
 -R
--s
--S
+-s, --silent, --quiet	# 静默选项。不把正在运行的命令打印出来。
+-S,	--no-keep-going, --stop	# 取消-k选项的效果。
 -t, --touch	# 更新文件的日期，从而不执行它所依赖的命令。这实际上就是假装命令已经执行过了，以便make将来调用的时候欺骗它。
 --trace
 -v
