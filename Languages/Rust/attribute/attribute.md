@@ -33,6 +33,7 @@ macro_use	// 扩展宏的可见性，或从其它crate导入宏。
 // 诊断
 // ABI，链接，符号，FFI
 no_main	// 不会加载"main"标记
+no_mangle	// 禁止符号名编码
 // 代码生成
 // 文档
 // 预加载

@@ -16,6 +16,7 @@ git push [选项] [<repository> [<refspec>...]]
 #### 选项
 
 ```
+--all	# 推送所有的分支。
 -d, --delete	# 删除远程仓库的refs。refs可以一个分支，也可以是一个标签。
 -f, --force		# 看起来不是“强制推送”这么简单，具体原理待查
 -u, --set-upstream	# 指定默认的远程仓库

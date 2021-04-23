@@ -24,11 +24,13 @@ rgrep # 等价于grep -r
 ##### 匹配器的选择
 
 ```
--E, --extended-regexp	# 搜索扩展的正则表达式
--F, --fixed-strings		# 搜索固定的字符串，而不是正则表达式
--G, --basic-regexp
--P, --perl-regexp
+-E, --extended-regexp	# 把<PATTERN>理解为扩展的正则表达式
+-F, --fixed-strings		# 把<PATTERN>理解为固定的字符串，而不是正则表达式
+-G, --basic-regexp		# 把<PATTERN>理解为基本的正则表达式，这是默认选项
+-P, --perl-regexp		# 把<PATTERN>理解为Perl兼容的正则表达式(PCRE)
 ```
+
+关于PCRE，详见`man 3 pcresyntax`和`man 3 pcrepattern`
 
 ##### 匹配控制
 

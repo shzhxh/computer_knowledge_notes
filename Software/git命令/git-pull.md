@@ -21,7 +21,7 @@ git pull [options] [repository [refsepc...]]
 ##### 与抓取相关
 
 ```
-
+--all	# 抓取所有
 ```
 
 
