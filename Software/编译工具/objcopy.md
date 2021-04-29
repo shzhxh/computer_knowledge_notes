@@ -18,3 +18,10 @@ objcopy [选项] infile outfile
 --info			# 显示所有支持的架构和object格式
 ```
 
+#### 示例
+
+```bash
+# elf转bin
+objcopy -O binary <elf_file> <bin_file>
+```
+

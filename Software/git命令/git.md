@@ -80,7 +80,7 @@ gitk
 git-config	# 设置git
 git-fast-export
 git-fast-import
-git-filter-branch
+git-filter-branch	# 重写分支。
 git-mergetool
 git-pack-refs
 git-prune
@@ -100,7 +100,7 @@ git-replace
 ##### 操作命令
 
 ```
-git-apply
+git-apply		# 打补丁
 git-checkout-index
 git-commit-tree		# 创建一个commit对象
  -p <parent>	# 用于将两个commit关联起来，建立先后次序

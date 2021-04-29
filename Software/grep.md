@@ -1,9 +1,9 @@
 #### 语法
 
 ```
-grep [OPTIONS] PATTERN [FILE...]
-grep [OPTIONS] -e PATTERN ... [FILE...]
-grep [OPTIONS] -f FILE ... [FILE...]
+grep [OPTIONS] PATTERN [FILE...]		# 打印出能匹配正则表达式的行
+grep [OPTIONS] -e PATTERN ... [FILE...]	# 指定正则表达式为PATTERN
+grep [OPTIONS] -f FILE ... [FILE...]	# 正则表达式是从文件FILE中获取
 ```
 
 ```
@@ -74,6 +74,9 @@ rgrep # 等价于grep -r
 ```
 -a, --text		# 等价于 --binary-files=test，像处理文本文件一样处理二进制文件
 --binary-files=<TYPE>	# 
+--exclude=<GLOB>	# 名称满足模式<GLOB>的文件将会被跳过
+--exclude-from=<FILE>	# 要被忽略的文件名放在<FILE>里
+--exclude-dir=<GLOB>	# # 名称满足模式<GLOB>的目录将会被跳过
 -I		# 等价于 --binary-files=without-match, 不处理二进制文件
 -r, --recursive	# 递归搜索，对于符号链接只有在命令行里指定了才会追踪它
 -R, --dereference-recursive	# 递归搜索，会追踪所有的符号链接

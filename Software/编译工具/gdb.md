@@ -33,10 +33,11 @@ ws
 
 ```
 awatch
-break		
+break	# 在特定位置设置断点。		
 catch
 clear
 commands
+continue	# 程序在信号或断点处会停下来，此命令让程序继续执行。
 delete
 disable
 dprintf
@@ -127,6 +128,7 @@ target tfile	# 使用追踪文件作为一个target
 
 ```
 info		# 显示各类信息
+info register(s)	# 显示整型计数器及它们的类型。若带参数则显示给定寄存器的信息。
 ```
 
 ##### 支持类

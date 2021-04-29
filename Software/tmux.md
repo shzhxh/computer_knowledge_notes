@@ -37,6 +37,9 @@ attach, attach-session [-dEr] [-c working-dir] [-t target-session]
 
 ls, list-sessions [-F format]
 	# 列出server管理着的所有会话
+	
+new-session [options] [shell-cmd]	# 创建一个新的会话。
+	-d	# 新会话不附加到当前终端。(默认是附加到当前终端的)
 ```
 
 
