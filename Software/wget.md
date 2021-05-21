@@ -41,5 +41,23 @@ wget [option] [url]
 
 ##### 递归搜索
 
+```
+-r, --recursive	# 开启递归搜索，默认深度为5.
+-k, --convert-links	# 下载完成后转换文档中的链接使其适合本地观看。
+-p, --page-requisites	# 下载所有必需的文件，以正确显示给定HTML页。
+```
+
+
+
 ##### 递归接收/拒绝
+
+```
+-np, --no-parent	# 不向父目录的方向递归检索。
+```
+
+#### 示例
+
+```bash
+wget -r -p -np -k <url>	# 批量下载url下的所有网页
+```
 

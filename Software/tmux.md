@@ -13,6 +13,39 @@ tmux使用c/s结构，主要包括如下模块：
 tmux [options] [command [flags]]
 ```
 
+
+
+#### 命令
+
+##### 客户端与会话
+
+```bash
+attach, attach-session [-dEr] [-c working-dir] [-t target-session]
+	# 如在tmux外部，则在当前终端创建一个新的client并把它附加到target-session。如在tmux内部，则切换到当前client。
+
+ls, list-sessions [-F format]
+	# 列出server管理着的所有会话
+	
+new-session [options] [shell-cmd]	# 创建一个新的会话。
+	-d	# 新会话不附加到当前终端。(默认是附加到当前终端的)
+	
+rename, rename-session [-t target-session] new-name
+	# 给会话重命名
+```
+
+
+
+##### 窗口与面板
+
+```bash
+renamew, rename-window [-t target-vindow] new-name
+	# 给窗口重命名
+```
+
+
+
+##### 键绑定
+
 #### 选项
 
 可以通过变量的值来控制tmux的外观和行为。有三类选项：server选项、session选项和window选项。
@@ -26,27 +59,6 @@ show-window-options [-gv] [-t target-window] [option]
 ```
 
 
-
-#### 命令
-
-##### 窗户端与会话
-
-```
-attach, attach-session [-dEr] [-c working-dir] [-t target-session]
-	# 如在tmux外部，则在当前终端创建一个新的client并把它附加到target-session。如在tmux内部，则切换到当前client。
-
-ls, list-sessions [-F format]
-	# 列出server管理着的所有会话
-	
-new-session [options] [shell-cmd]	# 创建一个新的会话。
-	-d	# 新会话不附加到当前终端。(默认是附加到当前终端的)
-```
-
-
-
-##### 窗口与面板
-
-##### 键绑定
 
 #### 激活控制台
 

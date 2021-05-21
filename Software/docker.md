@@ -157,7 +157,6 @@ push
 rename
 restart	# 重启容器。
 rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
-run		# 相当于create + start
 search
 stats
 stop	# 停止一个或多个运行中的容器。
@@ -238,6 +237,20 @@ docker rm [options] <containers> # 删除容器
   -l, --link	# 删除指定链接(link)
   -v, --volumes	# 删除与容器相关的卷(volumes)
 ```
+
+##### run
+
+```
+docker run [options] <image> [cmd] [args]
+	# 在一个新容器里运行命令，相当于create + start
+# 选项
+-d, --detach	# 在后台运行容器，并打印容器的id
+--name <string>	# 指定容器名
+--network <network>	# 把容器连接到一个network
+-v, --volume <list>	# 绑定并挂载一个卷
+```
+
+
 
 ##### save
 
