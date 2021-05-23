@@ -1,5 +1,5 @@
 ```
-qemu-nbd [options] <filename>
+qemu-nbd [options] <filename>	# 使用NBD协议来导出qemu镜像<filename>
 qemu-nbd -d <dev>		# 取消到设备dev的连接
 ```
 
