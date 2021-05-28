@@ -99,6 +99,7 @@ V	# 选择，以行为单位
 	:s/vivian/sky/g	//替换当前行所有vivian为sky
 	:%s/[a-z]//ig	//删除文档中所有字母，且忽略大小写
 	:%s/old/new/gc	//查找全部文件，并提示是否把old替换为new
+	:%s/^\s\+//		//替换行首的所有空白字符，空白字符指空格或tab
 	:n,$s/vivian/sky	//从第n行到最后一行替换第一个vivian为sky
 ```
 

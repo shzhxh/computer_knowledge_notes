@@ -64,9 +64,9 @@ rgrep # 等价于grep -r
 ##### 文本行控制
 
 ```
--A NUM, --after-context=NUM
--B NUM, --before-context=NUM
--C NUM, -NUM, --context=NUM
+-A NUM, --after-context=NUM		# 打印出匹配的行后面NUM行的内容。
+-B NUM, --before-context=NUM	# 打印出匹配的行前面NUM行的内容。
+-C NUM, -NUM, --context=NUM		# 打印输出内容的NUM行。
 ```
 
 ##### 文件与目录选择
@@ -126,7 +126,6 @@ word$		//行尾匹配
 1	# 无匹配的结果
 2	# 有错误发生
 ```
-
 
 
 

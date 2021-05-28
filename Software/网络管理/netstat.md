@@ -2,6 +2,29 @@
 
 打印网络连接、路由表、接口统计数据、伪装连接和组播成员。
 
+```bash
+netstat [-vWeenNcCF] [Af] -r	# 显示内核路由表
+# Af : 默认inet
+#	-6|-4
+#	-A <af>
+#	--<af>
+#	af可能的值：inet, inet6, ax25, netrom, ipx, ddp, x25
+netstat [-vWnNcaeol] [socket...]	# 显示打开的套接字
+# socket : 
+#	-t, --tcp
+#	-u, --udp
+#	-U, --udplite
+#	-S, --sctp
+#	-w, --raw
+#	-x, --unix
+#	--ax25
+#	--ipx
+#	--netrom
+netstat {[-vWeenNac] -i | [-cnNe] -M | -s [-6tuw]}	# 显示网络接口，或伪装连接，或统计数据。
+```
+
+
+
 #### 选项
 
 ```
