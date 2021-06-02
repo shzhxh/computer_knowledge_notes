@@ -10,6 +10,16 @@ wget [option] [url]
 
 ##### 基本启动
 
+```bash
+-e ,--execute <cmd>	# 执行可以定义在文件.wgetrc里的命令。
+	# 可能的cmd（详见"info wget"第6.3章： Wgetrc Commands）
+	# http_proxy = <STRING>	# 使用STRING作为HTTP代理
+	# https_proxy = <STR>	# 使用STR作为HTTP代理
+	# use_proxy = <on/off>	# 是否使用代理
+```
+
+
+
 ##### 日志和输入文件
 
 ```
