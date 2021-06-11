@@ -3,7 +3,7 @@
 ```
 gdb [选项] prog			# 调试程序prog
 gdb [选项] prog procID	# 调试正在运行的程序prog，procID是其进程号
-gdb [选项] prog core		# 调试程序prog并指定core文件
+gdb [选项] prog core		# 调试程序prog并指定core文件(core文件是异常退出后转储出来的文件)
 ```
 
 #### 选项
@@ -65,6 +65,7 @@ watch
 display		# 程序停止的时候打印出表达式的值
 print		# 打印出表达式的值
 set
+set args	# 指定程序的参数
 set riscv	# risc-v专有命令
 set riscv use_compressed_breakpoints	# 设置是否使用压缩的断点
 undisplay	# 程序停止的时候不再打印出某些表达式的值
@@ -90,8 +91,32 @@ list	# 列出指定的函数或命令
 维护命令
 
 ```
-flushregs
-maintenance
+flushregs	# 强制刷新寄存器缓存
+maintenance agent	# 把表达式转换为用于追踪的远程代理字节码
+maintenance btrace	# 追踪分支(branch tracing)
+maintenance check	# 检查gdb状态
+maintenance cplus	# C++
+maintenance demangler-warning	# demangler警告
+maintenance deprecate	# Deprecate a command
+maintenance dump-me	# 核心转储(dump core)
+maintenance expand-symtabs	# 展开符号表
+maintenance flush-symbol-cache	# 刷新符号缓存
+maintenance info	# 显示被调试程序的内部信息
+	program-spaces	# 打印gdb所管理的所有程序的内存空间信息
+maintenance internal-error	# 产生一个内部错误
+maintenance internal-warning	# 产生一个内部警告
+maintenance packet	# 发送任意包到远程目标
+maintenance print	# 打印内部状态
+	statistics	# 对于程序中的每个目标文件，打印objfile和bcache的信息。
+maintenance selftest	# 运行gdb的单元测试
+maintenance set	# 设置内部变量
+	per-command	# 设置每个命令的统计信息
+	per-command space [on|off]	# 是否打印每个命令的内存使用
+maintenance show	# 显示内部变量
+maintenance space <value>	# 显示空间使用。相当于"maint set per-command space"，value为非0则开启此功能，value为0则关闭此功能。
+maintenance time	# 显示时间使用
+maintenance translate-address	# 把节名和地址转换为符号
+maintenance undeprecate	#  Undeprecate a command
 ```
 
 

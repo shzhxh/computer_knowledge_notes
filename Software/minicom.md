@@ -28,3 +28,9 @@ configuration默认为一个叫"minirc.dfl"的文件，如果给了minicom一个
 Ctrl+A，再按q，退出。
 
 `minicom -D /dev/ttyUSB0`连接到串口ttyUSB0。
+
+#### 问题解决
+
+1. 无法输入字符
+
+   > Ctrl-A + O进入配置，选串口设置，把"硬件流控制"设置为No，把“软件流控制”设置为Yes。然后"把设置保存为dfl"。

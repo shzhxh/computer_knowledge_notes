@@ -85,3 +85,14 @@ cd .ssh && touch config	# 创建config文件
 	# 注：如遇到Bad owner or permissions on XXX/config，要把config修改为600权限。
 ```
 
+#### 错误解决
+
+1. 提示对方机器"Permission denied"
+
+   > 查看对方机器的/etc/ssh/sshd_config文件：
+   >
+   > 如允许密码登陆，则“PasswordAuthentication yes”不能注释
+   >
+   > 如允许root登陆，则“PermitRootLogin yes”不能注释
+   >
+   > 如允许使用密钥登陆，则“PubkeyAuthentication yes”和“AuthorizedKeysFile .ssh/authorized_keys”不能注释

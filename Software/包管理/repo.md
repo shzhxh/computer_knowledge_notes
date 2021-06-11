@@ -41,6 +41,7 @@ info		# 从显示分支，当前分支或未合并分支获取信息
 init		# 在当前目录初始化repo
   -u URL	# 指定manifest仓库的地址
   -b REVISION	# 指定manifest仓库的分支或版本
+  -m, --manifest-name=<NAME>	# 初始化manifest文件
 manifest	# 显示当前使用的manifest信息内容
   -r, --revision-as-HEAD	# 保存当前HEAD的版本
   --suppress-upstream-revision	# 
