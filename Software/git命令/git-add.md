@@ -4,6 +4,14 @@
 
 #### 语法
 
+```bash
+git add [optoins] [--] [pathspec...]
+# pathspec...
+#   
+```
+
+
+
 #### 选项
 
 ```
