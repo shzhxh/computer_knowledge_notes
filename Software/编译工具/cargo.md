@@ -16,10 +16,21 @@ cargo [options] --explain <CODE>
 
 ```bash
 # 构建命令
-build	# 编译一个包。
+build [options]	# 编译一个包。
 	# 不使用"--release"时采用dev配置
 	# 使用"--release"时采用release配置
 	# 可以在Cargo.toml中使用[profile.*]覆盖任意设置的默认值。
+	## 包选项
+	## 目标选项
+	## 属性选项
+	## 编译选项
+	--traget <triple>	# 指定编译的架构(默认是主机的架构)。triple的格式为<arch><sub>-<vendor>-<sys>-<abi>。
+	## 输出选项
+	## 显示选项
+	## Manifest选项
+	## 通用选项
+	-Z <flag>	# Unstable flags to Cargo。(仅用于nightly)
+	## 其它选项
 doc		# 构建一个包的文档。生成的是HTML格式。
 	# 使用"///"来注解格式化文档，以支持Markdown
 	# 使用"//!"用于描述整个crate。
@@ -35,12 +46,14 @@ doc		# 构建一个包的文档。生成的是HTML格式。
 	## Manifest选项
 	## 通用选项
 	## 其它选项
-run		# 编译并运行本地包
+run	[options] [-- args]	# 编译并运行本地包
 	## 包选项
+	-p, --package <spec>	# 指定要运行的包。关于<spec>的格式见cargo-pkgid。
 	## 目标选项
 	## 属性选项
 	## 编译选项
 	--target <TRIPLE>	# 在指定架构上运行。也可以在配置文件里通过"buld.target"的值来指定。
+	--release	# 使用release属性进行编译优化。
 	## 输出选项
 	## 显示选项
 	## Manifest选项
@@ -92,4 +105,15 @@ version
 - Cargo.toml
 
   如以[workspace]开始，则用于设置工作空间。通过给"members"赋值增加成员。
+
+#### 换源
+
+```
+修改~/.cargo/config
+[source.crates-io]
+replace-with = 'tuna'
+
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+```
 

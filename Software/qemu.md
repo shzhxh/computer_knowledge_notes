@@ -5,9 +5,13 @@ mkdir build
 sudo make install
 ```
 > ERROR: glib-2.22 gthread-2.0 is required to compile QEMU
- `sudo apt install libglib2.0-dev`
+>  `sudo apt install libglib2.0-dev`
 > ERROR: pixman >= 0.21.8 not present.
- `sudo apt install libpixman-1-dev`
+>  `sudo apt install libpixman-1-dev`
+> ERROR: Cannot find Ninja
+> `sudo apt install ninja-build`
+> ERROR: pkg-config binary 'pkg-config' not found
+> `sudo apt install pkg-config`
 #### 名词解释
 
 - 前端：qemu里运行的操作系统所能看到的设备。比如e1000网卡。
