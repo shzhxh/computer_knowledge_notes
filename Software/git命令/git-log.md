@@ -7,7 +7,11 @@
 #### 语法
 
 ```
-git log [options] [revision range] [path]
+git log [options] [revision range] [[--] paths]
+	# <revision range>用于指定revision的范围。如不指定，则默认为HEAD。详见gitrevisions(7)的"Specifying Ranges"节。
+		# r1..r2用于表示r1没有而r2有的提交。
+		# r1...r2用于表示r1和r2之间的提交差异。即可以r1比r2早，也可以r2比r1早。
+	# [--] paths用于指定要显示的路径
 ```
 
 #### 选项

@@ -136,7 +136,6 @@ docker image <cmd>	# 管理镜像
 #### 命令
 
 ```
-build	# 从Dockerfile创建一个镜像。
 commit	# 从容器创建一个镜像。
 diff
 events
@@ -179,6 +178,17 @@ docker attach [options] CONTAINER	# 连接到运行中的容器
   --no-stdin
   --sig-proxy
 ```
+
+##### build
+
+```
+build [options] <Experimental> <PATH|URL|->	# 从Dockerfile创建一个镜像。
+
+# 选项
+-t, --tag[=[]]	# 如果执行成功，则将仓库名应用于得到的镜像。
+```
+
+
 
 ##### cp
 
@@ -266,6 +276,13 @@ docker save [options] <images>	# 把镜像保存为tar文件
 docker start [options] <containers>	# 启动一个或多个已停止的容器。
 	-a, --attach	# 附加STDIN/STDERR和forward信号
 	-i, --interactive	# 附加容器的STDIN
+```
+
+#### 配置
+
+```
+# 使用代理上网
+vim /etc/default/docker # 修改http_proxy
 ```
 
 

@@ -479,6 +479,7 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 - [Qemu4.2.0用户文档](https://qemu.weilnetz.de/doc/qemu-doc.html#Display-options)
 - QEMU新的-nic选项：[中文翻译版](https://zhuanlan.zhihu.com/p/41258581)、[英文版](https://www.qemu.org/2018/05/31/nic-parameter/)
 - [Qemu虚拟化之Machine Type](https://remimin.github.io/2019/07/09/qemu_machine_type/)
+- [-kernel, -bios, -device loader的区别](https://stackoverflow.com/questions/58420670/qemu-bios-vs-kernel-vs-device-loader-file)
 
 #### 问题的解决
 

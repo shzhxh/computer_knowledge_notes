@@ -35,6 +35,7 @@ git branch <--edit-description> [branchname]
 -f, --force		# 与--track或--no-track联用时，表示强制把branchname重置为start-point
 -m, --move		# 移动或重命名分支
 -M				# 等价于--move --force，强制重命名分支
+-r, --remotes	# 列出远程追踪的分支。如与-d联用，则删除远程追踪的分支。
 -t, --track		# 
 --no-track		# 
 -u <upstream>, --set-upstream-to <upstream>

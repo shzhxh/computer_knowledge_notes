@@ -117,3 +117,12 @@ replace-with = 'tuna'
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 ```
 
+#### 错误记录
+
+1. ````
+   can't find crate for `std`
+   note: the `riscv64gc-unknown-none-elf` target may not be installed
+   ````
+
+   > 使用rustup target list命令可以看见riscv64gc-unknown-none-elf已经安装了。我之前在~/.cargo/config里新建了一个条目build.target="riscv64gc-unknown-none-elf"，当我把这个条目删除后就不再有这个错误提示了。错误原因未知。
+
