@@ -1,6 +1,6 @@
 #### 安装
 ```shell
-mkdir build
+mkdir build && cd build
 ../configure --target-list=riscv32-softmmu,riscv64-softmmu
 sudo make install
 ```
@@ -170,7 +170,7 @@ qemu-system-riscv64 [options] [disk_image]
 	# gtk的意思是在GTK窗口中显示视频输出。该接口提供了下拉菜单和其它UI元素来控制VM。
 	# none的意思是不显示视频输出。它类似于-nographic选项的作用，但不会重定向串口或并口的数据。
 -full-screen	# 以全屏启动
--nographic	# 禁用图形输出并将串行I/O重定向到控制台
+-fnographic	# 禁用图形输出并将串行I/O重定向到控制台
 -vga [cirrus|std|vmware|qxl|xenfb|tcx|cg3|virtio|none]
 	# 选择显卡类型
 	# cirrus指的是GD5446显卡。Windows系统从win95之后都能识别和使用此显卡。为qemu 2.2之前的默认显卡。

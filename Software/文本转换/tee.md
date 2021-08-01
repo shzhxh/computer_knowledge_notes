@@ -11,3 +11,9 @@ tee [options] [files]
 -a, --append	# 在文件里追加，而不是覆盖
 ```
 
+#### 用法示例
+
+```shell
+<cmd> 2>&1 | tee <cmd>.txt	# 读取标准输出和标准错误
+```
+

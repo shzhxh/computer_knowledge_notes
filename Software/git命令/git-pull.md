@@ -5,7 +5,8 @@
 #### 语法
 
 ```
-git pull [options] [repository [refsepc...]]
+git pull [options] [repository [refspec...]]
+	# <refspec>...的格式为[+]<src>:<dst>。但和git push相反，在git pull里，<src>指的是远程分支，<dst>指的是本地分支。
 ```
 
 #### 选项

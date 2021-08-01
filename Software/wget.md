@@ -23,6 +23,7 @@ wget [option] [url]
 ##### 日志和输入文件
 
 ```
+-i, --input-file=<file>	# 从<file>中读取URLs。要求文件中每行一个URL。
 -q, --quiet		# 关闭wget的输出
 ```
 

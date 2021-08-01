@@ -47,7 +47,7 @@ netstat {[-vWeenNac] -i | [-cnNe] -M | -s [-6tuw]}	# 显示网络接口，或伪
 -c， --continuous	# 持续打印信息，时间间隔为1s。
 
 -l, --listening	# 仅列出在监听的服务状态。默认不列出。
--a
+-a, --all		# 显示所有的socket。包括在监听的和没有监听的。
 -F
 -C
 -Z

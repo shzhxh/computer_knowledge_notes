@@ -151,7 +151,6 @@ logs
 pause	# 暂停一个或多个容器中的进程。
 port
 ps		# 列出所有运行着的容器。加-a则列出所有的容器。
-pull
 push
 rename
 restart	# 重启容器。
@@ -238,6 +237,20 @@ docker load [options]	# 从tar文件或STDIN装载镜像
  -q, --quiet		# 静默模式
 ```
 
+##### pull
+
+```
+docker pull [options] <name>[:tag|@digest]	# 把镜像拉取到本地。相当于"docker image pull"
+# 选项
+-a, --all-tags[=false]	# 下载所有标记的镜像
+--disable-content-trust[=true]	# 跳过镜像验证
+-h, --help[=false]		# 帮助
+--platform=""			# 如果服务器适用于多平台，则需设置平台
+-q, --quiet[=false]		# 静默模式
+```
+
+
+
 ##### rm
 
 ```
@@ -257,6 +270,7 @@ docker run [options] <image> [cmd] [args]
 -d, --detach	# 在后台运行容器，并打印容器的id
 --name <string>	# 指定容器名
 --network <network>	# 把容器连接到一个network
+-p, --publish <list>	# 把容器的端口发布到主机
 -v, --volume <list>	# 绑定并挂载一个卷
 ```
 
