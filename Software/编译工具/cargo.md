@@ -100,6 +100,16 @@ version
 # 普通选项
 ```
 
+#### 配置
+
+```
+# [net]用于配置网络
+net.git-fetch-with-cli
+	# 布尔型，默认false。如为true，则使用系统自带的git命令。如为false，则使用内建的git库。
+```
+
+
+
 #### 相关文件
 
 - Cargo.toml

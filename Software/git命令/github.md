@@ -3,10 +3,14 @@
 - [Github Actions 入门教程——阮一峰](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
 - [actions的官方市场](https://github.com/marketplace?type=actions)
 - [actions的官方仓库](https://github.com/actions)
+- [workflow的语法](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)
+- [触发workflow的条件](https://docs.github.com/en/actions/reference/events-that-trigger-workflows)
 
 ##### workflow文件
 
-- name - workflow的名称
+一个workflow就是一次CI的过程，它表现为一个yml文件。一个workflow包若干个job，即`jobs.<job_id>`。一个job包含若干个step，即`jobs.<job_id>.steps`。一个step包含若干个action，即`jobs.<job_id>.steps.run`。
+
+- name - workflow的名称。如省略，默认为当前文件名。
 
 - on - 触发workflow的条件
 
@@ -18,10 +22,18 @@
   jobs.<job_id>.needs	# 指定运行顺序
   jobs.<job_id>.runs-on	# 指定虚拟机，是必填字段
   jobs.<job_id>.steps	# 指定任务的运行步骤
-  	# name字段：步骤名，run字段：该步骤的命名或action，env字段该步骤所需的环境变量。
+  ```
+  
+- steps - 组成任务的步骤
+
+  ```
+  steps[*].name	# 步骤名
+  steps[*].run	# 该步骤的命令或action
+  steps[*].env	# 该步骤所需的环境变量。
+  steps[*].uses	# 
   ```
 
-  
+- run - 组成步骤的命令
 
 #### 免密登陆
 

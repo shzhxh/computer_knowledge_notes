@@ -117,7 +117,9 @@ docker container <cmd>	# 管理容器
 ```
 docker image <cmd>	# 管理镜像
 # 命令，可用docker image <cmd> --help获取详情
-  build
+  build [options] <path|url|->	# 从Dockerfile构建镜像
+  # --force-rm : 总是移除中间容器
+  # -t, --tag <list> : 在'name:tag'格式里的name和可选的tag
   history
   import
   inspect
@@ -268,9 +270,13 @@ docker run [options] <image> [cmd] [args]
 	# 在一个新容器里运行命令，相当于create + start
 # 选项
 -d, --detach	# 在后台运行容器，并打印容器的id
+-i, --interactive	# 即使没有attached也保持STDIN打开
+--mount <mount>	# 把一个文件系统挂载到容器
 --name <string>	# 指定容器名
 --network <network>	# 把容器连接到一个network
 -p, --publish <list>	# 把容器的端口发布到主机
+--rm			# 当exit的时候自动删除容器
+-t, --tty		# 分配一个伪TTY
 -v, --volume <list>	# 绑定并挂载一个卷
 ```
 
