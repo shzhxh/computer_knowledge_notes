@@ -14,13 +14,21 @@
 
 - on - 触发workflow的条件
 
+  ```
+  on.schedule		# 指定工作流的运行时间(使用的cron语法)。
+  ```
+
+  
+
 - jobs - 要执行的任务
 
   ```
   jobs.<job_id>	# 任务的名称
+  jobs.<job_id>.if	# 用以指定job运行的条件
   jobs.<job_id>.name	# 任务的说明
   jobs.<job_id>.needs	# 指定运行顺序
   jobs.<job_id>.runs-on	# 指定虚拟机，是必填字段
+  jobs.<job_id>.strategy	# 为任务创建matrix，使每个任务都可以有不同的变化。
   jobs.<job_id>.steps	# 指定任务的运行步骤
   ```
   
@@ -30,7 +38,9 @@
   steps[*].name	# 步骤名
   steps[*].run	# 该步骤的命令或action
   steps[*].env	# 该步骤所需的环境变量。
-  steps[*].uses	# 
+  steps[*].uses	# 指定一个要运行的action，它是step的一部分
+  steps[*].with	# 指定action所需的参数
+
   ```
 
 - run - 组成步骤的命令

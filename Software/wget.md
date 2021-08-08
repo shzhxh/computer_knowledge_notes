@@ -24,6 +24,7 @@ wget [option] [url]
 
 ```
 -i, --input-file=<file>	# 从<file>中读取URLs。要求文件中每行一个URL。
+-o, --output-file=<logfile>	# 把输出信息写入到<logfile>。
 -q, --quiet		# 关闭wget的输出
 ```
 
@@ -35,7 +36,7 @@ wget [option] [url]
 -c, --continue	# 继续获取下载到一半的文件。
 -T <sec>, --timeout=<sec>	# 设置网络的timeout为<sec>秒。
 -t <num>, --tries=<num>		# 尝试的次数设置为<num>。
--O <file>, --output-document=<file>	# 文档不会写入到相应的文件，而是把所有的文档连接起来写入到<file>。
+-O , --output-document=<file>	# 
 ```
 
 
@@ -43,6 +44,12 @@ wget [option] [url]
 ##### 目录
 
 ##### HTTP
+
+```
+--referer=<url>	# 
+```
+
+
 
 ##### HTTPS
 
