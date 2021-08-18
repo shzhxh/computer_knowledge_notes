@@ -5,7 +5,7 @@
 #### 语法
 
 ```
-diff [option] files
+diff [options] <files>
 ```
 
 #### 选项
@@ -13,7 +13,10 @@ diff [option] files
 ```
 -r, --recursive		# 递归比较两个目录里的所有文件
 -N, --new-file		# 将不存在的文件当成空文件
+--suppress-common-lines	# 与-y联用，表示只输出内容不同的列。
 -u, -U NUM, --unified[=NUM]	# 以合并的方式来显示文件内容的不同
+-W, --width=<NUM>	# 允许输出列数最高为<NUM>，默认130。
+-y, --side-by-side	# 输出成两列
 ```
 
 #### 用法

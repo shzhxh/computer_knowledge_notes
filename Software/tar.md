@@ -51,7 +51,7 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 ##### 设备选择与切换
 
 ```
--f:使用archive file或device ARCHIVE
+-f, --file=<ARCHIVE>	# 使用archive file或device ARCHIVE
 ```
 
 ##### 设备屏蔽
@@ -62,6 +62,7 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 
 ```
 -j, --bzip2	# 使用bzip2方式压缩
+-J, --xz	# 使用xz方式压缩
 -z, --gzip, --gunzip, --ungzip	# 使用gzip方式压缩
 -Z, --compress, --uncompress	＃ 使用compress方式压缩
 ```

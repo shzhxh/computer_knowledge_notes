@@ -12,6 +12,12 @@ git submodule <command> [options]	# 初始化，更新或分析子模块
 
 ##### deinit
 
+```
+deinit [-f] <--all | [--] path...>	# 删除本地子模块
+```
+
+
+
 ##### update
 
 ```
