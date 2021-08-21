@@ -30,6 +30,12 @@ curl https://sh.rustup.rs -sSf | sh
 check		# 检查工具链和rustup的更新
 completions	# 为shell生成tab补全脚本
 component	# 修改工具链的组件
+	# rustup component <cmd>
+	# <cmd>:
+	#	list - 列出已安装的组件
+	#	add - 把组件添加到rust工具链
+	#	remove - 把组件从rust工具链里删除
+	#	help - 打印帮助信息
 default		# 设置默认工具链
 doc			# 当前工具链的文档
 help		# 打印帮助信息

@@ -157,7 +157,6 @@ push
 rename
 restart	# 重启容器。
 rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
-search
 stats
 stop	# 停止一个或多个运行中的容器。
 tag
@@ -289,6 +288,18 @@ docker save [options] <images>	# 把镜像保存为tar文件
 # 选项
   -o, --output <file>	# 输出到文件(默认STDOUT)
 ```
+
+##### search
+
+```
+docker search [options] <term>	# 在Docker Hub上搜索镜像
+    -f, --filter <filter>
+    --format <string>
+    --limit <int>
+    --no-trunc
+```
+
+
 
 ##### start
 

@@ -30,7 +30,7 @@
 -f file, --file=file, --makefile=FILE	# 使用file作为makefile
 -i, --ignore-errors
 -I dir, --include-dir=dir
--j [jobs], --jobs[=jobs]
+-j [jobs], --jobs[=jobs]	# 指定并行的任务数量为[jobs]。如不写[jobs]，则尽最大可能并行。
 --jobserver-fds [R,W]
 -k, --keep-going
 -l [load], --load-average[=load]
@@ -55,7 +55,7 @@
 
 #### 示例
 
-```
+```shell
 make SHELL="/bin/bash -x"	# 要了解详细的编译过程，但"make -n"又失效的时候，可试试这条命令
 ```
 

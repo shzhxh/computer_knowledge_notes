@@ -6,13 +6,13 @@
 
 ```bash
 dd [operand] ...		# 转换和复制文件
-dd option				# 打印帮助信息或版本信息
+dd <--help|--version>	# 打印帮助信息或版本信息
 ```
 
 #### 操作数
 
 ```
-bs=BYTES	# 一次读写BYTES字节(默认512)
+bs=BYTES	# 一次读写BYTES字节，即一个块的大小(默认512)。覆盖ibs和obs
 cbs=BYTES	# 一次转换bYTES字节
 conv=CONVS	# 用指定的参数转换文件（notrunc:不截短输出文件）
 count=N		# 拷贝的块的数量（注：由ibs=指定一个块占多少个字节）
