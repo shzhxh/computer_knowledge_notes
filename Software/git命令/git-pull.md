@@ -34,3 +34,10 @@ git pull [options] [repository [refspec...]]
 git pull --unshallow	# 取消浅层复制时的所有限制，使本地仓库成为远程仓库的一个完全的复本
 ```
 
+#### 错误与问题
+
+1. fatal: refusing to merge unrelated histories
+
+   解决方法：当我执行`git pull`时出现此问题，解决方法是`git pull origin main:main`。
+
+   原因分析：网上说这是把两个没有关系的项目合并到一起产生的错误。可我只有一个远程仓库origin，只有一个分支main，并不存在多个没有关系的项目。且执行`git branch -vv`可见本地和远程的分支是有关联的。所以，还不知道真正出问题的原因。

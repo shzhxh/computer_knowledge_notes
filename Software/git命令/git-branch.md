@@ -4,13 +4,11 @@
 
 #### 语法
 
-```
+```shell
 git branch [options] [patterns]
 git branch <--track | --no-track> [-l] [-f] <branchname> [start-point]
-
-git branch <--set-upstream-to=upstream> [branchname]	# 指定branchname追踪远程分支upstream
+git branch <-u upstream> [branchname]	# 指定branchname追踪远程分支upstream
 git branch <--unset-upstream> [branchname]		# 删除对远程分支的追踪
-
 git branch <-m | -M> [oldbranch] <newbranch>	# 移动或重命名分支
 git branch <-c | -C> [oldbranch] <newbranch>	# 复制分支
 git branch <-d | -D> [-r] <branchname>...		# 删除分支

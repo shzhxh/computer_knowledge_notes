@@ -9,6 +9,7 @@ Client URL，用来请求web服务器，是一个上传下载工具。
 #### 选项
 
 ```
+--create-dirs	# 与-o <file>联用，意思是如果<file>包含的本地目录不存在，则创建之。
 -i, --include	# 显示http response的头信息和网页代码
 -I, --head		# 仅显示头信息
 -L, --location	# 有些网址是自动跳转的，使用此参数则会请求新跳转到的网址。

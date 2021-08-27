@@ -2,19 +2,20 @@
 
 添加或删除内核模块。
 
-```
-modprobe nbd	# 遇到问题
-
-cat/etc/os-release
-uname -r
-
-yum install kernel-devel kernel-headers
+#### 选项
 
 ```
+-r, --remove	# 删除模块，也会删除被删模块所依赖的无用模块。
+```
 
-[安装编译nbd模块](https://blog.csdn.net/miaodichiyou/article/details/76050361)
+
+
+#### 示例
 
 ```
-先depmod,再modprobe
+# LiveSuit安装内核模块
+cp awusb.ko /lib/modules/`uname -r`/kernel/
+depmod -a
+modprobe awusb
 ```
 

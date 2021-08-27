@@ -53,3 +53,9 @@ SYSLOG_SU_ENAB (boolean)
 255	# 
 ```
 
+#### 示例
+
+```
+su -c whoami szx	# 以用户szx运行whoami命令
+```
+

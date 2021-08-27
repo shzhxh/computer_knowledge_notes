@@ -145,7 +145,6 @@ export	# 将一个容器文件系统输出为压缩文件。
 history	# 查看某个镜像下的所有层。
 import
 info
-inspect	# 返回docker对象的底层信息。
 kill	# 杀死一个或多个运行中的容器。
 login
 logout
@@ -154,7 +153,6 @@ pause	# 暂停一个或多个容器中的进程。
 port
 ps		# 列出所有运行着的容器。加-a则列出所有的容器。
 push
-rename
 restart	# 重启容器。
 rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
 stats
@@ -226,6 +224,17 @@ docker exec	# 在运行的容器中执行一个命令。
 	-t, --tty			# 分配一个伪TTY
 ```
 
+##### inspect
+
+```
+docker inspect [options] <names|ids>	# 返回docker对象的底层信息。
+
+# 选项
+  -f, --format <string>
+  -s, --size
+  --type <string>
+```
+
 
 
 ##### load
@@ -248,6 +257,12 @@ docker pull [options] <name>[:tag|@digest]	# 把镜像拉取到本地。相当�
 -h, --help[=false]		# 帮助
 --platform=""			# 如果服务器适用于多平台，则需设置平台
 -q, --quiet[=false]		# 静默模式
+```
+
+##### rename
+
+```
+docker rename <OLD_NAME> <NEW_NAME>	# 重命名容器
 ```
 
 

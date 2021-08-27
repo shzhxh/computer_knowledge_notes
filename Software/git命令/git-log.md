@@ -22,6 +22,8 @@ git log [options] [revision range] [[--] paths]
 
 ```
 -<number>, -n <number>, --max-count=<number>	# 查看最近number次提交
+--pretty[=<fmt>], --format=<fmt>	# 用<fmt>格式美化输出。默认为medium。
+	# <fmt>可选的形式：oneline, short, medium, full, fuller, reference, email, raw, format:<string> 和 tformat:<string>.
 --since=<date>, --after=<date>					# 显示date之后的提交
 --until=<date>, --before=<date>					# 显示date之前的提交
 --author=<pattern>, --commiter=<pattern>		# 仅显示作者/提交者满足pattern模式的提交,可以多次使用此选项指定多个作者/提交者
@@ -51,6 +53,25 @@ git log [options] [revision range] [[--] paths]
 ##### 比较格式
 
 #### PRETTY的格式
+
+```
+oneline : <hash> <title line>
+medium :
+	commit <hash>
+	Author: <author>
+	Date: <author date>
+	<title line>
+	<full commit message>
+format:<string>
+	<string>	# 其形式类似于printf里的fmt字符串，其中占位符的含义：
+		# %n : 相当于printf里的\n
+		# %% : 相当于printf里的%%
+		# %H : 完整commit哈希
+		# %h : 简略的commit哈希
+	
+```
+
+
 
 #### 通用DIFF选项
 

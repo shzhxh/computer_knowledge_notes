@@ -5,7 +5,9 @@
 #### 子命令
 
 ```
+install	# 安装或更新软件包。
 source	# 获取源码，源码会下载到当前目录。
+reinstall	# 相当于install --reinstall。
 ```
 
 
@@ -14,5 +16,6 @@ source	# 获取源码，源码会下载到当前目录。
 
 ```
 -f, --fix-broken	# 尝试修复被损坏的信赖关系
+--reinstall			# 重新安装软件包
 ```
 
