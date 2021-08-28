@@ -27,4 +27,12 @@ jobs:
 
       # sync to gitee
       - name: sync to gitee
-        run: git push --all git@gitee.com:shzhxh/computer_knowledge_notes.git
+        uses: x-dr/sync-repo-to-gitee@master
+        env:
+          # 在 Settings->Secrets 配置 GITEE_KEY
+          SSH_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          github-repo: "git@github.com:shzhxh/computer_knowledge_notes.git"
+          # 注意替换为你的 Gitee 目标仓库地址
+          gitee-repo: "git@gitee.com:shzhxh/computer_knowledge_notes.git"
