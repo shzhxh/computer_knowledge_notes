@@ -33,7 +33,9 @@ ws
 
 ```
 awatch
-break	# 在特定位置设置断点。		
+break	# 在特定位置设置断点。
+	# b 10 : 断点在第10行
+	# b main : 断点在main函数
 catch
 clear
 commands

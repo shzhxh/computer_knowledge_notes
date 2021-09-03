@@ -228,6 +228,15 @@ V	# 选择，以行为单位
 | fileencodings | 一个字符编码的列表，启动时将依据列表自动探测文件的编码方式   |
 | termencoding  | vim所工作的终端的字符编码方式                                |
 
+##### 文件格式
+
+dos或windows通过CRLF来换行，Linux和Mac通过LF来换行。可以通过`fileformats`来控制文件格式。
+
+```
+:set fileformats=dos		# 使用windows的文件格式
+:set fileformats=unix	# 使用linux的文件格式
+```
+
 
 
 ##### 配色方案

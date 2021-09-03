@@ -32,7 +32,7 @@ cfg	// 控制条件编译
 cfg_attr	// 有条件地包含属性
 // 测试
 // 派生
-derive		// 自动特性实现
+derive		// 自动特性实现(derive的意思是获取，故在此处的意思是自动获取某个特性)
 // 宏
 macro_use	// 扩展宏的可见性。或从其它crate导入宏(后面要跟extern crate声明)。
 // 诊断

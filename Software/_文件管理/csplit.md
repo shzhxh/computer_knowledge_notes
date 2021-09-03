@@ -31,3 +31,10 @@ INTEGER				# 复制到指定行号
 {*}					# 按照之前的模式重复分割直到文件末尾
 ```
 
+#### 示例
+
+```
+# 以某行中存在qemu-system-x86_64为条件，分割test.log。分割后的文件以abc开头。
+csplit -f abc test.log /qemu-system-x86_64/ {*} 
+```
+

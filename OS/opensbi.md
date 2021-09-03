@@ -114,6 +114,8 @@ OpenSBI也提供了可启动的运行时固件，那些固件链接到了libplat
   - FW_PAYLOAD：下个启动阶段作为payload的固件
   - FW_JUMP：下个启动阶段使用静态跳转地址的固件
   - FW_DYNAMIC：下个启动阶段使用动态信息的固件
+  
+  > 以generic平台为例，make PLATFORM=generic会使顶层Makefile把platform/generic/config.mk包含进去，在这个config.mk里指定了FW_PAYLOAD、FW_JUMP、FW_DYNAMIC均为y，最后会把fw_dynamic.bin、fw_jump.bin、fw_payload.bin都编译出来。
 - SOC制造商可以选择：
   - 使用一个OpenSBI参考固件作为它们的M模式**运行时**固件
   - 把OpenSBI作为库从零构建M模式**运行时**固件
@@ -132,9 +134,9 @@ OpenSBI也提供了可启动的运行时固件，那些固件链接到了libplat
   + **FW_PAYLOAD_OFFSET** - 基于FW_TEXT_BASE的位移，payload二进制将从FW_TEXT_OFFSET链接到最终的FW_PAYLOAD固件二进制镜像。如没有定义FW_PAYLOAD_ALIGN则此参数必须使用。如果错误定义了FW_PAYLOAD_OFFSET或FW_PAYLOAD_ALIGN，或者两者都没有定义，则会产生编译错误。
   + **FW_PAYLOAD_ALIGN** - 地址对齐约束，payload二进制将被链接在基本固件二进制的后面，从而形成最终的FW_PAYLOAD固件二进制镜像。如没有定义FW_PAYLOAD_OFFSET则此参数必须使用。如果同时定义了FW_PAYLOAD_OFFSET或FW_PAYLOAD_ALIGN，则会使用FW_PAYLOAD_OFFSET而忽略FW_PAYLOAD_ALIGN。
   + **FW_PAYLOAD_PATH** 镜像文件的路径。如没有指定此参数，则会自动生成一个简单的测试payload。它在打印出一条信息后就进到一个无限循环里。
-  + **FW_PAYLOAD_FDT_PATH** 到FDT二进制文件的路径，它最终会嵌入到固件二进制的*.text* 段里。如果没有定义这个选项，且平台也没有定义它的文件（参考FW_PAYLOAD_FDT），则固件会期望上一个启动阶段来把FDT作为参数传递过来。
-  + **FW_PAYLOAD_FDT** 平台代码自己定义的FDT的路径。文件名必须满足平台*objects.mk*文件里 DTB文件的名称(*platform-dtb-y*条目)。此选项将会导致*FW_PAYLOAD_FDT_PATH*被自动设置。在 `make` 命令行里定义FW_PAYLOAD_FDT_PATH将会使此选项失效，命令行里定义的那个DTB文件将会构建到最终的固件里。
-  + **FW_PAYLOAD_FDT_ADDR** 在进行下一个启动阶段之前，FDT的放置地址。这个FDT可能是上个启动阶段传递的，也可能是FW_PAYLOAD_FDT_PATH定义的，它会嵌入到*.text*段里。如果没有提供这个参数，固件会把上个阶段传递的FDT地址直接传递给下个阶段。
+  + **FW_PAYLOAD_FDT_PATH** 到FDT二进制文件的路径，它最终会嵌入到固件二进制的`.text` 段里。如果没有定义这个选项，且平台也没有定义它的文件（参考FW_PAYLOAD_FDT），则固件会期望上一个启动阶段来把FDT作为参数传递过来。
+  + **FW_PAYLOAD_FDT** 平台代码自己定义的FDT的路径。文件名必须满足平台`objects.mk`文件里 DTB文件的名称(platform-dtb-y条目)。此选项将会导致FW_PAYLOAD_FDT_PATH被自动设置。在 `make` 命令行里定义FW_PAYLOAD_FDT_PATH将会使此选项失效，命令行里定义的那个DTB文件将会构建到最终的固件里。
+  + **FW_PAYLOAD_FDT_ADDR** 在进行下一个启动阶段之前，FDT的放置地址。这个FDT可能是上个启动阶段传递的，也可能是FW_PAYLOAD_FDT_PATH定义的，它会嵌入到`.text`段里。如果没有提供这个参数，固件会把上个阶段传递的FDT地址直接传递给下个阶段。
 
 ##### FW_JUMP
 
@@ -220,9 +222,43 @@ make PLATFORM=kendryte/k210 intall	# 创建install/platform/kendryte/k210/目录
 
 #### 源码分析
 
-opensbi从`_start`开始执行，位置在`firmware/fw_base.S`。`MOV_3R`用于保存`a0,a1,a2,a3`这三个寄存器的值，这是为下一条指令`call fw_boot_hart`做准备，因为`fw_boot_hart`要用到这个三寄存器。
+以generic平台payload模式为例。
 
-`fw_boot_hart`的作用是返回当前核的`Hart ID`。它前期进行了两个判断，一是魔数要匹配，二是版本号不能高于最高值，任意一个条件不满足，都会进到死循环`_bad_dynamic_info`里。`Hart ID`保存在`a0`里，然后函数返回。实际上`a0`返回的值是`-1`，**不理解这一点**。
+##### 汇编部分
+
+从`./firmware/fw_payload.elf.ldS`可见，opensbi从`_start`开始执行，位置在`firmware/fw_base.S`。
+
+`MOV_3R`用于保存`a0,a1,a2,a3`这三个寄存器的值，这是为下一条指令`call fw_boot_hart`做准备，因为`fw_boot_hart`要用到这个三寄存器。
+
+`fw_boot_hart`的作用是返回当前核的`Hart ID`。对payload模式，实际上`a0`返回的值是`-1`，这是为了在后面的代码里执行`_try_lottery`选出一个启动核。
 
 接下来把`a0`的值保存在`a6`里，然后恢复`a0,a1,a2`的值。如`Hart ID`为`-1`，说明需要挑选出一个boot hart，则执行`_try_lottery`；如`Hart ID`不为`a0`，说明当前核不是boot hart，则执行`_wait_reloate_copy_done`。
 
+代码重定位：判断`_load_start`与`_start`是否一致。若不一致，则会将代码重定位。
+
+清除通用寄存器的值：但a1和a2不会清除。
+
+清除bss段。
+
+设置sp寄存器的值，sp寄存器就在bss段的末尾。
+
+执行`call fw_platform_init`读取设备树里的信息。此函数在`platform/generic/platform.c`。a0传递参数0，a1传递设备树地址，a2传递设备树大小，a3传递0。
+
+fdt重定位。
+
+执行`call sbi_init`跳转到`sbi_init`。至此，汇编部分就结束了。
+
+##### C部分
+
+sbi_init : 首先判断是从什么模式启动的，从qemu的设备树可知是从S模式启动的。此时会以coldboot的模式启动，即执行`init_coldboot`。
+
+init_coldboot : 
+
+- **sbi_domain_init** - 初始化动态加载的镜像的模块
+- **sbi_platform_early_init** - 平台的早期初始化
+- **sbi_console_init** - 控制台初始化，从这里开始，就可以使用串口输出了。
+- **sbi_platform_irqchip_init** - irq中断初始化
+- **sbi_ipi_init** - 核间中断初始化
+- **sbi_tlb_init** - mmu的tlb表的初始化
+- **sbi_timer_init** - timer初始化
+- **sbi_hsm_prepare_next_jump** - 准备下一级的boot

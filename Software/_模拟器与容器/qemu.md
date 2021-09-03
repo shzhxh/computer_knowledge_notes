@@ -378,6 +378,8 @@ sendkey	# 键盘操作
 
   VirtIO板模拟了完整的计算机系统，方便操作系统的开发。它实现了VirtIO MMIO传输，支持VirtIO块设备和VirtIO网络设备，还有16550a UART用于控制台访问。这样qemu原生的各种块设备和网络实现都可用了。
   
+  通过查看`hw/riscv/virt.c`可以看到内存的布局，可以看到外设的地址，也可以看到DRAM是从`0x80000000`开始的。与virt板子相关的部分是从`virt_machine_init`开始的，首先是注册PLIC中断，然后注册系统内存，然后创建设备树。
+  
   ```
   # 查看virt machine的硬件配置信息
   sudo apt install device-tree-compiler
