@@ -8,6 +8,7 @@ bash [options] [cmd | file]	# 从标准输入读取cmd以执行命令，或从�
 # 对于[abCefhimnuvx]和[-o options]选项请参考set命令
 
 # 单字符选项
+-s	# 让bash从标准输入读取命令
 -x	# 打印要执行的命令
 
 # 多字符选项

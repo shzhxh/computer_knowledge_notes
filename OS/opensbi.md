@@ -226,6 +226,42 @@ make PLATFORM=kendryte/k210 intall	# 创建install/platform/kendryte/k210/目录
 
 ##### 汇编部分
 
+```
+_start: 确定启动核的id，这要靠_try_lottery
+_try_lottery: 第一个访问此标记的核被判定为启动核,启动核把实际装载地址_fw_start保存进变量_load_start，向下执行到relocate；非启动核则执行_wait_relocate_copy_done等待启动核完成所有工作。
+_relocate: 如链接位置和装载位置一致，则跳转到_relocate_done，表示完成了装载；否则用接下来的四个标记完成装载，然后跳转到_relocate_done。
+_relocate_copy_to_lower:
+_relocate_copy_to_lower_loop:
+_relocate_copy_to_upper:
+_relocate_copy_to_upper_loop:
+_wait_relocate_copy_done: 仅有非启动核才执行到此处，仅仅是跳转到_wait_for_boot_hart
+_relocate_done: 将变量_boot_status置1，表示完成装载。然后重置寄存器，向下执行到_bss_zero。
+_bss_zero:
+_scratch_init:
+_fdt_reloc_again:
+_fdt_reloc_done:
+_wait_for_boot_hart: 非启动核循环等待，仅有启动核将变量_boot_status置为2，才向下执行_start_warm
+_start_warm: 对所有核设置寄存器，然后跳转到C的部分sbi_init。
+_skip_trap_handler_rv32_hyp: 仅用于32位机器
+_skip_trap_exit_rv32_hyp: 仅用于32位机器
+# 以下部分是变量、函数、宏的定义，正常的代码流不应到此。
+_runtime_offset:
+_relocate_lottery:
+_boot_status:
+_load_start:
+_link_start:
+_link_end:
+_hartid_to_scratch:
+_start_hang:
+_trap_handler:
+_trap_exit:
+_trap_handler_rv32_hyp:
+_trap_exit_rv32_hyp:
+_reset_regs:
+```
+
+
+
 从`./firmware/fw_payload.elf.ldS`可见，opensbi从`_start`开始执行，位置在`firmware/fw_base.S`。
 
 `MOV_3R`用于保存`a0,a1,a2,a3`这三个寄存器的值，这是为下一条指令`call fw_boot_hart`做准备，因为`fw_boot_hart`要用到这个三寄存器。
@@ -234,25 +270,66 @@ make PLATFORM=kendryte/k210 intall	# 创建install/platform/kendryte/k210/目录
 
 接下来把`a0`的值保存在`a6`里，然后恢复`a0,a1,a2`的值。如`Hart ID`为`-1`，说明需要挑选出一个boot hart，则执行`_try_lottery`；如`Hart ID`不为`a0`，说明当前核不是boot hart，则执行`_wait_reloate_copy_done`。
 
+`_relocate_lottery`就是一个变量，初值为0，每当一个核启动这个变量值就加1。当第一个核启动的时候，得到初值为0，于是被选为启动核；当其它核启动的时候，初值非0，则执行`_wait_reloate_copy_done`。
+
 代码重定位：判断`_load_start`与`_start`是否一致。若不一致，则会将代码重定位。
 
-清除通用寄存器的值：但a1和a2不会清除。
+清除通用寄存器的值：但a1和a2不会清除。`call _reset_regs`
 
-清除bss段。
+清除bss段。`_bss_zero`，`_bss_start`和`_bss_end`是bss段的起始地址和结束地址，用一个循环把这段内存置0.
 
-设置sp寄存器的值，sp寄存器就在bss段的末尾。
+设置临时的trap处理例程。其实就是写mtvec寄存器，而这个处理例程`_start_hang`就是个死循环。
 
-执行`call fw_platform_init`读取设备树里的信息。此函数在`platform/generic/platform.c`。a0传递参数0，a1传递设备树地址，a2传递设备树大小，a3传递0。
+设置临时的栈。即设置sp寄存器的值，这段栈就在bss段的末尾。
 
-fdt重定位。
+让固件保存信息。即调用`fw_save_info`，由于payload模式不需要保存信息，故直接执行`ret`。
 
-执行`call sbi_init`跳转到`sbi_init`。至此，汇编部分就结束了。
+初始化平台。即执行`call fw_platform_init`读取设备树里的信息。此函数在`platform/generic/platform.c`。a0传递参数0，a1传递设备树地址，a2传递设备树大小，a3传递0。
+
+重新加载核的信息。即`hart_count`和`hart_stack_size`，它们都定义在结构体`struct sbi_platform`里，它们的值由前面的`fw_platform_init`函数确定。
+
+设置当前核的暂存空间。它被放在`_fw_end`的后面。
+
+把当前核暂存空间的地址放在tp寄存器。
+
+把结构体`struct sbi_scratch`的信息保存进当前核的暂存空间。
+
+- fw_start是固件的开始地址，即_fw_start的地址.
+- fw_size是固件大小，即_fw_end - _fw_start。
+- next_arg1是当前核下个启动阶段的arg1，或a1寄存器的值，使用`fw_next_arg1`函数可得。
+- next_addr是当前核下个启动阶段的地址，通过`fw_next_addr`函数可得。
+- next_mode是当前核下个启动阶段的特权级，即S模式。
+- warmboot_addr是当前核热启动的入口，即`_start_warm`的地址。
+- platform_addr是sbi_platform的入口，即结构体`platform`的地址。
+- hartid_to_scratch是hartid到sbi_scratch转换函数的地址，即`_hartid_to_scratch`函数。
+- trap_exit是trap退出函数的地址，即`_hartid_to_scratch`函数。
+- tmp0是临时存储，目前是清空该值。
+- options是OpenSBI库的选项，如果从参数`FW_OPTIONS`传入则为`FW_OPTIONS`的值，否则通过函数`fw_options`获取，对payload模式这个值为0。
+
+fdt重定位。a1保存了源fdt的地址，通过`fw_next_arg1`函数可得到目的fdt的地址。如果a1为0、或a1等于目的fdt的地址、或目的fdt为0，无需重定位，直接跳转到`_fdt_reloc_done`；否则计算出fdt的大小，在一个循环里完成fdt的重载。
+
+将`_boot_status`的值改为2，告诉非启动核们已经完成了启动。
+
+所有核都会执行`_start_warm`处的内容。
+
+1. 调用`_reset_regs`函数把常用的通用寄存器清零。
+2. 把mip和mie寄存器清0
+3. 获取结构体`sbi_platform`里的`hart_count`、`hart_stack_size`、`hart_index2id`，以及`mhartid`寄存器的值。
+4. 如果`hart_index2id`的值为0则跳转到3f，否则将向下执行标记1，不过在此之前把计数器a4置0。
+5. 标记1：通过循环遍历`hart_index2id`所指向的数组，如果某个数组元素与mhartid的值相等则跳转到2f，此时a4的值即为那个数组元素的索引。否则，数组的所有元素都不等于mhartid，则此a4将取-1。然后向下执行标记2.
+6. 标记2：把a4的值保存进s6。
+7. 标记3：如果s6大于s7，则表明数组`hart_index2id`里没有一个元素匹配当前的hart id，跳转到`_start_hang`进入死循环。当前核的暂存空间在当前核栈空间的顶部，基于此找到当前的暂存空间。然后把暂存空间的地址写入mscratch和sp两个寄存器。
+8. 把`_trap_handler`的地址放入mtvec寄存器，即设置中断处理例程。
+
+执行`call sbi_init`跳转到`sbi_init`，传递的参数即为结构体`sbi_scratch`的指针。至此，汇编部分就结束了。
 
 ##### C部分
 
-sbi_init : 首先判断是从什么模式启动的，从qemu的设备树可知是从S模式启动的。此时会以coldboot的模式启动，即执行`init_coldboot`。
+sbi_init : 首先判断是否支持下个启动阶段的特权级，如果不支持则执行`sbi_hart_hang()`函数进入低功耗模式且无限循环；如果支持则通过`atomic_xchg()`选出执行冷启动的核(其实就是第一个访问此函数的核)，此核会执行`init_coldboot()`，其它核则执行`init_warmboot()`。
 
 init_coldboot : 
+
+- sbi_scratch_init - 定义在`lib/sbi/sbi_scratch.c`，作用是初始化暂存空间的列表和分配器，即数组`hartid_to_scratch_table`。这是首先要作的事。
 
 - **sbi_domain_init** - 初始化动态加载的镜像的模块
 - **sbi_platform_early_init** - 平台的早期初始化
@@ -262,3 +339,9 @@ init_coldboot :
 - **sbi_tlb_init** - mmu的tlb表的初始化
 - **sbi_timer_init** - timer初始化
 - **sbi_hsm_prepare_next_jump** - 准备下一级的boot
+
+init_warmboot：
+
+- wait_for_coldboot
+- sbi_hsm_hart_get_state
+- sbi_hart_switch_mode
