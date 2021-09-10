@@ -36,6 +36,7 @@ awatch
 break	# 在特定位置设置断点。
 	# b 10 : 断点在第10行
 	# b main : 断点在main函数
+	# b *0x001 : 断点在内存地址0x001处
 catch
 clear
 commands

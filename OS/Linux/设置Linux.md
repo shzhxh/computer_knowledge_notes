@@ -1,42 +1,3 @@
-#### 目录结构
-
-目录配置：（FHS)(四种类型：static,variable,shareable,unshareable)
-
-```
-/bin	#常用命令
-/sbin	#系统管理员才会用到的命令
-/lib	#开机及常用命令的函数库
-/usr	#unix software resouce:软件放置处
-/opt	#第三方软件
-/srv	#网络服务
-/tmp	#放临时文件
-/etc	#配置文件
-	/etc/passwd	#用户信息
-	/etc/shadow	#密码信息
-	/etc/group	#组信息	
-/boot	#开机与内核
-/dev	#设备文件
-/var	#variable:与系统动作过程有关
-/media	#放置可移除的设备
-/mnt	#暂时挂载
-/home	#用户目录
-/root	#系统管理员目录
-/lost+found	#文件系统发生错误时，放置遗失片断
-/proc	# 记录着内核的数据结构，动态地存在于内存中
-	/proc/数字	# 数字代表了对应的进程，描述的是相关进程的信息
-	/proc/cpuinfo	# CPU信息
-	/proc/dma		# DMA通道信息
-	/proc/filesystems	# 文件系统信息
-	/proc/interrupts	# 中断信息
-	/proc/ioports		# IO端口信息
-	/proc/meminfo		# 内存信息
-	/proc/net
-	/proc/scsi			# SCSI设备的信息
-	/proc/sys
-	/proc/version		# 内核版本
-/sys	#内核相关信息
-```
-
 #### 文件种类
 
 文件三种权限：rwx
@@ -65,7 +26,7 @@ p	#数据输送文件
    # for ubuntu 16.04
    sudo apt install im-config fcitx-table-wbpy fcitx-pinyin
    im-config -s fcitx -z all_ALL
-
+   
    # for archlinux
    pacman -S fcitx fcitx-im fcitx-table-extra fcitx-configtool
    ```
@@ -89,3 +50,27 @@ p	#数据输送文件
   `include /etc/ld.so.conf.d/*.conf`，可见其具体的定义都在`/etc/ld.so.conf.d`文件夹中。
 
 - 使用`ldconfig`命令使配置生效。
+
+#### 终端提示符的设置
+
+即设置系统变量`PS1`，系统级的设置在`/etc/profile`，用户级的设置在`~/.bashrc`。
+
+```
+# 一些特殊符号的含义：
+/d	# 日期。
+/H	# 完整主机名。
+/h	# 主机的第一个名字。
+/t	# 时间显示为24小时制
+/T	# 时间显示为12小时制
+/A	# 时间显示为24小时制
+/u	# 用户名
+/v	# bash版本
+/w	# 完整的目录
+/W	# 最后一个目录
+/#	# 当前是第几个命令。
+/$	# 提示字符。root为#，普通用户为$。
+```
+
+#### 文字显示异常
+
+系统为英文环境时，默认字体Noto Scans CJK优先显示日文汉字，可修改`/etc/fonts/conf.avail/64-language-selector-prefer.conf`解决此问题。

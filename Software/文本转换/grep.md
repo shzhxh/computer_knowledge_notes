@@ -66,7 +66,7 @@ rgrep # 等价于grep -r
 ```
 -A NUM, --after-context=NUM		# 打印出匹配的行后面NUM行的内容。
 -B NUM, --before-context=NUM	# 打印出匹配的行前面NUM行的内容。
--C NUM, -NUM, --context=NUM		# 打印输出内容的NUM行。
+-C NUM, -NUM, --context=NUM		# 打印出匹配的行前后NUM行的内容。
 ```
 
 ##### 文件与目录选择
@@ -104,5 +104,6 @@ rgrep # 等价于grep -r
 2	# 有错误发生
 ```
 
+#### 存在的问题
 
-
+1. `[^\n]`本应理解为不包含`\n`的所有字符，但grep似乎把它理解为不包含`\、n、 \n`这三个字符的所有字符。

@@ -12,6 +12,7 @@ minicom [options] [configuration]
 ##### 选项
 
 ```
+-b, --baudrate	# 指定波特率，这将覆盖配置文件里的值
 -D, --device	# 指定设备，这将覆盖配置文件里的值
 -h, --help
 -v, --version

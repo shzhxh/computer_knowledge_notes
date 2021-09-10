@@ -63,7 +63,7 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
    apt install llvm-3.4
    ```
 
-   ​
+5. 文件管理器里添加书签：Ctrl+D
 
 
 ### 注意事项
@@ -76,7 +76,7 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
   # 3. 按"Ctrl+x"进入操作系统
   ```
 
-  ​
+  
 
 - INTEL机器在安装完成后依然需要在启动选项里加入`acpi=off`参数。
 
@@ -90,7 +90,7 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
   sudo update-grub
   ```
 
-  ​
+  
 
 - 关于ACPI Error的一些信息
 
