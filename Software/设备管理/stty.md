@@ -25,8 +25,10 @@ lnext <char>	# <char> will enter the next character quoted
 #### 特殊设置
 
 ```
+cols, columns N	# 告诉内核终端有N列
 ispeed N	# 设置输入速度为N
 ospeed N	# 设置输出速度为N
+rows N		# 告诉内核终端有N行
 ```
 
 #### 控制设置

@@ -59,16 +59,26 @@ int fprintf(FILE *stream, const char *format, ...)
 ```c
 int fscanf(FILE *stream, const char *format, ...);	// 依据格式串format从*stream中读取输入，把值赋给后续各个参数
 int scanf(const char *format, ...);	// 等价于fscanf(stdin, *format, ...)
-int sscanf;
+/* 从字符串读取格式化输入 */
+int sscanf(const char *str, const char *format, ...);
 ```
 
 #### 字符输入输出函数
 
 ```c
-int fgetc();
-int fgets();
-int fputc();
-int fputs();
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+/* 把字符推入到流中 */
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *__restrict, int, FILE *__restrict);
+int fputs(const char *__restrict, FILE *__restrict);
+int puts(const char *);
 ```
 
 
@@ -76,8 +86,9 @@ int fputs();
 #### 文件操作函数
 
 ```c
+/* 打开文件名为path的文件，并关联到一个流。参数mode指打开的模式。 */
 FILE *fopen(const char *path, const char *mode);
-	// 打开文件名为path的文件，并关联到一个流。参数mode指打开的模式。
+/* 把文件描述符关联到一个流 */
 FILE *fdopen(int fd, const char *mode);
 FILE *freopen(const char *path, const char *mode, FILE *stream);
 int fclose(FILE *stream);	// 关闭流
@@ -114,5 +125,15 @@ long ftell(FILE *stream);	// 返回stream流当前的位置
 ```c
 void perror(const char *s);	// 打印字符串s与错误信息
 int feof(FILE *stream);	// 测试流stream的文件结束指示符，如果设置了则返回非0。
+```
+
+#### 其它
+
+```c
+/* 打开一个动态内存缓冲区流 */
+FILE *open_memstream(char **ptr, size_t *sizeloc);
+
+/* 把内存作为stream打开 */
+FILE *fmemopen(void *buf, size_t size, const char *mode);
 ```
 
