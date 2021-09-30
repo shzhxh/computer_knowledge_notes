@@ -15,11 +15,11 @@ gdb [选项] prog core		# 调试程序prog并指定core文件(core文件是异�
 其它命令的别名
 
 ```
-ni		# 单步追踪指令
+ni		# 即nexti，单步追踪指令
 rc
 rni
 rsi
-si		# 精确地单步追踪指令
+si		# 即stepi，精确地单步追踪指令
 stepping
 tp
 tty
@@ -133,6 +133,8 @@ obscure特性
 运行程序
 
 ```
+start		# 开始执行程序，在main处停止
+starti		# 开始执行程序，在第一条指令处停止
 target		# 连接到一个目标(机器或进程)。
 target core	# 使用一个core文件作为target
 target exec	# 使用一个可执行文件作为target

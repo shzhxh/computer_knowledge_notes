@@ -441,7 +441,8 @@ map
 measure
 snapshot	# 管理镜像的快照
 rebase		# 在已有镜像的基础上创建新的镜像
-resize		# 改变镜像的大小
+# 改变镜像的大小
+resize [--object ojbdef] [--image-opts] [-f fmt] [--preallocation=prealloc] [-q] [--shrink] <filename> [+|-]<size>
 ```
 
 ##### 命令选项

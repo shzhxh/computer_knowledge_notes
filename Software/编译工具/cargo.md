@@ -123,9 +123,20 @@ version
 
 #### 配置
 
+cargo的配置文件是`.cargo/config`或`.cargo/config.toml`(当两者都存在时，cargo会读取没有后缀的那个，但是推荐带上后缀)，它会在当前目录和所有父目录中查找，最后在`~`查找。对于数字、字符串和布尔值，靠前的配置会覆盖靠后的配置；对于数组，所有的配置会连接起来；一般使用家目录放默认配置，这样就可以实现对每个包的精确配置。
+
 ```
+# [build]
+target
+	# 指定目标三元组<cpu-vendor-os>，例如"riscv64gc-unknown-none-elf"
+
+# [target.<triple>]	如[target.riscv64gc-unknown-none-elf]
+linker = "..."		# 指定链接器
+runner = "..."		# 指定wrapper，用来运行可执行文件
+rustflags = ["...", "..."]	# 指定rustc的编译参数
+
 # [net]用于配置网络
-net.git-fetch-with-cli
+git-fetch-with-cli
 	# 布尔型，默认false。如为true，则使用系统自带的git命令。如为false，则使用内建的git库。
 ```
 
@@ -214,4 +225,5 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 #### 参考资料
 
 - [cargo](https://doc.rust-lang.org/cargo/commands/cargo.html)
+- `rustup doc --cargo`
 - `cargo help <cmd>`

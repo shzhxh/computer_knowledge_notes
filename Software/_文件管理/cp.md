@@ -38,3 +38,6 @@ cp [OPTION] -t DIRECTORY SOURCE	# 将若干SOURCE复制到目录DIRECTORY
 
   这是由于文件夹包含子文件夹所致，使用`-r`选项即可
 
+- 把文件复制到fat32分区出现`failed to preserve ownership for`
+
+  fat文件系统不能保存Linux下的权限信息，所以有此提示。其实文件和目录都已正常保存，不用管它。
