@@ -135,4 +135,7 @@ ANDROID_LOG_TAGS
   
 问题3: adb connect后，提示offline的问题
 问题3分析：我使用的openthos，刚开始没有问题，在openthos休眠再恢复后就提示offline的问题了。adb disconnect后再adb connect，或target和host都重启，问题都未能解决。最终是在target上执行start adbd解决的问题，所以推测是target上adbd出了问题。
+
+问题4：设备通过type C连到主机上，有的主机上通过adb shell命令可以连接到设备，有的主机则不行。
+问题4分析：因为主机上adb命令的版本太旧，应换一个更新点的版本。
 ```

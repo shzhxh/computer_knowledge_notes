@@ -262,6 +262,18 @@ qemu-system-riscv64 [options] [disk_image]
 	# 不要创建默认设备
 -parallel DEV	# 将虚拟并口重定向到宿主机的设备DEV。
 -serial DEV	# 将虚拟串口重定向到宿主机的字符设备DEV。图形模式下默认为vc，非图形模式下默认为stdio。
+	# none - 不使用串口
+	# pty - 伪终端
+	# null - 丢弃所有串口输出
+	# /dev/ttyS0 - 真实串口设备
+	# file:/tmp/serial.out - 把串口输出写入文件
+	# stdio - 重定向到标准输入输出
+	# pipe:/tmp/serial:	- 重定向到管道，需手动创建/tmp/serial.in和/tmp/serial.out
+	# udp::3333 - 重定向到udp，使用nc -u -l -p 3333 可访问
+	# tcp::3333,servr,nowait - 重定向到tcp，使用telnet localhost 3333可访问
+	# telnet::3333,server,nowait - 重定向到telnet，访问方式同tcp
+	# unix:/tmp/serial.sock,server,nowait - 重定向到socket，用socat命令连接
+	# 定向到braille
 -S			# 在刚开始的时候别启动CPU（需要在管理器里输入“c”才会启动CPU）
 -s			# 相当于-gdb tcp::1234，即在TCP端口1234开启一个gdbserver
 ```

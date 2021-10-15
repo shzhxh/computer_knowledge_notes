@@ -33,3 +33,12 @@ run [build flags] <gofiles> [arguments]
 	# 编译和运行Go程序。关于[build flags]请查询"go-build"。
 ```
 
+#### 问题解决
+
+##### i/o timeout
+
+```
+go env -w GO111MODULE="on"
+go env -w GOPROXY="https://goproxy.cn,direct"
+```
+

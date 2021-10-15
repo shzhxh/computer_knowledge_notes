@@ -14,6 +14,8 @@ nc [options] [destination] [port]	# TCP和UDP的连接与侦听
 
 ```
 -l	# 监听一个连接，而不是初始化到远程机器的连接。
+-u	# 使用UDP。如不用此选项则使用TCP。
+-v	# 输出详细信息
 -w timeout	# 设置等待连线的时间为timeout秒
 ```
 

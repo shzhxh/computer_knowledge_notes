@@ -44,7 +44,10 @@ sed 'sed-command' input-file > output-file
     
 # 删除最后一行，将结果重定向到output-file：  
 sed '$d' input-file > output-file  
-# "$"的作用请参考正则表达式，意为最后一行。
+	# "$"的作用请参考正则表达式，意为最后一行。
+	
+# 删除包含了“abcd”的行
+sed -i "/abcd/d" input-file
   
 # 将指定目录path下的所有文件里的oldstr替换为newstr
 sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`

@@ -63,3 +63,10 @@ elf64lriscv elf64lriscv_lp64f elf64lriscv_lp64 elf32lriscv elf32lriscv_ilp32f el
 
 ##### emulation定义的选项
 
+#### 错误汇总
+
+##### 找不到库
+
+描述：/usr/bin/ld: cannot find -lxxxxx
+
+原因分析：1，系统内是否有这个库？`apt search libxxxxx-dev`；2，gcc能否搜索到这个库？`gcc -lxxxxx --verbose`；3，gcc的搜索路径是否包含了该库文件？查看`/etc/ld.so.conf`文件或`LD_LIBRARY_PATH`环境变量。若修改`LD_LIBRARY_PATH`环境变量无效，还需要修改`LIBRARY_PATH`环境变量。

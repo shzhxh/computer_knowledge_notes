@@ -9,6 +9,8 @@ iostat [options] [interval [count]]	# 统计CPU信息，统计磁盘和分区的
 ```
 -c	# 显示CPU使用情况
 -d	# 显示磁盘使用情况
+-k	# 以千字节每秒为单位
+-m	# 以兆字节每秒为单位
 ```
 
 示例

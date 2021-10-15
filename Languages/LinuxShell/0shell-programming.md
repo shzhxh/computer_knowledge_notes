@@ -108,7 +108,8 @@ if [ 1 -ne 0 ]; then echo "not equal"; fi
 将值和每一个模式匹配，若匹配则执行相应命令不再与其它模式匹配，否则执行星号后的命令。
 
 #### 循环
-  1. for
+- for
+
 ```bash
 # 格式一
   for 变量名 in 列表
@@ -125,7 +126,26 @@ if [ 1 -ne 0 ]; then echo "not equal"; fi
       ...
   }
 ```
-  2. until
+一个for循环的例子
+
+```bash
+#!/bin/bash
+
+# if a string in file1, then remove it from file2
+# $1 : file1
+# $2 : file2
+
+for line in `cat $1`
+do
+	b_name=`basename $line`
+	sed -i "/$b_name/d" $2
+done
+```
+
+
+
+- until
+
 ```
   until 条件
   do
@@ -134,7 +154,9 @@ if [ 1 -ne 0 ]; then echo "not equal"; fi
   done
 ```
   当条件为真时循环结束，注意测试发生在**循环末尾**。
-  3. while
+
+- while
+
 ```
   while 条件
   do
@@ -142,10 +164,10 @@ if [ 1 -ne 0 ]; then echo "not equal"; fi
     ...
   done
 ```
-  4. break  
+- break  
 
     跳出循环或case语句
-  5. continue  
+- continue  
 
     跳过当前循环
 

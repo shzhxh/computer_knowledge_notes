@@ -1,5 +1,7 @@
 [Python Standard Library](https://docs.python.org/3/library/)
 
+> Python的中文化已经做的很好了，本文已无必要再看了。请直接看[Python标准库](https://docs.python.org/zh-cn/3/library/index.html)
+
 #### 1. 简介
 
 #### 4. 内建类型
