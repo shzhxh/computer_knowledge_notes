@@ -40,3 +40,18 @@ sudo apt install xxxx:i386			# 安装软件包并指定其架构为i386
 # 原因分析：设置了代理
 ```
 
+#### sources.list文件
+
+- 以`#`开头：注释
+
+- 以deb开头：二进制仓库
+
+  ```
+  deb URI section1 section2
+  # URI:库所在的地址。dists目录包含了所有软件包的索引，其下的子目录名即为sections1,其中security代表重要的安全更新、updates代表建议的更新、proposed代表预释放的更新、backports代表不支持的更新。打开任意一个子目录，其下的子目录名即为section2，其中main代表完全的自由软件，restricted代表不完全的自由软件，universe代表ubuntu官方不支持，仅靠社区支持的软件，multiverse代表非自由软件，完全不提供支持和补丁。
+  ```
+
+  
+
+- 以deb-src开头：源码仓库
+

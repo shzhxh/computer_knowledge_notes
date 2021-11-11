@@ -54,6 +54,9 @@ sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`
 
 # 
 sed -n 's/ magicmagicmagic/ /p' file1 > file2
+
+# 把file1里278-280行的内容重定向到file2里
+sed -n '278,280p' file1 > file2
   ```
 
 #### 参考文档

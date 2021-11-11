@@ -54,3 +54,14 @@ git submodule update	# 更新子模块
 
 ```
 
+#### 错误解决
+
+1. could not get a repository handle for submodule 'rboot'
+
+   ```
+   # git submodule update出错此错误提示，删除了rboot目录下的.git文件即可，原因未知。
+   # 曾尝试过git submodule deinit，无效
+   # 曾尝试过rm -rf .git/modules/rboot，无效
+   ```
+
+   

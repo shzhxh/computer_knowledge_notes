@@ -33,7 +33,7 @@
 -j [jobs], --jobs[=jobs]	# 指定并行的任务数量为[jobs]。如不写[jobs]，则尽最大可能并行。
 --jobserver-fds [R,W]
 -k, --keep-going
--l [load], --load-average[=load]
+-l [load], --load-average[=load]	# 如果有其它任务在运行，且平均负载至少为[load](一个浮点数)，则不启动新任务(命令)。如不带参数，则删除以前的负载限制。
 -L, --check-symlink-times
 -n, --just-print, --dry-run, --recon	# 只打印命令而不执行它们
 -o file

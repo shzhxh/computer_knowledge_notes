@@ -8,6 +8,12 @@ gdb [选项] prog core		# 调试程序prog并指定core文件(core文件是异�
 
 #### 选项
 
+```
+-ex <cmd>	# 执行GDB命令<cmd>
+```
+
+
+
 #### 命令
 
 ##### 别名类

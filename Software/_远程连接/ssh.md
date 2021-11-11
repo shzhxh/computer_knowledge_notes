@@ -96,3 +96,7 @@ cd .ssh && touch config	# 创建config文件
    > 如允许root登陆，则“PermitRootLogin yes”不能注释
    >
    > 如允许使用密钥登陆，则“PubkeyAuthentication yes”和“AuthorizedKeysFile .ssh/authorized_keys”不能注释
+
+2. 提示对方机器"Connection refused"
+
+   > 经查是目标机器没有运行sshd，故sudo apt install openssh-server

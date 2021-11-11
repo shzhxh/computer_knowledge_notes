@@ -11,13 +11,19 @@ tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
 #### 操作
 
 ```
-# A:append
-# c:create
-# d:differences
-# r:append
-# t:list
-# u:update
-# x:extract
+tar {-A|--catenate|--concatenate} [options] <archive> <archive>: 把归档文件添加到其它的归档文件
+tar {-c|--create} [-f <achive>] [options] [file...] : 创建归档文件
+tar {-d|--diff|--compare} [-f <achive>] [options] [file...]  : 查找归档文件与文件系统的差别
+tar --delete [-file <achive>] [options] [member...]: 从归档文件中删除。
+tar {-r|--append} [-f <achive>] [options] [file...] : 向归档文件中添加文件
+tar {-t|--list} [-f <achive>] [options] [member...] : 列出归档文件的内容
+--test-label：测试归档文件的卷标
+tar {-u|--update} [-f <achive>] [options] [file...] : 更新归档文件的内容(即用新文件替代归档文件里的内容)
+tar {-x|--extract|--get} [-f <achive>] [options] [member...]: 从归档文件中释放文件
+--show-defaults ： 打印默认值
+-?, --help : 打印帮助信息
+--usage ：打印可用的选项
+--version : 打印版本信息
 ```
 
 #### 选项

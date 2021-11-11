@@ -12,7 +12,15 @@ sudo [option] <command> # 以其它用户的权限来执行命令
 #### 添加sudo权限
 
 ```
+# 方法一
 visudo	# 或vi /etc/sudoers
-# 模仿root ALL=(ALL) ALL，添加新行user_name ALL=(ALL) ALL
+	# 模仿root ALL=(ALL) ALL，添加新行user_name ALL=(ALL) ALL
+	
+# 方法二
+usermod -aG sudo <user_name>
+	# 在/etc/sudoers可以看到，admin和sudo两个组都有sudo权限，故可把用户加到这些个组以获得sudo权限
+	
+# 方法三
+vi /etc/group	# 直接修改/etc/group命令把用户加到admin或sudo组
 ```
 
