@@ -4,10 +4,22 @@
   http-equiv：把content属性关联到http头部  
   name：把content属性关联到一个名称  
   scheme：定义翻译content属性值的格式
+  
+* img标签：只设置宽度，不设置高度，可等比例缩放图片。
+
+  ```html
+  <!-- 把图片img.png缩放为原来的30% -->
+  <img src="img.png" width="30%">
+  ```
+
+  
+
 * link标签：连接一个样式表(只能出现在head内部)  
   href：规定被链接文档的位置  
   rel：规定前文档与被链接文档的关系
-* div标签：把文档分区或分节  
-* ul标签：定义无序列表
-* li标签：定义列表项目
   
+* div标签：把文档分区或分节  
+
+* ul标签：定义无序列表
+
+* li标签：定义列表项目

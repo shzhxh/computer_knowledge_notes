@@ -1,5 +1,7 @@
 [The Python Language Reference](https://docs.python.org/3/reference/index.html)
 
+> 请直接看中文版[python参考手册](https://docs.python.org/zh-cn/3/tutorial/index.html)
+
 ### 1 简介
 
 ### 2 词法分析

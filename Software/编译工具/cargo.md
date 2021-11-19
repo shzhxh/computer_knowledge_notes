@@ -32,9 +32,12 @@ build [options]	# 编译一个包。
 	## 输出选项
 	## 显示选项
 	## Manifest选项
+	--manifest-path <path>	# 指定Cargo.toml的路径。默认是从当前路径或任意父路径中查找。
 	## 通用选项
+	+<toolchain>	# 指定工具链的名称。（如+stable，+nightly）。前提要求：cargo是通过rustup安装的，此参数为cargo的第一个参数。
 	-Z <flag>	# Unstable flags to Cargo。(仅用于nightly)
 	## 其它选项
+	-j, --jobs <N>
 doc		# 构建一个包的文档。生成的是HTML格式。
 	# 使用"///"来注解格式化文档，以支持Markdown
 	# 使用"//!"用于描述整个crate。

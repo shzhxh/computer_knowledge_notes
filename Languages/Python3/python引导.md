@@ -1,4 +1,4 @@
-[The Python Tutorial](https://docs.python.org/3.4/tutorial/index.html)
+> 中文版已经做好，本文已无存在的必要，请直接看[Python教程](https://docs.python.org/zh-cn/3/tutorial/index.html)
 
 #### 1. Whetting Your Appetite
 

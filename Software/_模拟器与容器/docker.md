@@ -181,7 +181,8 @@ docker attach [options] CONTAINER	# 连接到运行中的容器
 
 ```
 build [options] <Experimental> <PATH|URL|->	# 从Dockerfile创建一个镜像。
-
+	# 读取<PATH>下的Dockerfile(包括子目录)，并把<PATH>下的所有内容发给Docker服务端，由服务端来创建镜像。也可以使用.dockerignore文件来忽略掉路径下的目录和文件。
+	
 # 选项
 -t, --tag[=[]]	# 如果执行成功，则将仓库名应用于得到的镜像。
 ```

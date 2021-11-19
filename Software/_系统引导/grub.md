@@ -9,15 +9,28 @@ sudo update-grub
 #### 简单配置
 
 1. `grub-mkconfig`可以用来生成grub.cfg文件。但是功能有限。
+
 2. /etc/default/grub文件控制`grub-mkconfig`命令的操作。
    - **GRUB_DEFAULT**：定义菜单入口，从0开始。
+   
+     > 注：主菜单的编号是从0开始，如果还有子菜单的情况怎么办呢？此时应该用>分隔主菜单和子菜单。比如：第1个主菜单下的第4个子菜单则表示为"1>4"。
+     >
+     > 注：也可以通过名字来指定默认入口。比如：GRUB_DEFAULT="1>Ubuntu, with Linux 3.13.0-24-generic"这样。
+   
    - **GRUB_HIDDEN_TIMEOUT**：定义在显示菜单之前等待的时间。
+   
    - **GRUB_TIMEOUT**：菜单等待时间，-1则会一直等待。
+   
    - **GRUB_DISTRIBUTOR**：由grub的分发者定义的标识名，用以输出更多的菜单条目信息。
+   
    - **GRUB_TERMINAL**：为GRUB_TERMINAL_INPUT和GRUB_TERMINAL_OUTPUT赋相同的值。指定终端输入和输出的设备。其值取决于特定平台，但一般会包含`console`本地终端、`serial`串口终端，默认为本地终端。
+   
    - **GRUB_CMDLINE_LINUX**：添加到菜单入口的LINUX内核命令行参数
+   
    - **GRUB_CMDLINE_LINUX_DEFAULT**：除非将GRUB_DISABLE_RECOVERY设置为`true`，否则每个内核都会生成两个入口：默认入口和覆盖模式。此命令的作用就是在GRUB_CMDLINE_LINUX后，只在默认模式下添加命令行参数。
+   
 3. 编辑/etc/grub.d文件夹中的文件或创建/boot/grub/custom.cfg，可以进行更灵活的配置。
+
 4. 直接修改grub.cfg文件是不建议的。
 
 #### 命令

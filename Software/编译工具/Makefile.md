@@ -52,9 +52,9 @@ $(patsubst PATTERN,REPLACEMENT,TEXT)
 $(sort <list>)
 	# 给字符串<list>中的单词按升序排序，返回排序后的字符串。
 $(strip)
-$(subst)
+$(subst <from>,<to>,<text>)	# 把字符串<text>中的<from>替换成<to>。
 $(wildcard <PATTERN...>)	 
-	# 在变量定义和函数引用时，让通配符代表的字符在变量中展开
+	# 在变量定义和函数引用时，通配符会失效。此时要让通配符有效，就要使用wildcard。
 $(word <n>,<text>)	# 取字符串<text>中第<n>个单词
 $(wordlist <ss>,<e>,<text>)		
 	# <ss>和<e>是单个数字，列出<text>里从序号<ss>到序号<e>之间的单词
