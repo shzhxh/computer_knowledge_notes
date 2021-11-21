@@ -63,6 +63,27 @@ trust       # Manage trust on Docker images
 volume      # Manage volumes
 ```
 
+##### buildx
+
+```
+docker buildx [options] <cmd>	# 使用buildkit来构建
+# 选项：
+  --builder <string>	# 用来指定builder
+# 命令：
+  bake
+  build [options] <path | url | ->		# 开始一个构建
+    -t, --tag <stringArry>	# stringArry的格式是'name:tag'，其中tag是可选的
+  create
+  du
+  inspect
+  ls
+  prune
+  rm
+  stop
+  use
+  version
+```
+
 
 
 ##### config

@@ -219,14 +219,15 @@ $_		# 上条命令的最后一个参数
 ##### 在变量中切割字符串
 
 ```
+# 假设var=http://www.abc.com/test.htm
 ${parameter:-word}
 ${parameter:=word}
 ${parameter:?word}
 ${parameter:+word}
-${#parameter}		# 获取字符串的长度
+${#parameter}		# 获取字符串的长度，例如${#var}的结果为27
 ${parameter%word} 	# 最小限度从后面截取word
 ${parameter%%word} 	# 最大限度从后面截取word
-${parameter#word} 	# 最小限度从前面截取word
-${parameter##word} 	# 最大限度从前面截取word
+${parameter#word} 	# 最小限度从前面截取word，例如${var#*/}的结果为/www.abc.com/test.htm
+${parameter##word} 	# 最大限度从前面截取word，例如${var##*/}的结果为test.htm
 ```
 

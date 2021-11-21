@@ -1,6 +1,10 @@
 #### 语法
 
-`find [options] [starting-point...] [expression]`
+````
+find [options] [starting-point...] [expression]
+	# 查找文件
+	# start-point : 查找的起点。如不指定则为当前目录。
+````
 
 #### 选项
 
@@ -20,12 +24,30 @@
 
 作用于命令行中它后面的Tests和Actions操作，总是返回true。
 
+```
+-daystart
+-follow
+-regextype <type>
+-warn
+-nowarn
+```
+
 ##### Global options
 
 作用于命令行中所有位置的Tests和Actions操作，总是返回true。
 
 ```bash
+-d	# 等价于-depth，为了适应各种BSD Unix和MacOs X。
+-depth	# 
+-help
+-ignore_readdir_race
 -maxdepth <levels>	# 指定要查找的文件夹的层数
+-mindepth <levels>
+-mount
+-noignore_readdir_race
+-noleaf
+-version
+-xdev
 ```
 
 
@@ -36,6 +58,8 @@
 
 ```
 -empty	# 文件或目录为空
+-name <pattern>	# 查找满足<pattern>的文件
+-path <pattern>	# 查找满足<pattern>的目录
 -size <n>	# 指定文件大小。可以带后缀表示单位，可以带前缀表示范围。
 	# 可用的后缀：b,512字节的块；c，字节；w，双字节；k，1024字节；M,1024k；G,1024M。
 	# 可用的前缀：+,大于；-,小于。
@@ -45,31 +69,45 @@
 
 ##### Actions
 
-执行一些动作，依据动作是否执行成功返回ture或false。
+执行一些动作，依据动作是否执行成功返回true或false。
 
 ```
 -delete		# 删除文件。成功返回ture，失败则返回一个非零的值。由于使用-delete就意味着也使用了-depth，所以-delete和-prune是不能一块使用的。注意：此选项应放在最后，因为它是根据它前面的选项做删除的。
 -exec <cmd>	# 
 -print	# 打印完整文件名，后跟\n字符。
 -print0	# 打印完整文件名，后跟NULL字符。
+-printf <fmt>
+-prune	# 忽略匹配的目录。但如使用了-depth选项，则此选项无效。
+-quit	# 
 ```
 
 
 
 ##### Operators
 
-将表达式中的其它部分连接起来。
+将表达式中的其它部分连接起来。如下操作符的优先级是递减的：
 
 ```
-! expr		# 对expr的值取反
--not expr	# 等价于"! expr" 
+(expr)		# 强制使expr有最高优先级
+! expr		# 非运算。对expr的值取反
+-not expr	# 等价于"! expr"，但不是POSIX标准。 
+expr1 expr2	# 且运算。
+expr1 -a expr2		# 等价于expr1 expr2。
+expr1 -and expr2	# 等价于expr1 expr2，但不是POSIX标准。
+expr1 -o expr2	# 或运算。
+expr1 -or expr2	# 等价于expr1 -o expr2，但不是POSIX标准。
+expr1 , expr2	# expr1和expr2的值都会计算，但只取expr2的值。
 ```
 
 
 
-#### 不常用文件名
+#### 异常文件名
 
-#### 标准一致性
+文件名中除了`\0`和`/`之外，可以包含任意字符。那么包含了异常字符的文件名可能会产生潜在的问题，比如改变一些终端里功能键的设置。find命令里actions表达式对异常字符的处理是多样的。
+
+#### 标准的一致性
+
+为了最适合POSIX标准，应设置环境变量`POSIXLY_CORRECT`。
 
 #### 环境变量
 
