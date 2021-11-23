@@ -32,7 +32,7 @@ long long strtoll (const char *__restrict, char **__restrict, int);
 unsigned long long strtoull (const char *__restrict, char **__restrict, int);
 ```
 
-#### env
+#### 环境变量
 
 ```c
 /* 清除环境 */
@@ -47,7 +47,7 @@ int setenv(const char *name, const char *value, int overwrite);
 int unsetenv(const char *name);
 ```
 
-#### random
+#### 随机数
 
 ```c
 /* 生成一个伪随机数 */
@@ -61,5 +61,15 @@ char *initstate(unsigned int seed, char *state, size_t n);
 
 /* 改变random()函数所使用的状态数组state */
 char *setstate(char *state);
+```
+
+#### 分配内存
+
+```c
+void *malloc(size_t size);	// 分配大小为size字节的内存，返回其指针。注：分配到的内存未初始化。
+void free(void *ptr);	// 释放ptr指向的内存。注：prt必须是malloc()，calloc()，或realloc()的返回值。
+void *calloc(size_t nmemb, size_t size);	// 为数组分配内存，nmemb是数组中元素数，size是每个元素的大小。注：分配到的内存会初始化为0.
+void *realloc(void *ptr, size_t size);
+void *reallocarray(void *ptr, size_t nmemb, size_t size);
 ```
 
