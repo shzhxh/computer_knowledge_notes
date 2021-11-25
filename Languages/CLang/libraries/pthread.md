@@ -4,7 +4,10 @@
 /* 创建一个新的线程 */
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg);
 
-/* 加入一个终止的线程 */
+/* 加入一个终止的线程。即等待由thread定义的线程结束。
+ * 如果retval非NULL，则目标线程把退出状态复制给retval。
+ * 返回值：０成功，失败则返回错误号。
+ */
 int pthread_join(pthread_t thread, void **retval);
 ```
 
