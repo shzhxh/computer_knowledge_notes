@@ -15,5 +15,11 @@ ssize_t read(int fd, void *buf, size_t count);
  * 返回值：成功则返回写入的字节数。错误则返回-1。
  */
 ssize_t write(int fd, const void *buf, size_t count);
+
+/*
+ * 在运行的时候修改配置信息
+ * name: _SC_NPROCESSORS_ONLN当前在线的处理器数量
+ */
+long sysconf(int name);
 ```
 

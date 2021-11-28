@@ -1,3 +1,9 @@
+#### 概述
+
+设置文件的状态
+
+#### 相关函数
+
 ```c
 /* 把文件的时间戳提高到纳秒的精度 */
 int utimensat(int dirfd, const char *pathname, const struct timespec times[2], int flags);

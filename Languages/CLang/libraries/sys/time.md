@@ -1,3 +1,9 @@
+#### 概述
+
+设置时间
+
+#### 相关函数
+
 ```c
 /* 设置时间 */
 int gettimeofday(struct timeval *tv, struct timezone *tz);

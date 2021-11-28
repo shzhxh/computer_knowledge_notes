@@ -1,6 +1,6 @@
 #### 简介
 
-string.h定义了两组函数，一组以str开头，一组以mem开头
+string.h定义了两组函数，一组以str开头，一组以mem开头。用于管理字符串。
 
 #### 定位字符串中的字符
 
@@ -27,11 +27,15 @@ char *strncat(char *dest, const char *src, size_t n);
 
 #### 复制字符串
 
-```
-char *strdup(const char *s);	//复制字符串s，并返回其指针。
-char *strndup();
-char *strdupa();
-char *strndupa();
+```c
+/* 复制字符串s，并返回其指针。新字符串的内存是通过malloc()获得的。*/
+char *strdup(const char *s);
+/* 复制字符串s，并返回其指针，但最多只复制n个字节。新字符串的内存是通过malloc()获得的。*/
+char *strndup(const char *s, size_t n);
+/* 复制字符串s，并返回其指针。新字符串的内存是通过alloca()获得的。*/
+char *strdupa(const char *s);
+/* 复制字符串s，并返回其指针，但最多只复制n个字节。新字符串的内存是通过alloca()获得的。*/
+char *strndupa(const char *s, size_t n);
 ```
 
 #### 复制内存区域
@@ -42,17 +46,17 @@ void *memcpy(void *dest, cosnt void *src, size_t n);
 /* 在内存s上填充n个字节，字节内容为c */
 void *memset(void *s, int c, size_t n);
 bcopy
-
+/*  */
 memccpy
-
+/*  */
 memmove
-
+/*  */
 mempcpy
-
-strcpy
-
-strncpy
-
+/* 复制字符串 */
+char *strcpy(char *dest, const char *src);
+/* 复制指定长度字符串 */
+char *strncpy(char *dest, const char *src, size_t n);
+/*  */
 wmemcpy
 ```
 
@@ -67,5 +71,26 @@ size_t strcspn(const char *s, const char *reject);
 void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen);
 /* 查找字符串needle在字符串haystack中首次出现的位置 */
 char *strstr(const char *haystack, const char *needle);
+/*
+ * 作用：分割字符串stringp，分割符来自于delim
+ * stringp：被分割的字符串。如为NULL表示分割完成，不作任何事而直接返回NULL。
+ * delim：由分割符组成的字符串。
+ */
+char *strsep(char **stringp, const char *delim);
+/* 返回字符串的长度 */
+extern size_t strlen (const char *__s)
+     __THROW __attribute_pure__ __nonnull ((1));
+/* 比较两个字符串  */
+extern int strcmp (const char *__s1, const char *__s2)
+     __THROW __attribute_pure__ __nonnull ((1, 2));
+/* 比较两个字符串里的n个字符  */
+extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+     __THROW __attribute_pure__ __nonnull ((1, 2));
+/* 依据delim中的字符分割字符串str */
+char *strtok(char *str, const char *delim);
+
+char *strtok_r(char *str, const char *delim, char **saveptr);
+/* 以目标字符串的所有字符作为集合，在当前字符串查找该集合的任一元素 */
+char *strpbrk(const char *s, const char *accept);
 ```
 

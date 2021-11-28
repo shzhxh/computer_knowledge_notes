@@ -1,3 +1,5 @@
+#### 概述
+
 实用函数
 
 #### 数组排序与字符串转换
@@ -30,6 +32,15 @@ long strtol (const char *__restrict, char **__restrict, int);
 unsigned long strtoul (const char *__restrict, char **__restrict, int);
 long long strtoll (const char *__restrict, char **__restrict, int);
 unsigned long long strtoull (const char *__restrict, char **__restrict, int);
+
+/* 字符串转换到 int 整型 */
+int atoi(const char *nptr);
+/* 字符串转换到 long 整型 */
+long atol(const char *nptr);
+/* 字符串转换到 double 符点数 */
+double atof(const char *nptr);
+long long atoll(const char *nptr);
+
 ```
 
 #### 环境变量

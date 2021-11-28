@@ -1,6 +1,6 @@
 ### 简介
 
-关于可变参数的处理，详见`stdarg.h`
+关于可变参数的处理，详见`stdarg.h`（注：此文件不属于glibc标准库，但属于musl-dev库）。
 
 通过`man stdarg`获取帮助
 

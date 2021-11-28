@@ -1,13 +1,18 @@
-getopt.h是用来获取函数参数的。
+#### 概述
+
+获取函数参数。
 
 #### 变量
 
 ```c
+/* 定义在bits/getopt_core.h */
 extern char *optarg;	// 用于getopt和调用者之间通信，当getopt找到带有参数的选项时，参数值放在这里。
 extern int optind, opterr, optopt;
   // optind：argv里下一个待处理参数的索引。用于对getopt的重复调用。
   // opterr：调用者在这里存储0以禁止getopt因未识别的选项而打印错误消息。
   // optopt：设置未识别的选项字符。
+
+/* 定义在bits/getopt_ext.h */
 struct option{
   const char *name;	// 长选项
   int has_arg;		// 是否需要参数，0不需要，1需要，2均可
@@ -19,6 +24,7 @@ struct option{
 #### getopt
 
 ```c
+/* 定义在bits/getopt_core.h */
 // 作用：解析命令行参数，只支持短选项。
 // argc：参数数量，来自于main函数。
 // argv：参数数组，来自于main函数。以'-'开头的被认为是一个参数。
@@ -30,6 +36,7 @@ int getopt(int argc, char * const argv[], const char *optstring);
 #### getopt_long
 
 ```c
+/* 定义在bits/getopt_ext.h */
 // 作用：解析命令行参数，支持--开头的长选项和-开头的短选项。
 // argc, argv：直接从main函数传递而来
 // shortopts：短选项字符串。需要传递参数时要在后面加冒号。
@@ -44,6 +51,7 @@ extern int getopt_long (int argc, char *const argv[],
 #### getopt_long_only
 
 ```c
+/* 定义在bits/getopt_ext.h */
 // 作用：与getopt_long基本相同，区别在于长选项字串是用"-"开始的，而不是"--"。
 // argc, argv：直接从main函数传递而来
 // shortopts：短选项字符串。需要传递参数时要在后面加冒号。

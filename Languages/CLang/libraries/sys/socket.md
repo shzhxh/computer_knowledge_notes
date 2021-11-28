@@ -1,3 +1,9 @@
+#### 概述
+
+网络插座
+
+#### 相关函数
+
 ```c
 // 作用：创建连接的端点
 // 返回值：一个指向网络插座的文件描述符
@@ -21,17 +27,17 @@ int socket(int domain, int type, int protocol);
 int socketpair(int domain, int type, int protocol, int sv[2]);
 ```
 
-结构体
+#### 相关结构体
 
 ```c
-/* 网络插座的地址  */
+/* 网络插座的地址。定义在bits/socket.h  */
 struct sockaddr  {
     __SOCKADDR_COMMON (sa_);    /* 通用数据: 地址族和长度  */
     // 注，上一行展开后是：unsigned short int sa_family;
     char sa_data[14];           /* 地址数据，包含了端口号和地址  */
   };
 
-/* Internet网络插座的地址  */
+/* Internet网络插座的地址。定义在netinet/in.h  */
 struct sockaddr_in  {
     __SOCKADDR_COMMON (sin_);
     // 注，上一行展开后是：unsigned short int sin_family;
@@ -46,8 +52,9 @@ struct sockaddr_in  {
                            - __SOCKADDR_COMMON_SIZE
                            - sizeof (in_port_t)
                            - sizeof (struct in_addr)];
-  };
-// 关于struct in_addr的定义
+};
+
+// Internet address。定义在netinet/in.h
 typedef uint32_t in_addr_t;
 struct in_addr  {
     in_addr_t s_addr;
