@@ -24,5 +24,7 @@ struct tm *localtime (const time_t *);
 char *asctime (const struct tm *);
 char *ctime (const time_t *);
 int timespec_get(struct timespec *, int);
+/* 高精度的睡眠 */
+int nanosleep(const struct timespec *req, struct timespec *rem);
 ```
 

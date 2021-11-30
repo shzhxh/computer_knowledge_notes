@@ -17,8 +17,9 @@ ssize_t read(int fd, void *buf, size_t count);
 ssize_t write(int fd, const void *buf, size_t count);
 
 /*
- * 在运行的时候修改配置信息
+ * 在运行的时候获取配置信息
  * name: _SC_NPROCESSORS_ONLN当前在线的处理器数量
+ * 		_SC_NPROCESSORS_CONF已配置的处理器数量
  */
 long sysconf(int name);
 ```

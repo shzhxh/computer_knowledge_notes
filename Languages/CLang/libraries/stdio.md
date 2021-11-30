@@ -107,9 +107,13 @@ int fprintf(FILE *stream, const char *format, ...)
 #### 格式化输入
 
 ```c
-int fscanf(FILE *stream, const char *format, ...);	// 依据格式串format从*stream中读取输入，把值赋给后续各个参数
-int scanf(const char *format, ...);	// 等价于fscanf(stdin, *format, ...)
-/* 从字符串读取格式化输入 */
+// 依据格式串format从*stream中读取输入，把值赋给后续各个参数
+int fscanf(FILE *stream, const char *format, ...);	
+// 等价于fscanf(stdin, *format, ...)
+int scanf(const char *format, ...);	
+/* 从字符串读取格式化输入
+ * 返回值：成功则返回写入的条目的数量，失败则返回-1。
+ */
 int sscanf(const char *str, const char *format, ...);
 ```
 
