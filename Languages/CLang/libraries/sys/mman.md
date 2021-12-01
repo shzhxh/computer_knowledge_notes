@@ -43,3 +43,26 @@ int munlock(const void *addr, size_t len);
 int munlockall(void);
 ```
 
+#### POSIX共享内存对象
+
+```c
+/* 创建或打开一个POSIX共享内存对象
+ * name：内存对象的名字
+ * oflag：必须包含O_RDONLY和O_RDWR其中之一，其余可选择包含：
+ *		O_CREAT,如不存在则创建
+ *		O_EXCL, 如指定了O_CREAT且存在，则返回错误。
+ *		O_TRUNC，如存在则截断为0字节
+ * mode：详见sys/stat.h
+ *		S_IRUSER, 所有者可读
+ *		S_IWUSER, 所有者可写
+ *		S_IXUSER, 所有者可执行
+ * 返回值：成功则返回一个非负的文件描述符；失败返回-1。
+ */
+int shm_open(const char *name, int oflag, mode_t mode);
+
+/* 删除一个共享内存对象
+ * 返回值：0成功，-1失败。
+ */
+int shm_unlink(const char *name);
+```
+

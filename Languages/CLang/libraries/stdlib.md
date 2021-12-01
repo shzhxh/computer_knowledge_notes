@@ -50,8 +50,11 @@ long long atoll(const char *nptr);
 int clearenv(void);
 /* 改变或添加环境变量 */
 int putenv(char *string);
-/* 获取环境变量 */
+/* 获取环境变量的值
+ * 返回值：环境变量name所对应的值的指针。如没有匹配的则返回NULL。
+ */
 char *getenv(const char *name);
+char *secure_getenv(const char *name);
 /* 改变或添加环境变量 */
 int setenv(const char *name, const char *value, int overwrite);
 /* 删除环境变量 */

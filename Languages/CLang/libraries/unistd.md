@@ -1,3 +1,9 @@
+#### 概述
+
+unistd是unix std的意思，由POSIX标准定义。包含了大量的对系统调用的封装。
+
+#### 相关函数
+
 ```c
 /*
  * 创建单路的管道。
@@ -22,5 +28,19 @@ ssize_t write(int fd, const void *buf, size_t count);
  * 		_SC_NPROCESSORS_CONF已配置的处理器数量
  */
 long sysconf(int name);
+```
+
+##### 截断文件
+
+```c
+/* 将文件名为path的文件截断到长度为length字节，截断的原则是多退少补
+ * 返回值：0成功，-1失败。
+ */
+int truncate(const char *path, off_t length);
+
+/* 将文件描述符为fd的文件截断到长度为length字节，截断的原则是多退少补
+ * 返回值：0成功，-1失败。
+ */
+int ftruncate(int fd, off_t length);
 ```
 

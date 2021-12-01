@@ -2,6 +2,20 @@
 
 日期与时间处理
 
+#### 相关变量类型
+
+```c
+/* timespec定义了时间的值，精度为ns */
+struct timespec {
+	time_t tv_sec;        /* seconds */
+	long   tv_nsec;       /* ns,必须在0~999,999,999之间 */
+};
+```
+
+
+
+#### 相关函数
+
 ```c
 int clock_getres(clockid_t clk_id, struct timespec *res);
 

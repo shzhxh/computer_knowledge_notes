@@ -48,7 +48,7 @@ int sigismember(const sigset_t *set, int signum);
 
 ```c
 /*
- * 作用：取决于参数how。
+ * 作用：取决于参数how。只能用于单进程单线程。
  * how：SIG_BLOCK把参数set中的信号添加到信号屏蔽字中，
  *      SIG_SETMASK把信号屏蔽字设置为参数set中的信号，
  *		SIG_UNMASK从信号屏蔽字中删除参数set中的信号
