@@ -38,7 +38,10 @@ struct tm *localtime (const time_t *);
 char *asctime (const struct tm *);
 char *ctime (const time_t *);
 int timespec_get(struct timespec *, int);
-/* 高精度的睡眠 */
+/* 高精度的睡眠
+ * req：表示要求睡眠的时间
+ * rem：有可能线程没有睡到req要求的时间。如rem非NULL，则用来记录剩余应该睡眠的时间。从而可以继续调用nanosleep从而达到指定的睡眠。
+ */
 int nanosleep(const struct timespec *req, struct timespec *rem);
 ```
 

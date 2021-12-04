@@ -7,3 +7,5 @@
 - 配置C语言的库
 
   Ctrl+Shift+P调出配置窗口，输入edit，选择“C/CPP:Edit Configurations”，在打开的json文件中“includePath”下添加库文件的地址
+
+- 跳转到括号的另一边：搜索"go to bracket"可得。在Ubuntu下为`Ctrl+Shift+\`

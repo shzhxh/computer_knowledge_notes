@@ -59,6 +59,10 @@ union semun {
  * semid：要控制的信号量所在的信号量集合。
  * semnum：要控制的信号量在信号量集合中的序号。(从0开始编号。)
  * cmd：对信号量的控制操作。
+ *		IPC_RMID - 0, 删除标识符
+ *		IPC_SET - 1, 设置ipc_perm选项
+ *		IPC_STAT - 2, 获取ipc_perm选项
+ *		IPC_INFO - 3, See ipcs
  * 		GETPID - 11, get sempid 
  * 		GETVAL - 12, get semval 
  * 		GETALL - 13, get all semval's 

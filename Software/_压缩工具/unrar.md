@@ -6,10 +6,10 @@ unrar <cmd> [switchs] <archive> [files] [paths]	# 从rar文件里解压
 
 ```
 e	# 将文件解压到当前目录
-l
-p
-t
-v
+l	# 列出压缩文件的内容
+p	# 把文件打印到stdout
+t	# 测试压缩文件
+v	# 详细列出压缩文件
 x	# 带路径解压文件
 ```
 
