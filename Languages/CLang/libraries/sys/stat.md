@@ -39,7 +39,9 @@ struct stat {
 };
 
 
-/* 获取文件名为pathname的文件的状态。如pathname是符号链接，则获取它指向的文件的信息。 */
+/* 获取文件名为pathname的文件的状态。如pathname是符号链接，则获取它指向的文件的信息。
+ * 返回值：0成功；-1失败。
+ */
 int stat(const char *pathname, struct stat *statbuf);
 /* 获取文件描述符为fd的文件的状态。 */
 int fstat(int fd, struct stat *statbuf);

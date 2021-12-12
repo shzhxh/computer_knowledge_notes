@@ -52,9 +52,13 @@ memccpy
 memmove
 /*  */
 mempcpy
-/* 复制字符串 */
+/* 复制字符串
+ * 返回值：到dest的指针。
+ */
 char *strcpy(char *dest, const char *src);
-/* 复制指定长度字符串 */
+/* 复制指定长度字符串
+ * 返回值：到dest的指针。
+ */
 char *strncpy(char *dest, const char *src, size_t n);
 /*  */
 wmemcpy
