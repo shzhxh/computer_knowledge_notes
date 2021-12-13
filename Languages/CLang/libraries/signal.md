@@ -18,6 +18,8 @@
 
 信号未决状态字(mask of pending signals)：在PCB的结构体中，每位对应一个信号。1未决，0不抵达。
 
+
+
 #### 信号
 
 ```c
@@ -26,6 +28,37 @@
 #define	SIGKILL		9	// 立即终止进程(此信号不能被捕获或忽略)
 #define	SIGTERM		15	// 要求进程终止
 ```
+
+#### 相关数据结构
+
+```c
+union sigval {          /* Data passed with notification */
+	int     sival_int;         /* Integer value */
+	void   *sival_ptr;         /* Pointer value */
+};
+
+/* 很多API使用sigevent结构体来描述向进程通知一个事件的方式 */
+struct sigevent {
+	int          sigev_notify; /* 通知的实现方式 */
+    		// SIGEV_NONE - 空的通知，即事件到达时不做任何事情
+    		// SIGEV_SIGNAL - 通过发送sigev_signo里定义的信号来通知进程
+    		// SIGEV_THREAD - 通过调用sigev_notify_function来通知进程
+    		// SIGEV_THREAD_ID - 仅POSIX计时器使用，详见timer_create(2)
+	int          sigev_signo;  /* 信号的编号 */
+	union sigval sigev_value;  /* Data passed with notification */
+	void       (*sigev_notify_function) (union sigval);
+                            /* Function used for thread
+                               notification (SIGEV_THREAD) */
+	void        *sigev_notify_attributes;
+                            /* Attributes for notification thread
+                               (SIGEV_THREAD) */
+	pid_t        sigev_notify_thread_id;
+                            /* 线程id */
+};
+
+```
+
+
 
 #### 管理信号
 
@@ -69,6 +102,9 @@ int sigdelset(sigset_t *set, int signum);
  * 返回值：1包含，0不包含，-1信号无效
  */
 int sigismember(const sigset_t *set, int signum);
+
+/* 挂起调用线程直到信号集set里某个信号变成pending的状态 */
+int sigwait(const sigset_t *set, int *sig);
 ```
 
 #### 检测或改变信号屏蔽字

@@ -9,5 +9,6 @@ vim -t tag	// 打开定义tag的文件
 :tn	# 下一条tags
 Ctrl+]	# 跳到函数或变量的定义处
 Ctrl+T	# 返回跳转源
+Ctrl+o	# 反向跳转
 ```
 

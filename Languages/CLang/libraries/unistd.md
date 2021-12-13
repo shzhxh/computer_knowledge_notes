@@ -93,5 +93,8 @@ long sysconf(int name);
  * 返回值：成功，如是父进程则返回子进程的pid，如是子进程则返回0。失败，父进程返回-1，子进程不会创建。
  */
 pid_t fork(void);
+
+/* 返回当前线程在内核里的线程id */
+pid_t gettid(void);
 ```
 

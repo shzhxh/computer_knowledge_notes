@@ -1,6 +1,15 @@
 #### 概述
 
-线程管理
+线程管理。因遵循POSIX标准的线程接口，故称为pthread。
+
+#### 相关数据结构
+
+```c
+/* Conditional variable handling.  */
+#define PTHREAD_COND_INITIALIZER { { {0}, {0}, {0, 0}, {0, 0}, 0, 0, {0, 0} } }
+```
+
+
 
 #### 相关函数
 
@@ -17,6 +26,9 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_
  * 返回值：０成功，失败则返回错误号。
  */
 int pthread_join(pthread_t thread, void **retval);
+
+/* 获取调用线程的ID */
+pthread_t pthread_self(void);
 ```
 
 ##### 管理cancel
@@ -65,9 +77,11 @@ int pthread_mutexattr_settype(pthread_mutexattr_t *, int);
 ```c
 int pthread_cond_init(pthread_cond_t *__restrict, const pthread_condattr_t *__restrict);
 int pthread_cond_destroy(pthread_cond_t *);
+/* 用于阻塞线程 */
 int pthread_cond_wait(pthread_cond_t *__restrict, pthread_mutex_t *__restrict);
 int pthread_cond_timedwait(pthread_cond_t *__restrict, pthread_mutex_t *__restrict, const struct timespec *__restrict);
 int pthread_cond_broadcast(pthread_cond_t *);
+/* 给一个等待在条件变量cond的线程发信号，使其脱离阻塞状态 */
 int pthread_cond_signal(pthread_cond_t *);
 ```
 
@@ -108,4 +122,20 @@ void *pthread_getspecific(pthread_key_t);
 int pthread_setspecific(pthread_key_t, const void *);
 ```
 
-#### 
+##### 调度管理
+
+```c
+/* 设置线程对CPU的亲和性
+ * thread - 要设置的线程
+ * cpuset - 要被设置为CPU亲和性掩码的CPU集
+ * 返回值 - 0成功，失败则返回非0的错误码。
+ */
+int pthread_setaffinity_np(pthread_t thread, size_t cpusetsize,
+                                  const cpu_set_t *cpuset);
+
+/* 获取线程对CPU的亲和性 */
+int pthread_getaffinity_np(pthread_t thread, size_t cpusetsize,
+                                  cpu_set_t *cpuset);
+```
+
+****
