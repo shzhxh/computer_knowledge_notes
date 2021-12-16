@@ -84,6 +84,7 @@ int timer_gettime(timer_t timerid, struct itimerspec *value);
  */
 int timer_settime(timer_t timerid, int flags, const struct itimerspec *restrict new_value, struct itimerspec *restrict old_value);
 
+/* 获取POSIX per-process计时器的溢出计数 */
 int timer_getoverrun(timer_t timerid); 
 ```
 
@@ -105,10 +106,15 @@ struct tm *localtime (const time_t *);
 char *asctime (const struct tm *);
 char *ctime (const time_t *);
 int timespec_get(struct timespec *, int);
-/* 高精度的睡眠
+/* 让调用线程进行高精度(纳秒)的睡眠。(注：调用线程被唤醒可能有一定的延迟，因为要等待CPU空闲。)
  * req：表示要求睡眠的时间
  * rem：有可能线程没有睡到req要求的时间。如rem非NULL，则用来记录剩余应该睡眠的时间。从而可以继续调用nanosleep从而达到指定的睡眠。
+ * 返回值：如果睡足了要求的时间，返回0；否则，返回-1。如果是因为信号handler而中断了函数的调用，则errono设置为EINTR。
  */
 int nanosleep(const struct timespec *req, struct timespec *rem);
+/* 让调用线程进行高精度(纳秒)的睡眠。可以指定时钟。 */
+int clock_nanosleep(clockid_t clock_id, int flags,
+                           const struct timespec *request,
+                           struct timespec *remain);
 ```
 

@@ -242,6 +242,13 @@ dos或windows通过CRLF来换行，Linux和Mac通过LF来换行。可以通过`f
 :set fileformats=unix	# 使用linux的文件格式
 ```
 
+##### 高亮行或列
+
+```
+:set cursorcolumn
+:set cursorline
+```
+
 
 
 ##### 配色方案

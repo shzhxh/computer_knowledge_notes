@@ -46,12 +46,26 @@ int pthread_cancel(pthread_t);
 ##### 管理互斥锁
 
 ```c
-int pthread_mutex_init(pthread_mutex_t *__restrict, const pthread_mutexattr_t *__restrict);
-int pthread_mutex_lock(pthread_mutex_t *);
-int pthread_mutex_unlock(pthread_mutex_t *);
-int pthread_mutex_trylock(pthread_mutex_t *);
+/* 初始化一个互斥锁 */
+int pthread_mutex_init(pthread_mutex_t *restrict mutex,
+           const pthread_mutexattr_t *restrict attr);
+
+/* 给互斥区上锁。如已上锁则调用线程阻塞。 */
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+
+/* 释放互斥锁 */
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+
+/* 给互斥区上锁。如已上锁则主即返回不会阻塞调用线程。 */
+int pthread_mutex_trylock(pthread_mutex_t *mutex);
+
+/*  */
 int pthread_mutex_timedlock(pthread_mutex_t *__restrict, const struct timespec *__restrict);
-int pthread_mutex_destroy(pthread_mutex_t *);
+
+/* 销毁一个互斥锁 */
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+/*  */
 int pthread_mutex_consistent(pthread_mutex_t *);
 ```
 
