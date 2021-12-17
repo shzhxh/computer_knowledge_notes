@@ -9,42 +9,46 @@
 #### 文件操作
 
 ```c
-/*
-  ##### 解读mode
-- r：以读的方式打开文件，流指向文件开头。
-- r+：以读写的方式打开，流指向文件开头。
-- w：将文件截断为0长度，或创建可写的文件，流指向文件开头。
-- w+：以读写的方式打开，文件不存在则会创建，存在则截断。流指向文件开头。
-- a：以附加的方式打开，文件不存在则会创建，流指向文件末尾。
-- a+：以附加且可读的方式打开，文件不存在则会创建，但读是从文件开头，写是从文件末尾。
-- 还可以附加`b`表示是二进制，但这对POSIX兼容系统来说没有效果，而只是为了与C89兼容。
- */
+/* 解读mode */
+// r：以读的方式打开文件，流指向文件开头。
+// r+：以读写的方式打开，流指向文件开头。
+// w：将文件截断为0长度，或创建可写的文件，流指向文件开头。
+// w+：以读写的方式打开，文件不存在则会创建，存在则截断。流指向文件开头。
+// a：以附加的方式打开，文件不存在则会创建，流指向文件末尾。
+// a+：以附加且可读的方式打开，文件不存在则会创建，但读是从文件开头，写是从文件末尾。
+// 还可以附加`b`表示是二进制，但这对POSIX兼容系统来说没有效果，而只是为了与C89兼容。
+
+
 /* 打开文件名为path的文件，并关联到一个流。参数mode指打开的模式。 */
 FILE *fopen(const char *path, const char *mode);
 /* 把文件描述符关联到一个流 */
 FILE *fdopen(int fd, const char *mode);
 FILE *freopen(const char *path, const char *mode, FILE *stream);
-int fclose(FILE *stream);	// 关闭流
+/* 关闭流 */
+int fclose(FILE *stream);
+```
 
+#### 流的缓冲操作
 
-/*
-#### 流缓冲区操作
+```c
+/* 三种缓冲的方式 */
+// unbuffered：信息直接写到文件或终端上。stderr默认是无缓冲的。
+// block buffered：信息以块的形式保存和写入。通常所有的文件都是块缓冲的。
+// line buffered：信息以行的形式保存。当流指向终端(如stdout)则是行缓冲的。
 
-有三种缓冲的方式：
-
-- unbuffered：信息直接写到文件或终端上。stderr默认是无缓冲的。
-- block buffered：信息以块的形式保存和写入。通常所有的文件都是块缓冲的。
-- line buffered：信息以行的形式保存。当流指向终端(如stdout)则是行缓冲的。
- */
+/* 将缓冲区与流相关联。如buf为NULL，则无缓冲，否则全缓冲。缓冲区大小为BUFSIZ。 */
 void setbuf(FILE *stream, char *buf);
-
+/* 将缓冲区与流相关联。如buf为NULL，则无缓冲，否则全缓冲。
+ * size : 缓冲区的大小。
+ */
 void setbuffer(FILE *stream, char *buf, size_t size);
-
+/* 将流关联为行缓冲，等价于setvbuf(stream, NULL, _IOLBF, 0); */
 void setlinebuf(FILE *stream);
 /* 将缓冲区与流相关联，本函数应该仅可以在打开一个流且没有进行其它操作前执行。
  * buf：用于取代当前缓冲区的新缓冲区指针。如为NULL则会在下次读或写的时候分配缓冲区。
  * mode：_IONBF，无缓冲;_IOLBF行缓冲；_IOFBF全缓冲。
  * size:缓冲区大小。
+ * 返回值：0，成功；非0，错误。
  */
 int setvbuf(FILE *stream, char *buf, int mode, size_t size);
 ```
