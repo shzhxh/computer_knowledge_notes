@@ -103,7 +103,9 @@ int sigdelset(sigset_t *set, int signum);
  */
 int sigismember(const sigset_t *set, int signum);
 
-/* 挂起调用线程直到信号集set里某个信号变成pending的状态 */
+/* 挂起调用线程直到信号集set里某个信号变成pending的状态
+ * 返回值：0代表成功；正数是错误号，代表失败。
+ */
 int sigwait(const sigset_t *set, int *sig);
 ```
 
@@ -124,6 +126,13 @@ int rt_sigprocmask(int how, const kernel_sigset_t *set,
                   kernel_sigset_t *oldset, size_t sigsetsize);
 /* 作用：和sigprocmask一样，不同之处在于它适用于多线程程序 */
 int pthread_sigmask(int how, const sigset_t *set, sigset_t *oldset);
+```
+
+#### 其它
+
+```c
+/* 给线程发信号 */
+int pthread_kill(pthread_t thread, int sig);
 ```
 
 

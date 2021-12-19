@@ -179,5 +179,10 @@ FILE *open_memstream(char **ptr, size_t *sizeloc);
 
 /* 把内存作为stream打开 */
 FILE *fmemopen(void *buf, size_t size, const char *mode);
+
+/* 从stream中读取整行 */
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+
+ssize_t getdelim(char **lineptr, size_t *n, int delim, FILE *stream);
 ```
 
