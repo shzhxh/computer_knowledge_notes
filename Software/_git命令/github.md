@@ -10,6 +10,8 @@
 
 一个workflow就是一次CI的过程，它表现为一个yml文件。一个workflow包若干个job，即`jobs.<job_id>`。一个job包含若干个step，即`jobs.<job_id>.steps`。一个step包含若干个action，即`jobs.<job_id>.steps.run`。
 
+> job是并行的基本单位，job之间是并行的，job内部是串行。一个workflow就是具有共同目标的job的集合。
+
 - name - workflow的名称。如省略，默认为当前文件名。
 
 - on - 触发workflow的条件
@@ -38,9 +40,13 @@
   steps[*].name	# 步骤名
   steps[*].run	# 该步骤的命令或action
   steps[*].env	# 该步骤所需的环境变量。
-  steps[*].uses	# 指定一个要运行的action，它是step的一部分
+  steps[*].uses	# 指定一个要运行的action，它被当作是step的一部分
+  	# action可以来自于当前仓库，一个公共仓库，或已发布的docker镜像
+  	# 强烈建议使用action的时候指定版本号，以免action的作者更新后引发问题
+  	# 某些action会需要with关键字所带来的参数
+  	# action要么是JS文件，要么是docker容器。
   steps[*].with	# 指定action所需的参数
-
+  
   ```
 
 - run - 组成步骤的命令

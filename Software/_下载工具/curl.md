@@ -15,6 +15,7 @@ Client URL，用来请求web服务器，是一个上传下载工具。
 -I, --head		# 仅显示头信息
 -L, --location	# 有些网址是自动跳转的，使用此参数则会请求新跳转到的网址。
 -o, --output <file>	# 默认是输出到标准输出，使用此选项则输出的文件file。
+-O, --remote-name	# 把远程的文件下载到本地。
 --trace <file>	# 将详细信息输出到file，将得到比-v选项更详细的信息。
 --trace-ascii <file>	# 类似于--trace选项，但会放弃二进制信息仅输出ascii信息。
 -s, --silent	# 静默模式。
