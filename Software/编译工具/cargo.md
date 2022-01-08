@@ -1,8 +1,6 @@
-#### 简介
+### 简介
 
 cargo是rust的包管理器。
-
-#### 用法
 
 ```bash
 cargo [options] <command> [args]
@@ -12,32 +10,13 @@ cargo [options] --help
 cargo [options] --explain <CODE>
 ```
 
-#### 命令
+### 命令
 
-##### 构建命令
+#### 构建命令
 
 ```bash
 bench [options] [benchname][-- bench-options]	# 编译并运行benchmark。
-build [options]	# 编译一个包。
-	# 不使用"--release"时采用dev配置
-	# 使用"--release"时采用release配置
-	# 可以在Cargo.toml中使用[profile.*]覆盖任意设置的默认值。
-	## 包选项
-	## 目标选项
-	## 属性选项
-	## 编译选项
-	--traget <triple>	# 指定编译的架构(默认是主机的架构)。triple的格式为<arch><sub>-<vendor>-<sys>-<abi>。
-		# 也可以在配置文件里通过设置build.target实现同样的功能。
-		# 注：编译结果会放在不同的目录中。
-	## 输出选项
-	## 显示选项
-	## Manifest选项
-	--manifest-path <path>	# 指定Cargo.toml的路径。默认是从当前路径或任意父路径中查找。
-	## 通用选项
-	+<toolchain>	# 指定工具链的名称。（如+stable，+nightly）。前提要求：cargo是通过rustup安装的，此参数为cargo的第一个参数。
-	-Z <flag>	# Unstable flags to Cargo。(仅用于nightly)
-	## 其它选项
-	-j, --jobs <N>
+
 doc		# 构建一个包的文档。生成的是HTML格式。
 	# 使用"///"来注解格式化文档，以支持Markdown
 	# 使用"//!"用于描述整个crate。
@@ -47,6 +26,8 @@ doc		# 构建一个包的文档。生成的是HTML格式。
 	## 包选项
 	## 目标选项
 	## 属性选项
+	--features <features>	# 指定要激活的属性。
+	--no-default-features	# 不激活default属性。
 	## 编译选项
 	## 输出选项
 	## 显示选项
@@ -79,7 +60,35 @@ test	# 对包执行单元和集成测试。用`--`分隔，传给cargo的放前�
 	--include-ignored	# 即运行忽略的，也运行不被忽略的测试
 ```
 
-##### manifest命令
+##### build
+
+```bash
+build [options]	# 编译一个包。
+	# 注：不使用"--release"时采用dev配置
+	# 注：使用"--release"时采用release配置
+	# 注：可以在Cargo.toml中使用[profile.*]覆盖任意设置的默认值。
+## 包选项
+## 目标选项
+## 属性选项
+## 编译选项
+	--traget <triple>	# 指定编译的架构(默认是主机的架构)。triple的格式为<arch><sub>-<vendor>-<sys>-<abi>。
+		# 也可以在配置文件里通过设置build.target实现同样的功能。
+		# 注：编译结果会放在不同的目录中。
+	--release	# 使用release配置来编译要优化的组件。
+## 输出选项
+## 显示选项
+## Manifest选项
+	--manifest-path <path>	# 指定Cargo.toml的路径。默认是从当前路径或任意父路径中查找。
+## 通用选项
+	+<toolchain>	# 指定工具链的名称。（如+stable，+nightly）。前提要求：cargo是通过rustup安装的，此参数为cargo的第一个参数。
+	-Z <flag>	# Unstable flags to Cargo。(仅用于nightly)
+## 其它选项
+	-j, --jobs <N>
+```
+
+
+
+#### manifest命令
 
 ```
 update [options]	# 把Cargo.lock里的依赖更新到最新的版本。Cargo.lock如不存在则创建。
@@ -87,7 +96,7 @@ update [options]	# 把Cargo.lock里的依赖更新到最新的版本。Cargo.loc
 
 
 
-##### 包命令
+#### 包命令
 
 ```
 init [options] [path]	# 创建Cargo包
@@ -99,7 +108,7 @@ new	# 创建一个cargo包
 
 
 
-##### publishing命令
+#### publishing命令
 
 ```
 login	# 把注册中心的令牌保存到本地。
@@ -109,14 +118,14 @@ yank	# 从索引中删除一个已上传的crate。
 
 
 
-##### 通用命令
+#### 通用命令
 
 ```
 help
 version
 ```
 
-#### 选项
+### 选项
 
 ```bash
 # 特定选项
@@ -128,7 +137,7 @@ version
 # 普通选项
 ```
 
-#### 配置
+### 配置
 
 cargo的配置文件是`.cargo/config`或`.cargo/config.toml`(当两者都存在时，cargo会读取没有后缀的那个，但是推荐带上后缀)，它会在当前目录和所有父目录中查找，最后在`~`查找。对于数字、字符串和布尔值，靠前的配置会覆盖靠后的配置；对于数组，所有的配置会连接起来；一般使用家目录放默认配置，这样就可以实现对每个包的精确配置。
 
@@ -149,7 +158,7 @@ git-fetch-with-cli
 
 
 
-#### 相关文件
+### 相关文件
 
 ##### Cargo.toml
 
@@ -209,7 +218,7 @@ git-fetch-with-cli
 
   
 
-#### 换源
+### 换源
 
 ```
 修改~/.cargo/config
@@ -220,7 +229,7 @@ replace-with = 'tuna'
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 ```
 
-#### 错误记录
+### 错误记录
 
 1. ````
    can't find crate for `std`
@@ -229,7 +238,7 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
    > 使用rustup target list命令可以看见riscv64gc-unknown-none-elf已经安装了。我之前在~/.cargo/config里新建了一个条目build.target="riscv64gc-unknown-none-elf"，当我把这个条目删除后就不再有这个错误提示了。错误原因未知。
 
-#### 参考资料
+### 参考资料
 
 - [cargo](https://doc.rust-lang.org/cargo/commands/cargo.html)
 - `rustup doc --cargo`

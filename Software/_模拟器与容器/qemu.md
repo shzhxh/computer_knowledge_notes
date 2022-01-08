@@ -36,6 +36,12 @@ qemu-system-riscv64 [options] [disk_image]
 	# timer-period=period : 设置音频子系统的计时器周期。默认10000(10ms)
 -boot # 定义启动顺序
 -cpu	# 选择CPU模型
+	# 可用的CPU:
+	# Haswell - Intel Core Processor (Haswell)
+	# 可以被识别的CPUID:
+	# smap - 
+	# check - 
+	# fsgsbase - 
 -device <driver>[,prop[=value][,...]]
 	# 添加设备。设备名为driver，prop=value用于设置该设备的属性。一个有效的属性取决于该设备本身。
 	# 使用"-device help"获取可用的设备名。使用"-device <drive>,help"获取某个设备的可用属性。
@@ -71,6 +77,8 @@ qemu-system-riscv64 [options] [disk_image]
 	# 指定键盘布局，默认为en-us。
 -M, -machine [type=]name[,prop[=value][,...]]
 	# 选择要模拟的机器
+	# q35 - alias of pc-q35-5.2
+	# pc-q35-5.2 - Standard PC (Q35 + ICH9, 2009)
 	# 可用的prop有：
 	# accel选择加速器，支持的加速器有kvm,xen,hax,hvf,whpx或tcg。默认tcg
 	# kernel_irqchip选择加速irq芯片的支持，选项有on,off或split。默认off
@@ -99,8 +107,7 @@ qemu-system-riscv64 [options] [disk_image]
 
 ```
 -cdrom FILE	# 相当于 -drive file=FILE,index=2,media=cdrom
--blockdev
-	# 创建一个新的块驱动器结点。
+-blockdev	# 配置一个块设备的后端。
 	## 对所有块驱动器都有效的选项
 	## file的选项
 	## raw的选项
@@ -491,7 +498,7 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 
 #### 参考资料
 
-- [Qemu4.2.0用户文档](https://qemu.weilnetz.de/doc/qemu-doc.html#Display-options)
+- [Qemu用户文档](https://www.qemu.org/docs/master/index.html)
 - QEMU新的-nic选项：[中文翻译版](https://zhuanlan.zhihu.com/p/41258581)、[英文版](https://www.qemu.org/2018/05/31/nic-parameter/)
 - [Qemu虚拟化之Machine Type](https://remimin.github.io/2019/07/09/qemu_machine_type/)
 - [-kernel, -bios, -device loader的区别](https://stackoverflow.com/questions/58420670/qemu-bios-vs-kernel-vs-device-loader-file)

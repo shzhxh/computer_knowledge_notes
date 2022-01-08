@@ -16,7 +16,7 @@ sed [option] command [input-file]
 ```
 -e <script>或--expression=<script>	# 用指定的script命令处理输入文件。
 -f <script文件>或--file=<script文件>	# 用指定的script文件处理输入文件。
--i[SUFFIX], --in-place[=SUFFIX]	# 先输出到临时文件，再重命名为原文件。SUFFIX是给将原文件名加上SUFFIX，这样原文件就不会被覆盖。
+-i[SUFFIX], --in-place[=SUFFIX]	# 就地修改文件。把原文件file重命名为file[SUFFIX]，然后把对文件的修改写入到file。
 -n或--quiet或--silent		# 不打印过程，只显示结果。
 --version					# 打印版本信息。
 --help						# 打印帮助文件。
@@ -35,6 +35,12 @@ sed [option] command [input-file]
   p：打印
 
   s/regexp/replacement/：用replacement替换满足正则表达式regexp的地方
+
+```
+s#regexp#replacement#	# 也可以使用'#'号做为分隔字符，此时'/'就无需转义了
+```
+
+
 
 #### 例子
 

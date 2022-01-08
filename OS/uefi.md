@@ -36,7 +36,7 @@ UEFI是操作系统和平台固件之间的接口，它提供的是启动OS所�
 将需要传递给DXE的信息组成HOB(Handoff Block)列表，然后将控制权转交到DXE手中。
 
 - 初始化PS(PEI Core Service)
-- 调度系统中的PEIM
+- 调度系统中的PEIM(PEI模块)
 - 准备HOB列表
 - 调用DXE入口函数
 
