@@ -58,6 +58,7 @@ find [options] [starting-point...] [expression]
 
 ```
 -empty	# 文件或目录为空
+-iname <pattern>	# 查找满足<pattern>的文件，但大小写不敏感。
 -name <pattern>	# 查找满足<pattern>的文件
 -path <pattern>	# 查找满足<pattern>的目录
 -size <n>	# 指定文件大小。可以带后缀表示单位，可以带前缀表示范围。

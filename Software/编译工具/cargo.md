@@ -104,6 +104,7 @@ install	# 构建和安装一个rust库。
 new	# 创建一个cargo包
 	--bin	# 默认选项。包里会有src/main.rs(二进制目标)。
 	--lib	# 包里会有src/lib.rs(库目标)。
+search [options] [query...]	# 从crates.io查找包
 ```
 
 

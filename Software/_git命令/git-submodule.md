@@ -64,4 +64,12 @@ git submodule update	# 更新子模块
    # 曾尝试过rm -rf .git/modules/rboot，无效
    ```
 
+2. 子模块会自己checkout到某个提交点
+
+   ```
+   # 我希望子模块能自己随着远程仓库的更新而自己更新，但实际上不会的。通过观察执行了git submodule add的那个分支，可以发现子模块的commit id也被记录下了。所以，让子模块更新的方法是：
+   cd <submodule> && git pull
+   cd .. && git add <submodule> && git commit -m ""
+   ```
+
    

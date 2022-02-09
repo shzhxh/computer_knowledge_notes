@@ -43,7 +43,7 @@ netstat {[-vWeenNac] -i | [-cnNe] -M | -s [-6tuw]}	# 显示网络接口，或伪
 -N
 -e
 -p, --programs	# 显示PID/程序名
--o
+-o, --timers	# 包含网络计时器的信息。
 -c， --continuous	# 持续打印信息，时间间隔为1s。
 
 -l, --listening	# 仅列出在监听的服务状态。默认不列出。
