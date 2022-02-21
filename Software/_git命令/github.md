@@ -31,6 +31,7 @@
   jobs.<job_id>.needs	# 指定运行顺序
   jobs.<job_id>.runs-on	# 指定虚拟机，是必填字段
   jobs.<job_id>.strategy	# 为任务创建matrix，使每个任务都可以有不同的变化。
+  	# strategy.fail-fast默认为true，此时matrix里的job只要有一个出错，其它都会退出。若希望matrix里每个job都能执行完，应将其设为false。
   jobs.<job_id>.steps	# 指定任务的运行步骤
   ```
   
@@ -50,6 +51,15 @@
   ```
 
 - run - 组成步骤的命令
+
+##### 使用的限制
+
+- Job执行时间：每个job的运行时间不得超过6小时。
+- Workflow运行时间：每个workflow运行时间不得超过72小时。
+- API的请求：一个仓库里每小时的API请求不得超过1000次。超出的API请求调用会失败，这可能会导致job失败。
+- 并行的Job数量：Free用户并行的Job数量不得超过20个，超过的Job将进入队列中。
+- Job matrix：一个matrix生成的job数不得超过256个。
+- Workflow运行队列：每个仓库10秒内的的wrokflow队列不得超过500个
 
 #### 免密登陆
 

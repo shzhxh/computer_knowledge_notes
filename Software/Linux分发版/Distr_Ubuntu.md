@@ -65,6 +65,22 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
 
 5. 文件管理器里添加书签：Ctrl+D
 
+6. 禁用tracker-*
+
+   tracker-*进程主要是为文件、应用等创建索引，但经常导致CPU、IO占用过高使系统卡顿，所以要禁用它们。
+
+   ```
+   # 方法一，禁止tracker-*程序启动
+   sudo vim /etc/xdg/autostart/tracker-* # 把X-GNOME-Autostart-enabled的true改为false
+   tracker reset --hard	# 结束所有的的tracker进程，删除所有的索引和配置
+   tracker daemon -t	# 结束所有的tracker进程，我感觉数据可以保留，不建议删除索引和配置数据
+   # 方法二，让tracker-*不工作
+   	# 使用gsettings或dconf-editor，在org.freedesktop.Tracker.Miner.Files下，让crawling-interval值为-2，意为不对数据库进行检查；让enable-monitors的值为false。
+   tracker reset --hard
+   ```
+
+   
+
 
 ### 注意事项
 
