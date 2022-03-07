@@ -159,7 +159,6 @@ docker image <cmd>	# 管理镜像
 #### 命令
 
 ```
-commit	# 从容器创建一个镜像。
 diff
 events
 export	# 将一个容器文件系统输出为压缩文件。
@@ -172,12 +171,10 @@ logout
 logs
 pause	# 暂停一个或多个容器中的进程。
 port
-ps		# 列出所有运行着的容器。加-a则列出所有的容器。
 push
 restart	# 重启容器。
 rmi		# 移除一个或多个镜像(最顶层)。可以使用-f来删除中间的只读层。
 stats
-stop	# 停止一个或多个运行中的容器。
 tag
 top
 unpause
@@ -191,6 +188,7 @@ wait
 
 ```
 docker attach [options] CONTAINER	# 连接到运行中的容器
+	# 注：Ctrl+P+Q从容器detach出去
 
 # 选项
   --detach-keys string
@@ -208,6 +206,17 @@ build [options] <Experimental> <PATH|URL|->	# 从Dockerfile创建一个镜像。
 -t, --tag[=[]]	# 如果执行成功，则将仓库名应用于得到的镜像。
 ```
 
+##### commit
+
+```
+docker commit [options] <container> [repo[:tag]]	# 从容器创建一个镜像。
+# 选项
+-a, --author <string>	# 指定作者
+-c, --change <list>		# 向要创建的镜像添加Dockerfile指令
+-m, --message <string>	# commit信息
+-p, --pause				# commit的时候暂停容器(默认为真)
+```
+
 
 
 ##### cp
@@ -216,7 +225,9 @@ build [options] <Experimental> <PATH|URL|->	# 从Dockerfile创建一个镜像。
 # 是docker container cp的别名
 # 注：docker里的路径要使用绝对路径
 docker cp [options] <container>:<src_path> <dest_path|->	# 从容器复制到本地
-docker cp [options] <src_path|-> <>container>:<>dest_path>	# 从本地复制到容器
+docker cp [options] <src_path|-> <container>:<dest_path>	# 从本地复制到容器
+	# 源路径里的-，表示从stdin读取tar文件，然后把它释放到容器里
+	# 目的路径里的-，表示把容器里的tar文件释放到stdout
 
 # 选项
 -a, --archive[=false]	# archieve模式(复制所有的uid/gid信息)
@@ -241,9 +252,15 @@ docker create [options] <image> [cmd] [args]	# 创建容器。实际上是为指
 ##### exec
 
 ```
-docker exec	# 在运行的容器中执行一个命令。
-	-i, --interactive	# 始终保持STDIN打开,即使没有附加
-	-t, --tty			# 分配一个伪TTY
+docker exec [options] <container> <cmd> [args]	# 在运行的容器中执行一个命令。
+# 选项
+  -d, --detach		# 在后台运行命令
+  --detach-keys <str>
+  -i, --interactive	# 始终保持STDIN打开,即使没有附加
+  --privileged
+  -t, --tty			# 分配一个伪TTY
+  -u, --user <str>
+  -w, --workdir <str>
 ```
 
 ##### inspect
@@ -268,6 +285,25 @@ docker load [options]	# 从tar文件或STDIN装载镜像
  -i, --input <file>	# 读取tar文件(默认STDIN)
  -q, --quiet		# 静默模式
 ```
+
+##### ps
+
+```
+ps		# 列出所有运行着的容器。
+
+# 选项
+-a, --all	# 列出所有的容器。(默认列出正在运行的容器)
+-f, --filter <cond>	# 按条件<cond>过滤输出
+	# <cond>的格式：key=value，如name=abc
+--format <str>		# 
+-n, --last <int>	# 
+-l, --latest		#
+--no-trunc			#
+-q, --quiet			#
+-s, --size			# 
+```
+
+
 
 ##### pull
 
@@ -343,8 +379,20 @@ docker search [options] <term>	# 在Docker Hub上搜索镜像
 ```
 docker start [options] <containers>	# 启动一个或多个已停止的容器。
 	-a, --attach	# 附加STDIN/STDERR和forward信号
+	--detach-keys <str>	# 
 	-i, --interactive	# 附加容器的STDIN
 ```
+
+##### stop
+
+```
+docker stop [options] <containers>	# 停止一个或多个运行中的容器。
+
+# 选项
+-t, --time <int>	# 在结束容器之前等待的时间，单位秒
+```
+
+
 
 #### 配置
 

@@ -18,6 +18,7 @@ ln [OPTION] -t <DIRECTORY> <TARGET>  # 在DIRECTORY目录下创建所有TARGET�
 #### 参数
 
 ```bash
+-f, --force		# 如目标文件存在则删除(意为强制创建链接)
 -s, --symolic	# 创建软链接
 -t, --target-directory=<DIR>	# 将创建的链接放到DIR目录
 -T, --no-target-directory	# 将LINK_NAME视为普通文件而非目录

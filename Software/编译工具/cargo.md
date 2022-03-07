@@ -16,7 +16,6 @@ cargo [options] --explain <CODE>
 
 ```bash
 bench [options] [benchname][-- bench-options]	# 编译并运行benchmark。
-
 doc		# 构建一个包的文档。生成的是HTML格式。
 	# 使用"///"来注解格式化文档，以支持Markdown
 	# 使用"//!"用于描述整个crate。
@@ -86,6 +85,22 @@ build [options]	# 编译一个包。
 	-j, --jobs <N>
 ```
 
+##### check
+
+```bash
+check [options]	# 检查当前的包
+## 包选项
+## 目标选项
+## 属性选项
+	-- all-features	# 激活所有可用的属性
+## 编译选项
+## 输出选项
+## 显示选项
+## Manifest选项
+## 通用选项
+## 其它选项
+```
+
 
 
 #### manifest命令
@@ -125,6 +140,25 @@ yank	# 从索引中删除一个已上传的crate。
 help
 version
 ```
+
+#### 其它命令
+
+不是cargo自带，需要用户自己安装的命令。
+
+```bash
+cargo clippy [options] [--] [opts]
+# 作用：检查package里的常见错误，提升rust代码的质量
+	# 选项（其它选项同rust check）
+	--no-deps
+	--fix
+	# opts
+	-W --warn OPT
+	-A --allow OPT
+	-D --deny OPT
+	-F --forbid OPT
+```
+
+
 
 ### 选项
 

@@ -58,8 +58,8 @@ sed -i "/abcd/d" input-file
 # 将指定目录path下的所有文件里的oldstr替换为newstr
 sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`
 
-# 
-sed -n 's/ magicmagicmagic/ /p' file1 > file2
+# 把文件里从start到end之间的内容打印出来(包含start和end所在的行)
+sed -n '/start/,/end/p' file
 
 # 把file1里278-280行的内容重定向到file2里
 sed -n '278,280p' file1 > file2

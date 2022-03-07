@@ -111,3 +111,16 @@ rustup component add llvm-tools-preview
 rustup component add rust-src
 ```
 
+#### 错误解决
+
+1 使用rust-objcopy的时候提示`Could not find tool: objcopy`
+
+解决方法：
+
+```
+cargo install cargo-binutils
+rustup component add llvm-tools-preview
+```
+
+
+

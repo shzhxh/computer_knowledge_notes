@@ -1,5 +1,5 @@
 ```
-lsof [options] [--] [names]		# 列出打开的文件
+lsof [options] [--] [names]		# 列出进程打开的文件，或打开文件的进程，或进程打开的端口。
 ```
 
 #### 选项
@@ -17,5 +17,11 @@ lsof [options] [--] [names]		# 列出打开的文件
 	# [service] 是/etc/services里的名称之一
 	# [port] 端口号
 -p [PIDs]	# 指定PID的列表以选择输出或不输出它们的文件。
+```
+
+#### 示例
+
+```
+lsof /etc/passwd	# 查看哪个进程在占用/etc/passwd
 ```
 

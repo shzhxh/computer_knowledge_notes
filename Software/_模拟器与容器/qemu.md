@@ -298,6 +298,29 @@ QEMU的控制台。"Ctrl+Alt+2"进入控制台，"Ctrl+Alt+1"进入QEMU界面。
 
 ```
 info	# 显示虚拟机的运行信息
+	info block [-v]	# 显示块设备的信息(-v：显示详细信息)
+	info blockstats	# 显示块设备的统计信息
+	info chardev	# 显示字符设备的信息
+	info cpus		# 显示所有cpu的信息
+	info cpustats	# 显示cpu的统计信息
+	info lapic		# 显示本地apic的状态
+	info mem		# 显示虚拟内存映射
+	info memdev		# 显示内存后端
+	info memory-devices	# 显示内存设备
+	info mtree		# 显示内存树
+	info name		# 显示当前虚拟机的名字
+	info network	# 显示网络状态
+	info numa		# 显示numa的信息
+	info pci		# 显示pci信息
+	info pic		# 显示PIC的状态
+	info profile	# 显示配置信息
+	info qdm		# 显示qdev设备模型的列表
+	info qom-tree	# 显示qom合成树
+	info qtree		# 显示设备树
+	info registers	# 显示cpu的寄存器
+	info roms		# 显示所有的rom
+	info status		# 显示当前虚拟机的状态(运行或暂停)
+	info tlb		# 显示虚拟内存到物理内存的映射
 help	# 查询某个命令的帮助信息
 ```
 
