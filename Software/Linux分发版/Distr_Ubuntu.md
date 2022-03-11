@@ -7,6 +7,7 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
 3. 根目录放ssd分区提升开机速度，读写频繁的目录放hdd分区保护ssd。
 4. 新安装好的ubuntu在炫龙笔记本的显卡驱动有问题，需要在恢复模式下安装好正确的显卡驱动。
 5. 在命令模式下输出`^@`是由ACPI引起的，可以通过给内核传递`acpi=off`参数解决此问题
+
 ### 错误解决
 
 - System program problem detected
@@ -77,6 +78,20 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
    # 方法二，让tracker-*不工作
    	# 使用gsettings或dconf-editor，在org.freedesktop.Tracker.Miner.Files下，让crawling-interval值为-2，意为不对数据库进行检查；让enable-monitors的值为false。
    tracker reset --hard
+   ```
+
+7. gnome-shell
+
+   Gnome Shell 是 GNOME 3 的 主要元件，它改革了 GNOME 桌面环境 的 操作，包括窗口管理、应用程序启动和工作空间管理 的 方式，为使用者提供一个全新方便易用 的 桌面管理方式。 gnome shell 本质上来说，是窗口管理器、应用启动器、桌面布局 的 集合。
+
+    GNOME Shell 扩展就是那些可以安装在 GNOME 之上的第三方附加组件和插件。这些扩展程序是为执行特定任务而创建的，例如显示天气状况、网速等。大多数情况下，你可以在顶部面板中访问它们。也有一些 GNOME 扩展在顶部面板上不可见，但它们仍然可以调整 GNOME 的行为。
+
+   ```
+   sudo apt install gnome-tweak-tool	# 管理gnome-shell的工具
+   gnome-shell --version				# 查看gnome-shell的版本
+   sudo apt install gnome-shell-extensions	# 安装一些gnome-shell扩展，然后在Tweaks里控制它们的开启
+   gnome-shell-extension-gsconnect		# 安装gsconnect，可以在Tweaks里控制它的开启
+   gnome-extentions install 
    ```
 
    

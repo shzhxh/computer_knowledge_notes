@@ -139,14 +139,19 @@ $_		# 上条命令的最后一个参数
 
 ```
 # 假设var=http://www.abc.com/test.htm
-${parameter:-word}
-${parameter:=word}
-${parameter:?word}
-${parameter:+word}
+${parameter:-word}	# 如果parameter有值则取其值，否则结果为word
+${parameter:=word}	# 如果parameter有值则取其值，否则结果为word
+${parameter:?word}	# 如果parameter有值则取其值，否则结果为word
+${parameter:+word}	# 无论parameter是否有值，结果为总是word
 ${#parameter}		# 获取字符串的长度，例如${#var}的结果为27
 ${parameter%word} 	# 最小限度从后面截取word
 ${parameter%%word} 	# 最大限度从后面截取word
 ${parameter#word} 	# 最小限度从前面截取word，例如${var#*/}的结果为/www.abc.com/test.htm
 ${parameter##word} 	# 最大限度从前面截取word，例如${var##*/}的结果为test.htm
+
+${parameter:start}	# 从start开始获取字符串，如${var:7}的结果为www.abc.com/test.htm
+${parameter:start:len}	# 从start开始截取len个字符，如${var:7:3}的结果为www
+${parameter:start-len}	# 先取最右的len个字符，然后再从所得的字符串的start位开始截取，如${var:3-5}和${var:2-4}的结果都是tm
+${parameter:start-len1:len2}	# 先取最右的len1个字符，然后再从所得字符串的start位开始截取长度为len2的字符。如${var:3-5:1}的结果是t
 ```
 

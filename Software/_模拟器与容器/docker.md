@@ -256,6 +256,7 @@ docker exec [options] <container> <cmd> [args]	# 在运行的容器中执行一�
 # 选项
   -d, --detach		# 在后台运行命令
   --detach-keys <str>
+  -e, --env <list>	# 设置环境变量
   -i, --interactive	# 始终保持STDIN打开,即使没有附加
   --privileged
   -t, --tty			# 分配一个伪TTY
@@ -416,3 +417,16 @@ docker create -it --name szx-8.1 -v /data/data:/root/szx oto_repo bash	# 从镜�
 
 ```
 
+#### 错误分析
+
+1. 问题描述
+
+   脚本script_file.sh在docker内手动运行正常，但使用`docker exec -d docker_name script_file.sh`运行出错。错误原因是：command not found。
+
+   原因分析
+
+   因为在`.bashrc`文件里设置了额外的环境变量，而`docker exec`命令并不会设置额外的环境变量。
+
+   解决方法
+
+   在脚本里使用`source`命令设置所需要的环境变量。

@@ -22,3 +22,9 @@ git diff [options] <blob> <blob>						# 比较两个blob对象之间的差别
 	# <count> : 用于限制输出的行数。
 ```
 
+#### 示例
+
+```
+git diff > my.patch	# 从对工作区的修改来生成补丁
+```
+

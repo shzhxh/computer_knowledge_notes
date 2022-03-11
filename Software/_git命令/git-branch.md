@@ -42,3 +42,13 @@ git branch <--edit-description> [branchname]
 -v, -vv, --verbose	# -v和--verbose作用相同，显示每个本地分支的名称、sha1、HEAD的提交信息。-vv则会增加显示本地分支对应的远程分支。
 ```
 
+#### 示例
+
+```
+# 把detached的提交保存到其它分支，比如main分支
+git branch tmp	# 创建新分支tmp，把当前detached的提交保存在新分支tmp上
+git checkout main	# 切换到main分支
+git merge tmp	# 把tmp分支合并到main分支
+git branch -d tmp	# 删除tmp分支
+```
+
