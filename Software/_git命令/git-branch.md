@@ -44,8 +44,8 @@ git branch <--edit-description> [branchname]
 
 #### 示例
 
-```
-# 把detached的提交保存到其它分支，比如main分支
+```bash
+# 1 把detached的提交保存到其它分支，比如main分支
 git branch tmp	# 创建新分支tmp，把当前detached的提交保存在新分支tmp上
 git checkout main	# 切换到main分支
 git merge tmp	# 把tmp分支合并到main分支

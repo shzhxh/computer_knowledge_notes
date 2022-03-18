@@ -16,23 +16,6 @@ cargo [options] --explain <CODE>
 
 ```bash
 bench [options] [benchname][-- bench-options]	# 编译并运行benchmark。
-doc		# 构建一个包的文档。生成的是HTML格式。
-	# 使用"///"来注解格式化文档，以支持Markdown
-	# 使用"//!"用于描述整个crate。
-	# 使用"pub use"来把类型重导出到顶级结构，以便用户查询。
-	## 文档选项
-	--open	# 先构建文档，再在浏览器中打开它。
-	## 包选项
-	## 目标选项
-	## 属性选项
-	--features <features>	# 指定要激活的属性。
-	--no-default-features	# 不激活default属性。
-	## 编译选项
-	## 输出选项
-	## 显示选项
-	## Manifest选项
-	## 通用选项
-	## 其它选项
 run	[options] [-- args]	# 编译并运行本地包
 	## 包选项
 	-p, --package <spec>	# 指定要运行的包。关于<spec>的格式见cargo-pkgid。
@@ -99,6 +82,56 @@ check [options]	# 检查当前的包
 ## Manifest选项
 ## 通用选项
 ## 其它选项
+```
+
+##### doc
+
+```bash
+doc	[options]	# 构建一个包的文档。生成的是HTML格式。
+	# 使用"///"来注解格式化文档，以支持Markdown
+	# 使用"//!"用于描述整个crate。
+	# 使用"pub use"来把类型重导出到顶级结构，以便用户查询。
+	## 文档选项
+	--open	# 先构建文档，再在浏览器中打开它。
+	--no-deps	# 不为依赖项构建文档。
+	--document-private-items	# 在文档中包含非公开的项。
+	## 包选项
+	--all
+	--exclude
+	-p
+	--workspace
+	## 目标选项
+	--bin
+	--bins
+	--example
+	--examples
+	--lib
+	## 属性选项
+	--all-features	# 激活所有属性。
+	--features <features>	# 指定要激活的属性。
+	--no-default-features	# 不激活default属性。
+	## 编译选项
+	--ignore-rust-version
+	--target
+	--profile
+	-r
+	## 输出选项
+	--target-dir
+	## 显示选项
+	-v
+	-q
+	--color
+	--message-format
+	## Manifest选项
+	--manifest-path
+	--frozen, --locked
+	--offline
+	## 通用选项
+	+<toolchain>	#
+	-h, --help		#
+	-Z <flag>		#
+	## 其它选项
+	-j, --jobs <N>	# <N>个作业并行执行
 ```
 
 

@@ -48,15 +48,23 @@ ssh [选项] [user@]hostname [command]		# 连接到服务器hostname
 -e escape_char
 -F configfile
 -I pkcs11
--i identit-J [user@]host[:port]y_file
--L address				# 本地转发
+-i <identity_file>
+-J [user@]host[:port]y_file
+-L [bind_address:]<port>:<host>:<hostport>				# 本地转发
+-L [bind_address:]<port>:<remote_socket>
+-L <local_socket>:<host>:<hostport>
+-L <local_socket>:<remote_socket>
 -l login_name
 -m mac_spec
 -O ctl_cmd
 -o option
 -p port					# 使用服务器的port端口
 -Q query_option
--R address				# 远程转发
+-R [bind_address:]<port>:<host>:<hostport>				# 远程转发
+-R [bind_address:]<port>:<local_socket>
+-R <remote_socket>:<host>:<hostport>
+-R <remote_socket>:<local_socket>
+-R [bind_address:]<port>
 -S ctl_path
 -W host:port
 -w local_tun[:remote_tun]
@@ -66,13 +74,13 @@ ssh [选项] [user@]hostname [command]		# 连接到服务器hostname
 
 ```
 # 本地转发
-ssh -C -f -N -g -L <本地监听ip>:<本地端口>:<远程ip>:<远程端口> 用户名@目标IP -p <ssh端口>
+ssh -fgNCL <本地监听ip>:<本地端口>:<远程ip>:<远程端口> 用户名@目标IP -p <ssh端口>
 
-# 远程转发
-ssh -C -f -N -g -R <远程ip>:<远程端口>:<本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
+# 远程转发：本地通过<用户名@目标IP>转发到远程，这样远程用户通过<远程端口>就可以登陆到本地了。
+ssh -fgNCR <远程ip>:<远程端口>:<本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
 
 # 动态转发
-ssh -C -f -N -g -D <本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
+ssh -fgNCD <本地ip>:<本地端口> 用户名@目标IP -p <ssh端口>
 
 # 免密登陆
 ssh-keygen -t rsa	# 生成密钥对
@@ -100,3 +108,7 @@ cd .ssh && touch config	# 创建config文件
 2. 提示对方机器"Connection refused"
 
    > 经查是目标机器没有运行sshd，故sudo apt install openssh-server
+
+3. WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+   > 清空~/.ssh/know_hosts文件
