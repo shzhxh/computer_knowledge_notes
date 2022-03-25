@@ -76,7 +76,8 @@ rgrep # 等价于grep -r
 --binary-files=<TYPE>	# 
 --exclude=<GLOB>	# 名称满足模式<GLOB>的文件将会被跳过
 --exclude-from=<FILE>	# 要被忽略的文件名放在<FILE>里
---exclude-dir=<GLOB>	# # 名称满足模式<GLOB>的目录将会被跳过
+--exclude-dir=<GLOB>	# 名称满足模式<GLOB>的目录将会被跳过
+--include=<GLOB>		# 仅搜索文件名满足<GLOB>的文件 
 -I		# 等价于 --binary-files=without-match, 不处理二进制文件
 -r, --recursive	# 递归搜索，对于符号链接只有在命令行里指定了才会追踪它
 -R, --dereference-recursive	# 递归搜索，会追踪所有的符号链接

@@ -17,21 +17,21 @@ int futimens(int fd, const struct timespec times[2]);
 ```c
 /* stat代表了文件的状态，其对应的数据结构为 */
 struct stat {
-	dev_t     st_dev;         /* ID of device containing file */
-	ino_t     st_ino;         /* Inode number */
-	mode_t    st_mode;        /* File type and mode */
-	nlink_t   st_nlink;       /* Number of hard links */
-	uid_t     st_uid;         /* User ID of owner */
-	gid_t     st_gid;         /* Group ID of owner */
-	dev_t     st_rdev;        /* Device ID (if special file) */
-	off_t     st_size;        /* Total size, in bytes */
+	dev_t     st_dev;         /* 设备ID */
+	ino_t     st_ino;         /* Inode号 */
+	mode_t    st_mode;        /* 文件的类型与模式 */
+	nlink_t   st_nlink;       /* 硬链接的数量 */
+	uid_t     st_uid;         /* 属主的用户ID */
+	gid_t     st_gid;         /* 属主的组ID */
+	dev_t     st_rdev;        /* 设备的主、次设备号 */
+	off_t     st_size;        /* 文件大小，以字节为单位 */
 	blksize_t st_blksize;     /* Block size for filesystem I/O */
 	blkcnt_t  st_blocks;      /* Number of 512B blocks allocated */
 
     /* 2.6内核之后提高到ns精度，增加了如下的域 */
-	struct timespec st_atim;  /* Time of last access */
-	struct timespec st_mtim;  /* Time of last modification */
-	struct timespec st_ctim;  /* Time of last status change */
+	struct timespec st_atim;  /* 最后访问时间 */
+	struct timespec st_mtim;  /* 修改时间 */
+	struct timespec st_ctim;  /* 状态改变时间 */
 
 	#define st_atime st_atim.tv_sec      /* Backward compatibility */
 	#define st_mtime st_mtim.tv_sec

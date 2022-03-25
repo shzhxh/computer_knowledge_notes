@@ -9,8 +9,17 @@ autoremove	# 曾经因为依赖关系而自动安装的包，现在已不再需�
 autoclean	# 如果一个软件包已被卸载，则删除它的安装文件。
 clean		# 删除所有安装文件。
 edit-sources	# 编辑sources.list
-remove		# 删除包。删除打包数据，但会保留少量的配置文件，这样再次安装就会保留它删除之前的样子。
+full-upgrade	#
+install		# 
+list		#
 purge		#  删除包。删除打包数据和配置文件。即使使用了remove命令也可以使用purge命令进行更彻底的删除。但它不会作用于用户目录下的数据和配置。
+remove		# 删除包。删除打包数据，但会保留少量的配置文件，这样再次安装就会保留它删除之前的样子。
+reinstall	# 
+satisfy		# 
+search		# 
+show		# 
+update		# 
+upgrade		# 
 ```
 
 
