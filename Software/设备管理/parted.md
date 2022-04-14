@@ -39,9 +39,13 @@ parted [options] [device[command[options...]...]]
 ```
 help		# 如果后面跟着命令，就打印该命令的帮助信息，否则打印通用的帮助信息。
 align-check	# 检查指定分区的对齐类型。
-mklabel		# 创建disklabel
-mktable		# 创建分区表
-mkpart		# 创建分区
+mklabel	<label-type>	# 创建disklabel。
+	# label-type : aix, amiga, bsd, dvh, gpt, "loop", mac, msdos, pc98, sun
+mktable <label-type>		# 创建分区表，作用同mklabel
+mkpart [part-type name fs-type] <start> <end>		# 创建分区
+	# part-type : "primary", "logical", or  "extended"
+	# name : GPT分区表需要
+	# fs-type : btrfs,ext[2|3|4],fat[16|32],hfs[+],linux-swap,ntfs, reiserfs, udf, xfs
 name		# 为分区命名
 print [args]	# 没有参数则显示当前设备的分区表，可选参数如下：
 	devices	: 显示所有的块设备
@@ -70,3 +74,14 @@ sudo parted /dev/sda	# 打开parted,选择目标盘sda
 (parted) mkpart primary 0 1396MB	# 创建一个新分区
 ```
 
+#### 错误解决
+
+1. 34s % 2048s != 0s
+
+   在创建分区的时候产生这个报警，因为没有按照最优的性能对齐。解决方法是用百分比表示。
+
+   ```
+   (parted) mkpart primary 0% 40%
+   ```
+
+   

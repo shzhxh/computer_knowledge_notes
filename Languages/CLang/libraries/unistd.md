@@ -73,6 +73,9 @@ int execvpe(const char *file, char *const argv[],
 ##### 其它
 
 ```c
+/* 关闭文件描述符 */
+int close(int fd);
+
 /* 从文件描述符fd里读取count个字节到到缓冲区buf里。注意：read会使文件位置增长。
  * 返回值：成功则返回读取的字节数，返回0代表已到了文件的末尾。错误则返回-1。
  */

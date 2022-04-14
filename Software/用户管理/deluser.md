@@ -16,5 +16,6 @@ deluser [options] user group	# 从指定的组里删除用户
 ```
 --remove-home：删除home directory和mail spool
 --remove-all-files:删除所有属于用户的文件
+--system	# 仅删除系统用户或系统组。
 ```
 

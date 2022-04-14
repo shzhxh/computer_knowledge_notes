@@ -30,16 +30,40 @@ lzcat	# 等价于xz -dc -F lzma，解压lzma文件并输出到stdout
 
 ```
 -c, --stdout, --to-stdout	# 把压缩或解压的数据写到标准输出。如不使用此选项则输出到文件。
+-f
+--file[=file]
+--file0[=file]
+-k, --keep	# 不删除输入文件
+--no-sparse
+--single-steam
+-S <.suf>
+
 ```
 
 ##### 基本文件格式与压缩选项
 
 ```
+-0 ... -9
+--block-list=<sizes>
+--block-size=<size>
+-C <check>
+-e
+--fast
+--flush-timeout=<timout>
 -F, --format=<fmt>	# 定义压缩或解压的格式。
 	# <fmt>可能的值：
 	# auto：默认的值。压缩时为xz，解压时会自动检测。但原始流无法被自动检测。
 	# xz：压缩或解压均为xz格式。
 	# lzma, alone: 压缩或解压均为lzma格式。
 	# raw: 压缩或解压原始流。
+--ignore-check
+--memlimit-compress=<limit>
+--memlimit-decompress=<limit>
+-M <limit>
+--no-adjust
+-T <threads>
 ```
 
+##### 配置压缩过滤链
+
+##### 其它

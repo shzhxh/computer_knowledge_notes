@@ -69,7 +69,7 @@ tar {-x|--extract|--get} [-f <achive>] [options] [member...]: 从归档文件中
 ```
 -j, --bzip2	# 使用bzip2方式压缩
 -J, --xz	# 使用xz方式压缩
--z, --gzip, --gunzip, --ungzip	# 使用gzip方式压缩
+-z, --gzip, --gunzip, --ungzip	# 使用gzip方式压缩，扩展名为.tgz或.tar.gz
 -Z, --compress, --uncompress	＃ 使用compress方式压缩
 ```
 
@@ -81,6 +81,16 @@ tar {-x|--extract|--get} [-f <achive>] [options] [member...]: 从归档文件中
 -C, --directory=DIR	# 执行任何操作前，先切换到DIR目录。
 
 ```
+
+##### 文件名转换
+
+```
+--strip-components=<NUM>	# 解压的时候去掉文件名上的<NUM>个前导部分
+```
+
+
+
+##### 文件名匹配选项
 
 ##### 信息输出选项
 

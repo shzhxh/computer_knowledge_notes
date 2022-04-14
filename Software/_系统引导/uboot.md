@@ -28,14 +28,15 @@ cmp
 ##### 外存操作
 
 ```
-mmc info	#
+mmc info	# 当前mmc设备的信息   
 mmc read	#
 mmc write	#
 mmc erase	# 
 mmc rescan	#
-mmc part	#
-mmc dev		#
-mmc list	#
+mmc part	# 列出mmc设备的分区
+mmc dev	[dev] [part]
+	# 切换mmc设备
+mmc list	# 列出有效的mmc设备
 mmc hwpartition	#
 mmc bootbus	# 
 mmc bootpart	# 
@@ -56,8 +57,8 @@ ext4load	#
 ##### 引导操作
 
 ```
-boot	#
-boot	# 
+boot	# 启动默认配置。即读取环境变量bootcmd来启动Linux。
+bootm [addr [args]]	# 启动内存中的Linux.
 ```
 
 #### 环境变量
