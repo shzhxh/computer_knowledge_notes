@@ -108,6 +108,8 @@ tar {-x|--extract|--get} [-f <achive>] [options] [member...]: 从归档文件中
 tar cf abc.tar ./abc	# 给abc目录创建归档文件abc.tar
 tar xf abc.tar -C ~/	# 将abc.tar解压到用户目录
 tar tf abc.tar			# 列出abc.tar里的文件
+tar tf abc.tar | awk -F "/" '{print $2}' | uniq
+	# 列出abc.tar里第一级目录
 ```
 
 

@@ -30,6 +30,9 @@ status	# 检查服务状态
 list-unit-files [patterns]	# 
 enable	# 使某项服务自动启动。其作法是加载一组符号链接，然后重载系统管理器的配置。
 disable	# 使某项服务不自动启动。其作法是删除相应的符号链接，从而使enable或link命令失效。
+set-default <TARGET>	# 设置启动的默认目标。其实就是创建了从/lib/systemd/system/<TARGET>到/etc/systemd/system/default.target的符号链接。
+	# multi-user.target - 默认不进入图形界面
+	# graphical.target - 默认进入图形界面
 ```
 
 
@@ -50,5 +53,6 @@ disable	# 使某项服务不自动启动。其作法是删除相应的符号链�
 
 ```bash
 systemctl start libvirtd	# 开启libvirtd服务
+systemctl set-default multi-user.target	# 开机后不进入图形界面
 ```
 

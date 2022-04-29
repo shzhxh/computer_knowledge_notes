@@ -14,7 +14,7 @@ install		#
 list		#
 purge		#  删除包。删除打包数据和配置文件。即使使用了remove命令也可以使用purge命令进行更彻底的删除。但它不会作用于用户目录下的数据和配置。
 remove		# 删除包。删除打包数据，但会保留少量的配置文件，这样再次安装就会保留它删除之前的样子。
-reinstall	# 
+reinstall	# 重新安装。
 satisfy		# 
 search		# 
 show		# 

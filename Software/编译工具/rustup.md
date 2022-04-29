@@ -9,8 +9,6 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.edu.cn/rustup/rustup
 curl https://sh.rustup.rs -sSf | sh
 ````
 
-
-
 #### 用法
 
 `rustup [flags] [+toolchain] <subcommand>`

@@ -297,6 +297,22 @@ vim ~/.vimrc
 	set ai
 ```
 
+#### 插件
+
+##### taglist
+
+```
+# 1. 下载taglist_46.zip，这是最新的。
+# 2. 解压到~/.vim目录
+unzip taglist_64.zip ~/.vim
+# 3. 生成帮助文档
+cd ~/.vim && vim	# 输入“:helptags .”命令
+
+# 用法
+:Tlisttoggle	# 是否开启列表显示
+ctrl+w+w		# 列表区和文本区切换
+```
+
 
 
 #### 常见错误
