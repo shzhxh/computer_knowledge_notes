@@ -118,13 +118,11 @@ pacman <operation> [options] [targets]
 ##### 文件选项(-F)
 
 ```
--y
--l
--s	# 查询包文件名
--x
--o
--q
---machinereadable
+-y, --refresh	# 从服务器更新包数据库。使用两次则表示强制更新。
+-l, --list		# 列出包所包含的文件。
+-x, --regex		# 以正则表达式检索。
+-q, --quiet		# 显示更少的信息。
+--machinereadable	# 以机器易读的方式打印。
 ```
 
 #### 管理配置文件
@@ -144,9 +142,16 @@ pacman -S --help	# 查询安装软件包的方法
 
 #### 错误解决
 
+##### 1
+
 **错误提示**：error: failed to commit transaction (conflicting files)。
 
 原因分析：这是文件冲突，pacman不会主动覆盖已经存在的文件。
 
 解决方法：将冲突的文件删除，重命名或转移到其它文件夹。
 
+##### 2
+
+- 错误提示：error: failed to commit transaction (invalid or corrupted package)
+- 原因分析：系统较长时间没更新，导致keyring过期了。
+- 解决方法：`pacman -Sy archlinux-keyring && pacman -Su`

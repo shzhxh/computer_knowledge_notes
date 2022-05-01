@@ -8,7 +8,7 @@ sudo update-grub
 
 #### 简单配置
 
-1. `grub-mkconfig`可以用来生成grub.cfg文件。但是功能有限。
+1. `grub-mkconfig -o grub.cfg`可以用来生成grub.cfg文件。但是功能有限。
 
 2. /etc/default/grub文件控制`grub-mkconfig`命令的操作。
    - **GRUB_DEFAULT**：定义菜单入口，从0开始。
