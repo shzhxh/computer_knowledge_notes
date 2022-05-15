@@ -130,4 +130,6 @@ xfs
 # 挂载img文件
 	fdisk -l abc.img	# 计算起始位置：起始扇区*扇区大小
 	sudo mount -o loop,offset=起始位置　abc.img /mnt
+# 挂载ntfs分区
+sudo pacman -S ntfs-3g	# 下载ntfs-3g后即可正常挂载ntfs分区
 ```

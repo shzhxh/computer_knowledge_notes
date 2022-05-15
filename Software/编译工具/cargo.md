@@ -306,6 +306,12 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
    > 使用rustup target list命令可以看见riscv64gc-unknown-none-elf已经安装了。我之前在~/.cargo/config里新建了一个条目build.target="riscv64gc-unknown-none-elf"，当我把这个条目删除后就不再有这个错误提示了。错误原因未知。
 
+2. ```
+   failed to load source for dependency `bitmap-allocator`
+   ```
+
+   > cargo使用了自带的git命令，导致git命令执行失败。参考“配置”相关章节进行设置。
+
 ### 参考资料
 
 - [cargo](https://doc.rust-lang.org/cargo/commands/cargo.html)

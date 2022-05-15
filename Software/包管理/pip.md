@@ -37,6 +37,7 @@ wheel		# 从你的需求构建wheels
 
 ```
 -e, --editable <path/url>	# 以可编辑的模式，从本地path或远程url来安装一个项目。
+-r, --requirement <file>	# 通过文件<file>进行安装。
 -U, --upgrade	# 把所有的包都更新到最新的版本。
 --pre			# 默认情况下，pip只寻找稳定版。使用此选项后，将会包含预发布版和开发版。
 ```

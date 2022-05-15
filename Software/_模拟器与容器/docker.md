@@ -6,7 +6,8 @@ Docker镜像和容器命令行接口(CLI)。是通过CLI与daemon交互的，共
 
 ```
 # 方法一：从系统仓库安装
-sudo apt-get install docker docker-engine docker.io
+sudo apt-get install docker docker-engine docker.io	# for ubuntu
+sudo pacman -S docker	# for arch
 
 ＃ 方法二：从第三方仓库安装
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
@@ -408,13 +409,23 @@ vim /etc/default/docker # 修改http_proxy
 
 ```
 # 使用前准备
-sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER	# 以非root的权限运行docker
 sudo systemctl start docker
+sudo systemctl enable docker
 
+# 转移镜像
 docker save -o oto8.tar oto_repo	# 把docker镜像oto_repo保存为oto8.tar
 docker load -i oto8.tar	# 从oto8.tar载入镜像
 docker create -it --name szx-8.1 -v /data/data:/root/szx oto_repo bash	# 从镜像oto_repo创建容器szx-8.1
 
+# 使用docker hub
+docker pull alpine:3.12		# 下载镜像
+docker create -it --name alpine-3 alpine:3.12	# 从镜像创建容器
+docker start -ai alpine-3	# 启动容器
+
+# 容器与主机互传文件
+docker cp abc alpine-3:root	# 把文件abc传到容器alpine-3的root目录
+docker cp alpine-3:root/abc .	# 把容器alpine-3的abc文件传到当前目录
 ```
 
 #### 错误分析

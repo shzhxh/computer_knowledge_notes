@@ -142,12 +142,17 @@ V	# 选择，以行为单位
 
 
 
-##### 分屏
+##### 打开多个文件
 
 ```
 	:vsp filename	# 纵向分屏，并打开文件filename
 	:sp  filename	# 横向分屏，并打开文件filename
 	ctrl+w+[hjkl]	# 分屏左下上右切换
+	:open filename	# 打开文件filename
+	:ls				# 显示已打开的文件
+	:bn		# 切换文件
+	:bp		# 切换文件
+	:bd		# 关闭文件
 ```
 
 ##### 移动光标

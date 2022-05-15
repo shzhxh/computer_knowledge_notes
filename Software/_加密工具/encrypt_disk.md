@@ -91,3 +91,10 @@ sudo cp XXX /mnt/back/
 sudo umount /mnt/back
 sudo cryptsetup luksClose /dev/mapper/back
 ```
+
+#### 配置
+
+```
+# 配置文件是/etc/crypttab，详见man crypttab
+```
+

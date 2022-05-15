@@ -70,6 +70,12 @@ man			# 查看给定命令的手册
 override	# Modify directory toolchain overrides
 run			# 运行一个命令
 self		# 修改rustup安装
+	# rustup self <cmd>
+	# <cmd>:
+	# update - 下载并安装对rustup的更新
+	# uninstall - 卸载rustup
+	# upgrade-data - 更新内部数据格式
+	# help
 set			# 设置rustup
 show		# 显示工具链或设置
 	# rustup show <cmd>
@@ -119,6 +125,12 @@ rustup component add rust-src
 cargo install cargo-binutils
 rustup component add llvm-tools-preview
 ```
+
+2 crates.io的索引无法更新
+
+解决方法：参考cargo的"换源"
+
+
 
 
 
