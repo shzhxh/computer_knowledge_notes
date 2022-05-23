@@ -148,6 +148,10 @@ V	# 选择，以行为单位
 	:vsp filename	# 纵向分屏，并打开文件filename
 	:sp  filename	# 横向分屏，并打开文件filename
 	ctrl+w+[hjkl]	# 分屏左下上右切换
+	ctrl+w+[qc]		# 关闭光标所在的分屏
+	ctrl+w+v		# 对当前的文件左右分屏
+	ctrl+w+s		# 对当前的文件上下分屏
+	ctrl+w+w		# 在分屏之间切换
 	:open filename	# 打开文件filename
 	:ls				# 显示已打开的文件
 	:bn		# 切换文件

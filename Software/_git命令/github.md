@@ -61,6 +61,10 @@
 - Job matrix：一个matrix生成的job数不得超过256个。
 - Workflow运行队列：每个仓库10秒内的的wrokflow队列不得超过500个
 
+##### 例子：代码同步
+
+1. `ssh-keygen`生成一个密钥对，私钥放github，公钥放gitlink。
+
 #### 免密登陆
 
 [使用ssh免密登陆](https://help.github.com/en/articles/connecting-to-github-with-ssh)

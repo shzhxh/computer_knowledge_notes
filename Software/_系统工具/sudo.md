@@ -24,3 +24,8 @@ usermod -aG sudo <user_name>
 vi /etc/group	# 直接修改/etc/group命令把用户加到admin或sudo组
 ```
 
+#### 错误记录
+
+1 sudo: unable to resolve host xxx
+
+> 编辑/etc/hosts文件，在localhost的后面添加" xxx"(注：空格分隔，不加引号)

@@ -17,3 +17,5 @@
 1 `Permission denied`
 
 因为远程主机的目录权限不对，注意修改目录权限。
+
+2 `-P <port>`一定要在`[options]`这个位置
