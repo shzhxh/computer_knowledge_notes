@@ -1,4 +1,4 @@
-name: Sync Github Repos To Gitlink
+name: Sync shzhxh
 
 on:
   push:
