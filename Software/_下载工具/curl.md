@@ -22,6 +22,7 @@ Client URL，用来请求web服务器，是一个上传下载工具。
 -S, --show-error	# 与-s联用，当产生错误时会显示出错信息。
 -v, --verbose	# 显示一次http通信的整个过程。
 -x, --proxy [protocol://]<host>[:port]	# 指定代理。
+-X, --request <method>	# 
 ```
 
 

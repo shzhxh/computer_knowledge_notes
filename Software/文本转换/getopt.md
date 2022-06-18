@@ -21,7 +21,7 @@
 ```
 getopt [options] [--] <optstring> <parameters>
 getopt [options] <-o|--options> <optstring> [options] [--] <parameters>
-	# options和sptstring决定解析的方式
+	# options和optstring决定解析的方式
 	# parameters是要解析的内容
 ```
 

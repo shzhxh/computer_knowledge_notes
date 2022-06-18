@@ -56,6 +56,10 @@ int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
  */
 int getsockname(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
+/* 获取网络插座sockfd的状态
+ */
+int getsockopt(int sockfd, int level, int optname, void *restrict optval, socklen_t *restrict optlen);
+
 /* 让服务端的网络插座sockfd变成被动网络插座。(网络插座默认是主动)
  */
 int listen(int sockfd, int backlog);
@@ -98,6 +102,11 @@ ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
 //   SOCK_STREAM - 提供顺序的、可靠的、双向的、基于连接的字节流。
 //   SOCK_DGRAM - 支持数据报（无连接的，不可靠的，消息有最大长度）。
 // protocol：指定网络插座要用的协议。通常一个网络插座的类型对应唯一的协议，此时此参数可指定为0；但若存在对应多个协议的情况，此时必须指定协议号。(详见/etc/protocols)
+
+/* 设置网络插座sockfd的状态
+ */
+int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
+
 int socket(int domain, int type, int protocol);
 
 /* 作用：创建两个网络插座，并使它们之间互相连接。

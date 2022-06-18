@@ -61,9 +61,33 @@
 - Job matrix：一个matrix生成的job数不得超过256个。
 - Workflow运行队列：每个仓库10秒内的的wrokflow队列不得超过500个
 
+##### 编写action
+
+- Dockerfile : 用于创建Docker容器action
+- action.yml：action的配置
+  - `input:<args>`定义接收的参数，其中`required`为true则必须传递此参数。
+  - `runs:`定义运行环境，比如docker。
+- entrypoint.sh：执行脚本。
+
 ##### 例子：代码同步
 
-1. `ssh-keygen`生成一个密钥对，私钥放github，公钥放gitlink。
+1. `ssh-keygen`生成一个密钥对，私钥放github的`仓库设置->Secrets`下，公钥放gitee的`个人设置->SSH公钥`下。
+2. gitee的个人设置下新建一个私人令牌，保存到github仓库设置的`secrets`下。
+3. 在github仓库里`.github/workflow/`目录下新建一个yml文件，使用第三方action实现推送。
+
+##### 例子：缓存文件
+
+- 输入：
+
+  `path` - 要缓存的文件和目录
+
+  `key` - 为保存文件而设置的键
+
+  `restore-keys` - 键的列表，如果缓存没有命中用来恢复缓存
+
+- 输出：
+
+  `cache-hit` - 一个布尔值，表示是否为键找到了确切的匹配。
 
 #### 免密登陆
 

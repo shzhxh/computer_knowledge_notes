@@ -81,3 +81,16 @@ strace [options] <command> [args]
 -V	# 打印版本号。
 ```
 
+#### 错误记录
+
+##### 1
+
+- 错误描述：docker里运行strace，提示`ptrace(PTRACE_TRACEME, ...): Function not implemented`
+- 原因分析：请参考[why-strace-doesnt-work-in-docker](https://jvns.ca/blog/2020/04/29/why-strace-doesnt-work-in-docker/)
+- 解决方法：`docker run --cap-add=SYS_PTRACE  -it ubuntu:18.04 /bin/bash`
+
+##### 2
+
+- 错误描述：shell脚本里运行strace，提示`strace: exec: Permission denied`
+- 原因分析：不知道为什么
+- 解决方法：`bash ./script.sh`

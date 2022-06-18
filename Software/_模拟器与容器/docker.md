@@ -74,7 +74,9 @@ docker buildx [options] <cmd>	# 使用buildkit来构建
   bake
   build [options] <path | url | ->		# 开始一个构建
     -t, --tag <stringArry>	# stringArry的格式是'name:tag'，其中tag是可选的
-  create
+  create	# 创建一个builder实例
+    --name <str>	# builder实例的名字
+    --use		# 设置当前的builder实例
   du
   inspect
   ls
@@ -349,6 +351,7 @@ docker run [options] <image> [cmd] [args]
 --name <string>	# 指定容器名
 --network <network>	# 把容器连接到一个network
 -p, --publish <list>	# 把容器的端口发布到主机
+--privileged	# 为此容器提供扩展的权限(extended priviledges)
 --rm			# 当exit的时候自动删除容器
 -t, --tty		# 分配一个伪TTY
 -v, --volume <list>	# 绑定并挂载一个卷
@@ -399,11 +402,41 @@ docker stop [options] <containers>	# 停止一个或多个运行中的容器。
 #### 配置
 
 ```
-# 使用代理上网
+# 使用代理上网，方法一
 vim /etc/default/docker # 修改http_proxy
+
+# 使用代理上网，方法二
+vim ~/.docker/config.json	# 添加如下内容
+{
+  "proxies":
+  {
+    "default":
+    {
+      "httpProxy":"http://proxy.example.com:8080",
+      "httpsProxy":"http://proxy.example.com:8080",
+      "noProxy":"localhost,127.0.0.1,.example.com"
+    }
+  }
+}
 ```
 
 
+
+#### 多架构支持
+
+##### 使用binfmt_misc
+
+binfmt_misc可以模拟执行异架构的二进制程序
+
+```
+apt install binfmtc binfmt-support
+docker run --rm --privileged multiarch/qemu-user-static --reset --persistent yes
+docker run -it riscv64/alpine:edge
+```
+
+##### 使用buildx子命令
+
+buildx是下一代标准构建命令的前端
 
 #### 使用示例
 
@@ -430,14 +463,16 @@ docker cp alpine-3:root/abc .	# 把容器alpine-3的abc文件传到当前目录
 
 #### 错误分析
 
-1. 问题描述
+1. 问题描述：脚本script_file.sh在docker内手动运行正常，但使用`docker exec -d docker_name script_file.sh`运行出错。错误原因是：command not found。
 
-   脚本script_file.sh在docker内手动运行正常，但使用`docker exec -d docker_name script_file.sh`运行出错。错误原因是：command not found。
+   原因分析：因为在`.bashrc`文件里设置了额外的环境变量，而`docker exec`命令并不会设置额外的环境变量。
 
-   原因分析
+   解决方法：在脚本里使用`source`命令设置所需要的环境变量。
 
-   因为在`.bashrc`文件里设置了额外的环境变量，而`docker exec`命令并不会设置额外的环境变量。
+2. 问题描述：`Cannot connect to the Docker daemon`
 
-   解决方法
-
-   在脚本里使用`source`命令设置所需要的环境变量。
+   原因分析：docker的守护进程没有启动
+   
+   解决方法：要找到具体的原因，比如用`systemctl status docker`进一步排查。
+   
+3. 问题描述：`start request repeated too quickly for docker.service`

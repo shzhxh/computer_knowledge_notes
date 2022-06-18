@@ -1,4 +1,4 @@
-#### archLinux安装过程分析
+#### 安装过程分析
 
 本文是对archlinux安装过程原理的分析，而不是安装引导，具体的安装步骤请参照wiki.archlinux.org。
 
@@ -33,7 +33,7 @@
 
 
 
-#### 在qemu上安装archLinux
+#### 在qemu上安装
 
 1. qemu的网络采用tun/tap方式，这是最好连网方式
 ```
@@ -106,7 +106,7 @@
 	pacman -S net-tools		//这样才可以使用ifconfig等工具
 ```
 
-#### U盘安装
+#### 在物理机上安装
 
 ##### 1. 制作启动盘
 
@@ -198,5 +198,13 @@ vim /etc/asound.conf
 
 # 视频解码器
 pacman -S gst-plugins-base gst-plugins-bad gst-plugins-good gst-plugins-ugly gst-libav
+```
+
+#### 使用AUR
+
+```
+git clone 	# 下载
+makepkg -si	# 安装或更新包，并使用pacman安装缺失的依赖
+pacman -Rs 	# 卸载包
 ```
 

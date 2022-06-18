@@ -4,6 +4,8 @@
 
 #### 模块
 
+- consts - 与当前目标相关的常数
+
 #### 结构体
 
 - Args - 进程参数的迭代器，为每个参数都生成一个`String`类型的值。
@@ -12,9 +14,19 @@
   pub struct Args { /* fields omitted */ }
   ```
 
-  
+- ArgsOs
+
+- JoinPathsError
+
+- SplitPaths
+
+- Vars
+
+- VarsOs
 
 #### 枚举类型
+
+- VarError
 
 #### 函数
 
@@ -24,4 +36,30 @@
   pub fn args() -> Args
   ```
 
-  
+- args_os
+
+- current_dir
+
+- current_exe
+
+- home_dir
+
+- join_paths
+
+- remove_var
+
+- set_current_dir
+
+- set_var
+
+- split_paths
+
+- temp_dir
+
+- var
+
+- var_os
+
+- vars
+
+- vars_os

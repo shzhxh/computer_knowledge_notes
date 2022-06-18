@@ -20,7 +20,7 @@ lzcat	# 等价于xz -dc -F lzma，解压lzma文件并输出到stdout
 ##### 操作模式
 
 ```
---z, --compress	# 压缩
+-z, --compress	# 压缩
 -d, --decompress, --uncompress	# 解压
 -t, --test
 -l, --list
@@ -67,3 +67,22 @@ lzcat	# 等价于xz -dc -F lzma，解压lzma文件并输出到stdout
 ##### 配置压缩过滤链
 
 ##### 其它
+
+#### 示例
+
+##### 基本
+
+```
+xz foo	# 把文件foo压缩为foo.xz，并在压缩成功后删除foo
+xz -dk bar.xz	# 解压缩bar.xz为bar，且在解压成功后不删除bar.xz
+tar cf - baz | xz -4e > baz.tar.xz
+	# 从文件baz创建baz.tar.xz，比默认的-6更慢但会需要更少的内存
+xz -dcf a.txt b.txt.xz c.txt d.txt.lzma > abcd.txt
+	# 只用一条命令就可以把压缩文件和非压缩文件合并为一个文件
+```
+
+##### 并行压缩
+
+##### 机器人模式
+
+##### 配置压缩过滤链

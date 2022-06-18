@@ -120,3 +120,10 @@ make menuconfig		# 调整.config
 make CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv -j8 install
 ```
 
+#### 问题解决
+
+1. 问题描述：libwacom9 : Depends: libwacom-common (= 2.2.0-1) but 1.12-1 is to be installed
+
+   原因分析：依赖冲突？
+
+   解决方法：`apt install libwacom9 libwacom2-`
