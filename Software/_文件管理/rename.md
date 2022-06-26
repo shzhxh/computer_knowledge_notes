@@ -15,7 +15,11 @@ rename [options] <perlexpr> [files]	# 对于files,使用规则perlexpr重命名
 #### 示例
 
 ```
-rename abc ABC abc*	# 把abc开头的文件里，abc修改为ABC(for C)
-rename 's/abc/ABC/' abc*	# 把abc开头的文件里，abc修改为ABC(for Perl)
+# C语言版
+rename abc ABC abc*	# 把abc开头的文件里，abc修改为ABC
+rename '' ABC *txt	# 给txt结尾的文件加上前缀ABC
+
+# Perl语言版
+rename 's/abc/ABC/' abc*	# 把abc开头的文件里，abc修改为ABC
 ```
 

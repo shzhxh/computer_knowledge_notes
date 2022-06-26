@@ -200,6 +200,21 @@ vim /etc/asound.conf
 pacman -S gst-plugins-base gst-plugins-bad gst-plugins-good gst-plugins-ugly gst-libav
 ```
 
+#### 获取源码
+
+```
+# abs是Arch Build System，可以通过它获取源码
+sudo pacman -S base-devel abs
+sudo abs	# 下载abs树
+sudo abs [package_name]
+	# 可以通过pacman -Qo命令查找一个程序所属的包
+cp -r /var/abs/[package_name] /mydir
+cd /mydir
+makepkg -os	# 获取源码，不进行构建
+```
+
+
+
 #### 使用AUR
 
 ```

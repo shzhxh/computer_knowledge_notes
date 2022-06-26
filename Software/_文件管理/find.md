@@ -137,5 +137,6 @@ find ./ -type f -name "hadoop-core*"	# 递归查找当前目录下以hadoop-core
 find -type f -not -name "*.md"			# 查找类型为文件，名称不匹配"*.md"的文件
 find . -type f -size +1M -print0 | xargs -0 du -h	# 查找当前目录下大于1M的文件，并打印其大小。注：如果想排序的话还可以通过管道输出给sort -h，但不要使用sort -n，因为-n选项是按数字排序，并不能表达文件真实的大小序列
 find -type f -name "*.png" -exec cp {} /tmp/png/ \;	# 把当前目录下的png文件复制到/tmp/png/目录下
+find abc -type d -empty -delete	# 递归删除abc下所有的空目录（包括abc）
 ```
 

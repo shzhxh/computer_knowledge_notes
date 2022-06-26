@@ -1,3 +1,9 @@
+### 参考资料
+
+- [cargo](https://doc.rust-lang.org/cargo/commands/cargo.html)
+- `rustup doc --cargo`
+- `cargo help <cmd>`
+
 ### 简介
 
 cargo是rust的包管理器。
@@ -230,11 +236,34 @@ git-fetch-with-cli
 
 ##### Cargo.toml
 
-- 如以[workspace]开始，则用于设置工作空间。工作空间是多个包的集合，每个包都是工作空间里的一个成员。
+- [workspace]，用于设置工作空间(workspace)。工作空间是多个包的集合，这些包就叫做工作空间的成员(workspace members)。有两种工作空间：作为root package，或作为虚拟清单(virtual manifest)。
+
+  `Cargo.toml`里即有`[workspace]`段也有`[package]`段，这种情况下这个package就是root package。工作空间的根目录(workspace root)就是工作空间的`Cargo.toml`所在的目录。
+
+  `Cargo.toml`里只有`[workspace]`段没有`[package]`段，这就叫虚拟清单。如果没有"主"包，或想让所有的包都在不同的目录下，则使用虚拟清单。
+
+  工作空间的要点是：
+
+  - 所有的包共用工作空间根目录下的`Carogo.lock`文件。
+  - 所有的包共用同一个输出目录，这个输出目录默认是工作空间根目录下的`target`目录。
+  - `Cargo.toml`里的`[patch], [replace], [pofile.*]`段只在根清单里被识别，而成员清单里则被忽略。
+
+  注意：工作空间里的所有存在依赖关系的路径，会自动成为工作空间的成员。所以`[package]`字段带着一个空的`[workspace]`字段，就是创建了一个包含这个包和它所有依赖路径的工作空间。
 
   ```
-  members		# 定义工作空间里的成员
+  # [workspace]段
+  members		# 定义工作空间里的成员，是由目录字符串组成的数组，支持通配符。
   exclude		# 避免把路径包含进工作区
+  default-members	# 在工作空间的根目录下，命令行里没有使用-p或--workspace标志显式地指定要操作的包，则使用此选项里定义的包作为要操作的包。
+  
+  # 选择工作空间
+    # 当进到工作空间的子目录，cargo会自动从父目录里找有[workspace]定义的Carogo.toml文件，以决定使用哪个工作空间。但也可以在成员库里使用 package.workspace 来手动指定工作空间的根目录。
+    
+  # 选择包
+    # 在工作空间里，与包相关的cargo命令(比如cargo build)可以用-p 或--workspace来指定要操作的包。如以上两个选项都没使用，cargo会使用当前工作目录下的包。如果当前目录是虚拟工作空间，则会添加所有的成员(和在命令行里给出--workspace的效果是一样的)。
+    
+  # [workspace.metadata]
+    # cargo会忽略它且不会报警。那些在Cargo.toml里保存工作空间配置的工具会用到它。虽然cargo没有为它的内容指定格式，但建议外部工具以统一的方式来使用它。例如，如果[package.metadata]缺数据的话则引用[workspace.metadata]里的数据。
   ```
 
 - 如以[package]开始，则用于定义package。
@@ -312,9 +341,3 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
    > cargo使用了自带的git命令，导致git命令执行失败。参考“配置”相关章节进行设置。
 
-### 参考资料
-
-- [cargo](https://doc.rust-lang.org/cargo/commands/cargo.html)
-- `rustup doc --cargo`
-- `cargo help <cmd>`
-- 

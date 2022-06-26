@@ -3,7 +3,7 @@ git lfs <command> [args]	# 在git仓库里管理大文件
 # 注：此子命令需单独安装：sudo apt install git-lfs
 ```
 
-高层命令
+#### 高层命令
 
 ```shell
 install	# 安装配置
@@ -15,12 +15,12 @@ pull	# 从远程获取LFS文件。相当于先执行git lfs fetch，再执行git
 track	# 查看git lfs路径，或把git lfs路径加到git attributes
 ```
 
-底层命令
+#### 底层命令
 
 ```
 ```
 
-示例
+#### 示例
 
 ```bash
 # 1. 设置git lfs，每个仓库仅需运行一次
@@ -35,3 +35,12 @@ git commit -m "Add disk image"
 git push
 ```
 
+#### 错误解决
+
+##### 1 
+
+错误提示：执行`git lfs pull`产生这样的错误`Smudge error: Error downloading ... Not Found: [404] Not Found`
+
+原因分析：远程仓库的大文件不存在
+
+解决方法：先要在本地把这些大文件下载完整，然后使用`git pull` 命令推送到远程仓库。

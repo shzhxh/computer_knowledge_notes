@@ -330,4 +330,11 @@ ctrl+w+w		# 列表区和文本区切换
 #### 常见错误
 
 - 在shell下`Ctrl+s`不是保存文件，而是暂停该终端，此时对终端的所有操作均无效。需要`Ctrl+q`退出当前状态。
+
 - 在shell下Ctrl+z是将该任务挂起了，可以输入`fg`继续之前的编辑。
+
+- 现象描述：Windows文本在Linux下显示`^M`
+
+  原因分析：Windows下和Linux下对换行符的理解不一致。
+
+  解决方法：`sed -i 's#\r#\n#' filename`

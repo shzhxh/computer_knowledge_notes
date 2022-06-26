@@ -16,11 +16,13 @@ sudo make install
 
 - 前端：qemu里运行的操作系统所能看到的设备。比如e1000网卡。
 - 后端：宿主机所能看到的qemu上的设备。比如网络设备的后端，user和tap等。
+- virtio：一个客户机和宿主机之间通信的接口。可以减少不同平台之间的兼容性问题。它是半虚拟化的解决方案，相比全虚拟化提升了性能。
 
 #### 语法
 
 ```
 qemu-system-riscv64 [options] [disk_image]
+	# [disk_image] : 0号IDE硬盘的镜像。某些系统是不需要镜像的。
 ```
 
 #### 选项
@@ -28,14 +30,15 @@ qemu-system-riscv64 [options] [disk_image]
 ##### 标准选项
 
 ```
--accel	# 选择加速器的模型
+-accel name[,prop=value[,...]]	# 选择加速器的模型
+-add-fd
 -audiodev [driver=]driver,id=id[,prop[=value][,...]]
 	# 添加一个音频后端driver，其id为id。
 	# 可用的prop有：
 	# id=identifier : 标识音频后端
 	# timer-period=period : 设置音频子系统的计时器周期。默认10000(10ms)
 -boot # 定义启动顺序
--cpu	# 选择CPU模型
+-cpu <model>	# 选择CPU模型
 	# 可用的CPU:
 	# Haswell - Intel Core Processor (Haswell)
 	# 可以被识别的CPUID:
@@ -96,6 +99,7 @@ qemu-system-riscv64 [options] [disk_image]
 -m megs	# 指定内存大小为megs，默认128M。
 -name string1[,process=string2][,debug-threads=on|off]
 	# 设置客户机的名称，string1是窗口名，string2是进程名
+-numa
 -smp n	# 设置CPU的个数为n，默认为1。
 -soundhw	# 使能并使用声卡。
 -version	# 打印版本信息
@@ -212,6 +216,8 @@ qemu-system-riscv64 [options] [disk_image]
 
 ```
 -nic [tap|user|...] [,...] [,mac=] [,model=]	# 此选项是一个快捷方式，用来一次性配置网络的前端和后端。网络的后端的选项和-netdev的选项是一样的。
+	# model=<modelname> : 配置客户端的网卡模型，model=help列出所有支持的类型。
+	# mac=<macaadr> ： 设置硬件的mac地址。
 -nic none	# 意味着不配置任何网络设备。它用来覆盖默认配置。默认配置是前端为默认网卡，后端为user。当没有提供其它网络选项的时候会激活默认配置。
 -netdev user,id=str[,...]	# 设置宿主网络为用户模式，这样就不需要超级用户的权限了。
   hostfwd=[tcp|udp]:[hostaddr]:hostport-[guestaddr]:guestport

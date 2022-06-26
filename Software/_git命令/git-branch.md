@@ -26,6 +26,7 @@ git branch <--edit-description> [branchname]
 #### 选项
 
 ```
+-a, --all		# 把本地分支和远程追踪的分支都列出来。
 -c, --copy		# 复制分支和相关的reflog
 -C				# 等价于--copy --force，强制复制分支
 -d, --delete	# 删除分支

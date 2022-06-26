@@ -136,6 +136,7 @@ pacman -S python	# 下载并安装python
 pacman -U <pkg>		# 本地安装软件包
 pacman -Syu			# 更新并升级
 pacman -Qs glibc	# 查询满足glibc的本地安装包
+pacman -Fl glibc	# 列出glibc包所包含的文件
 pacman -Qo /usr/lib/libm.a	# 查询文件libm.a所归属的软件包
 pacman -S --help	# 查询安装软件包的方法
 ```
