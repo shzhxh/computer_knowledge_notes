@@ -546,3 +546,11 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 解决方法：加上`-enable-kvm`选项
 
 原因分析：不开kvm硬件加速的情况下，可能cpu执行慢或代码进入了某种死循环中。
+
+##### 问题二
+
+问题描述：`undefined symbol: libusb_set_option`
+
+解决方法：使用`strace`命令观察`qemu-system-*`执行过程的输出，发现打开了一个非系统的`libusb.so`库，删除那个库所属的应用，再次安装qemu，问题解决
+
+原因分析：使用了不正确的`libusb.so`库

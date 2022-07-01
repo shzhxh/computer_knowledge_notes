@@ -49,6 +49,16 @@ sudo apt install xxxx:i386			# 安装软件包并指定其架构为i386
 # 原因分析：设置了代理
 ```
 
+##### apt-upgrade的问题
+
+```
+# 错误提示：dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem.
+# 解决方法：rm -rf /var/lib/dpkg/updates/*
+# 原因分析：配置冲突？
+```
+
+
+
 #### sources.list文件
 
 - 以`#`开头：注释
