@@ -1,6 +1,15 @@
+#### 参考文档
+
+- [github/pyserial](https://github.com/pyserial/pyserial)
+- [doc](https://pythonhosted.org/pyserial/)
+
+#### 安装
+
 ```
 pip3 install pyserial	# 安装pyserial
 ```
+
+#### 用法
 
 ```python
 import serial	# 导入pyserial模块
@@ -31,6 +40,18 @@ ser.rtscts		# 硬件流控制
 ser.dsrdtr		# 硬件流控制
 ser.interCharTimeout	# 字符间隔超时
 ```
+
+#### Serial类
+
+##### 数据描述符
+
+```
+cts	# Clear To Send，清除发送
+rts	# Request To Send，请求发送
+dtr	# Data Terminal Ready，数据终端准备完毕
+```
+
+
 
 #### serial.tools.miniterm
 
