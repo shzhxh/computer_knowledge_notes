@@ -1,9 +1,10 @@
-需求：
-1. 在qemu -machine sifive 上运行起来debian linux for rv64; 
-2. 用gcc OR llvm +musl lib编译静态库busybox，能跑在 debian linux for rv64上;
-3. 用gcc OR llvm +musl lib编译静态 helloworld app, 能跑在 debian linux for rv64上。 
 
-参考：[wiki.debian.org](https://wiki.debian.org/RISC-V#Setting_up_a_riscv64_virtual_machine)
+
+### 参考资料
+
+- [wiki.debian.org](https://wiki.debian.org/RISC-V#Setting_up_a_riscv64_virtual_machine)
+
+### 安装Debian(rv64)
 
 #### 0. 环境准备
 
@@ -120,7 +121,20 @@ make menuconfig		# 调整.config
 make CROSS_COMPILE=riscv64-linux-gnu- ARCH=riscv -j8 install
 ```
 
-#### 问题解决
+### 配置
+
+```
+# 安装缺失的固件
+sudo apt install isenkram-cli
+sudo isenkram-autoinstall-firmware
+
+# 安装输入法
+sudo apt install fcitx5 fcitx5-chinese-addons
+```
+
+
+
+### 问题解决
 
 1. 问题描述：libwacom9 : Depends: libwacom-common (= 2.2.0-1) but 1.12-1 is to be installed
 

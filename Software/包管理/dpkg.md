@@ -41,3 +41,8 @@ dpkg [options] <action>	# 管理debian包
 
 ```
 
+#### 错误解决
+
+1 安装缺失的依赖
+
+当`dpkg -i <pkg>`因缺失依赖而失败时，执行`apt install -f`安装缺失的依赖。

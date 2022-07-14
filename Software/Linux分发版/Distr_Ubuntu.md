@@ -94,6 +94,14 @@ ubuntu下使用程序Startup Disk Creator 创建启动U盘。
    gnome-extentions install 
    ```
 
+8. 不进入图形界面
+
+   ```
+   sudo systemctl set-default multi-user.target	# 默认不进入图形界面
+   sudo systemctl start gdm3.service		# 从控制台进入图形界面
+   sudo systemctl set-default graphical.target		# 默认进入图形界面
+   ```
+
    
 
 
