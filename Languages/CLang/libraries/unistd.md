@@ -99,5 +99,10 @@ pid_t fork(void);
 
 /* 返回当前线程在内核里的线程id */
 pid_t gettid(void);
+
+/* 睡眠usec毫秒
+ * 返回值：0成功，-1失败
+ */
+int usleep(useconds_t usec);
 ```
 
