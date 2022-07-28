@@ -26,3 +26,49 @@ cd zCore && make build linux=1 arch=riscv64	# 从Makefile可见，最终执行�
 ##### primary_main
 
 `primary_main`初始化日志系统，可以打印字符。初始化内存，重新映射内核。最后执行`run`函数开始调度用户态进程。
+
+#### 库之间的依赖关系
+
+##### zCore的依赖
+
+- kernel-hal -> zcore-drivers(**drivers**)
+
+- zcore-loader(**loader**) -> kernel-hal
+
+  -> zircon-object
+
+  -> linux-object
+
+  -> zircon-syscall
+
+  -> linux-syscall
+
+- zircon-object -> kernel-hal
+
+- linux-object -> zircon-object
+
+  -> kernel-hel
+
+  -> zircon-driver(**drivers**)
+
+linux-syscall -> zircon-object
+
+-> linux-object
+
+-> kernel-hal
+
+zircon-syscall-> zircon-object
+
+-> kernel-hal
+
+##### zCore的结构
+
+| 层级 | 名字                          | 作用                                   |
+| ---- | ----------------------------- | -------------------------------------- |
+| 6    | zCore                         | 顶层的库，调用底层库提供的各种功能     |
+| 5    | loader                        | 装载和执行用户程序，支持上层调用下层   |
+| 4    | linux-syscall, zircon-syscall | 实现系统调用，支持上层调用下层         |
+| 3    | linux-object, zircon-object   | 实现内核对象，支持上层调用下层         |
+| 2    | kernel-hal                    | 实现硬件抽象层的接口，支持上层调用下层 |
+| 1    | drivers                       | 实现驱动程序，对上层提供支持           |
+

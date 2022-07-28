@@ -51,5 +51,8 @@ git branch tmp	# 创建新分支tmp，把当前detached的提交保存在新分�
 git checkout main	# 切换到main分支
 git merge tmp	# 把tmp分支合并到main分支
 git branch -d tmp	# 删除tmp分支
+
+# 2 删除远程追踪的分支
+git branch -rd origin/tmp	# 删除远程仓库origin里的tmp分支
 ```
 

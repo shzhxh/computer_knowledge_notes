@@ -28,7 +28,7 @@ git clone https://aur.archlinux.org/ttf-wps-fonts.git
 cd ttf-wps-fonts
 makepkg -si
 
-# for ubuntu
+# for ubuntu and debian
 sudo apt install ttf-mscorefonts-installer
 
 # 适用于所有Linux系统

@@ -29,5 +29,13 @@ git push origin <tagname>	# 将标签推送到服务器
 -l, --list		# 列出标签
 -m, --message=<msg>			# 在msg里给出tag信息
 -F, --file=<file>			# 在file里给出tag信息
+--format=<fmt>	# 指定显示的格式为<fmt>。
+	# <fmt>的格式：在一个字符串里插入若干%(fieldname)。
+```
+
+#### 示例
+
+```
+git tag --format "%(refname:short) %(creatordate:short)"	# 获取标签的日期
 ```
 

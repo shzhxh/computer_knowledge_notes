@@ -23,5 +23,7 @@ zip [options] [zipfile] [file...]	# 把file...压缩为zipfile
 
 ```
 zip homework.zip *	//将当前文件夹下所有文件打包成homework.zip文件
+zip -e abc.zip abc	// 将文件abc压缩为abc.zip,且进行加密
+zip -r aaa.zip aaa	// 将目录aaa压缩为aaa.zip
 ```
 
