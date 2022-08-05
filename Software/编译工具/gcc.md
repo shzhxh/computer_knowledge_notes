@@ -10,6 +10,7 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 -c			# 不运行连接器，这样就只生成汇编器生成的目标文件。
 -S|-E	#
 -specs=<file>	# 编译器读取标准specs文件后再处理<file>,用来覆盖传给cc1,cc1plus,as,ld等的默认开关。
+-v	# 打印各个执行阶段所运行的命令。
 ```
 
 ##### C语言选项
@@ -57,6 +58,8 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 ##### 优化选项
 
 ```
+-ffuction-sections
+-fdata-sections
 -fomit-frame-pointer	# 在不需要frame指针的函数中忽略frame指针。
 -fno-omit-frame-pointer	# 看起来与-fomit-frame-pointer相反。
 -foptimize-sibling-calls	# 优化同级和尾部递归调用。

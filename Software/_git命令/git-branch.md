@@ -54,5 +54,8 @@ git branch -d tmp	# 删除tmp分支
 
 # 2 删除远程追踪的分支
 git branch -rd origin/tmp	# 删除远程仓库origin里的tmp分支
+
+# 3 查询本地分支追踪的是哪个远程分支
+git branch -vv
 ```
 

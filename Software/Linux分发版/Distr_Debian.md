@@ -141,3 +141,9 @@ sudo apt install fcitx5 fcitx5-chinese-addons
    原因分析：依赖冲突？
 
    解决方法：`apt install libwacom9 libwacom2-`
+   
+2. 问题描述：`man gcc`没有相关内容
+
+   原因分析：gcc-doc没有安装
+
+   解决方法：`apt instal gcc-doc`

@@ -9,7 +9,7 @@ Docker镜像和容器命令行接口(CLI)。是通过CLI与daemon交互的，共
 sudo apt-get install docker docker-engine docker.io	# for ubuntu
 sudo pacman -S docker	# for arch
 
-＃ 方法二：从第三方仓库安装
+＃ 方法二：从第三方仓库安装for ubuntu
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
@@ -19,6 +19,13 @@ sudo add-apt-repository \
     $(lsb_release -cs) \
     stable"
 sudo apt-get install docker-ce
+
+# 方法三：从第三方仓库安装for debian
+sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
 
@@ -432,6 +439,7 @@ binfmt_misc可以模拟执行异架构的二进制程序
 apt install binfmtc binfmt-support
 docker run --rm --privileged multiarch/qemu-user-static --reset --persistent yes
 docker run -it riscv64/alpine:edge
+docker run -it riscv64/debian:sid
 ```
 
 ##### 使用buildx子命令
