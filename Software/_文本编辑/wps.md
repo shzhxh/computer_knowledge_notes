@@ -35,3 +35,8 @@ sudo apt install ttf-mscorefonts-installer
 sudo cp -r fonts_dir /usr/share/fonts	# 直接把字体文件夹复制到对应目录下即可
 ```
 
+#### 问题解决
+
+1. 无法输入中文
+
+   参考此链接[wps使用fcitx5无法输入中文](https://wiki.archlinux.org/title/WPS_Office_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#Fcitx5_%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87)，配置完成后需要重启系统。

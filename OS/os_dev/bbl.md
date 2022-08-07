@@ -40,7 +40,7 @@ clint： Core Local Interrupter，提供实时时钟，计时器和处理器间�
 
 FDT主要由三大部分组成：Header, Structure block, Strings block。在内存中的分配如下图所示：
 
-![fdt_tree](_img/fdt_tree.jpg)
+![fdt_tree](../_img/fdt_tree.jpg)
 
 ```c
 /* Header主要描述设备树的基本信息 */

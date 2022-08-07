@@ -170,14 +170,34 @@ reboot 	# 重启，进入新安装的系统
 #### 配置
 
 ```bash
+# 创建用户
 useradd -m -g 用户组 -s /bin/zsh 用户名	# 创建普通用户
 passwd 用户名	# 为用户创建密码
 pacman -S sudo	# 安装sudo
 visudo	# 为用户添加sudo权限
 > 用户名   ALL=(ALL) ALL
+
+# 安装桌面环境
 pacman -S xorg-server xorg-apps	# 安装显示服务
 pacman -S xfce4 xfce4-goodies	# 安装桌面环境
 startxfce4	# 启动桌面环境
+
+# 安装显示管理器
+pacman -S lightdm ligthdm-gtk-greeter
+systemctl start lightdm
+systemctl enable lightdm
+
+# 中文输入法
+pacman -S fcitx5-im fcitx5-chinese-addons	# fcitx5及中文支持
+pacman -S fcitx5-qt gcitx5-gtk	# 得到更好的体验
+vim /etc/environment	# 添加如下几行(不包括">")
+> GTK_IM_MODULE=fcitx
+> QT_IM_MODULE=fcitx
+> XMODIFIERS=@im=fcitx
+> SDL_IM_MODULE=fcitx	# 为了支持使用SDL2库的游戏
+> GLFW_IM_MODULE=ibus	# 为了支持kitty,此环境变量的值只能为ibus
+
+# 安装网络工具
 pacman -S net-tools				# inconfig等网络工具
 
 # 提示没有wd719x和aic94xx，安装之

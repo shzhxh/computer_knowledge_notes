@@ -44,10 +44,21 @@ s#regexp#replacement#	# 也可以使用'#'号做为分隔字符，此时'/'就�
 
 #### 例子
 
+##### 打印
+
+```bash
+# 把文件里从start到end之间的内容打印出来(包含start和end所在的行)
+sed -n '/start/,/end/p' file
+
+# 把file1里278-280行的内容重定向到file2里
+sed -n '278,280p' file1 > file2
+```
+
+
+
+##### 删除
+
   ```shell
-# 保存sed输出，即将结果重定向到output-file:  
-sed 'sed-command' input-file > output-file
-    
 # 删除最后一行，将结果重定向到output-file：  
 sed '$d' input-file > output-file  
 	# "$"的作用请参考正则表达式，意为最后一行。
@@ -55,18 +66,19 @@ sed '$d' input-file > output-file
 # 删除包含了“abcd”的行
 sed -i "/abcd/d" input-file
   
-# 将指定目录path下的所有文件里的oldstr替换为newstr
-sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`
-
 # 删除每行里的前51个字符
 sed -i "s/.\{51\}//" file
 
-# 把文件里从start到end之间的内容打印出来(包含start和end所在的行)
-sed -n '/start/,/end/p' file
-
-# 把file1里278-280行的内容重定向到file2里
-sed -n '278,280p' file1 > file2
   ```
+
+##### 替换
+
+```bash
+# 将指定目录path下的所有文件里的oldstr替换为newstr
+sed -i "s/oldstr/newstr/g" `grep oldstr -rl path`
+```
+
+
 
 #### 参考文档
 
