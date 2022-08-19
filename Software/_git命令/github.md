@@ -95,6 +95,13 @@
 
 #### github webhook
 
+#### github classroom
+
+- 三种角色：
+- 老师（发布作业）：a创建学生信息并关联到github账号，b创建作业(并生成作业的链接)
+- 助教（对作业给出反馈），助教的反馈以pr的形式存在。
+- 学生（完成作业）：通过老师分享的链接加入作业，可以vscode在线编辑代码，也可git clone到本地编辑代码。提交后会执行github action的内容。可以在pr里看到助教的反馈。
+
 #### 免密登陆
 
 [使用ssh免密登陆](https://help.github.com/en/articles/connecting-to-github-with-ssh)

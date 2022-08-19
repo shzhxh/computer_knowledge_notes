@@ -42,8 +42,17 @@ allow, warn, deny, forbid	// 改变默认的检测级别
     deny(c)		// 如遇到c的违规行为，将发出error信号
     forbid(c)	// 类似于deny(c)，且禁止更改检测级别
 // ABI，链接，符号，FFI
+rate_name
+crate_type
+export_name		// 定义函数或static的对外符号名。
+link
+link_name
+link_section
+no_link
 no_main	// 不会加载"main"标记(当使用了no_std属性，rust就不会走正常的main函数流程，这时就需要使用no_main属性,详见参考文档的"rust-no-main")
 no_mangle	// 禁止符号名编码(这样编译器就不会mangle函数名，从而使其它语言可以调用Rust函数的接口)
+repr
+used
 // 代码生成
 // 文档
 // 预加载

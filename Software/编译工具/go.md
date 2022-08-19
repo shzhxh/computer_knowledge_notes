@@ -1,3 +1,16 @@
+#### 安装
+
+```bash
+wget https://go.dev/dl/go1.19.linux-amd64.tar.gz	# 下载
+tar xf go1.19.linux-amd64.tar.gz -C /usr/local		# 解压前要确保/usr/local/go目录不存在
+vim ~/.profile	# 添加如下内容
+	export PATH=$PATH:/usr/local/go/bin
+```
+
+
+
+#### 用法
+
 ```
 go <command> [arguments]
 ```

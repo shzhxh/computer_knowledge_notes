@@ -21,6 +21,7 @@ get-url <name>		# 检索远程分支的url
 set-url <name> <newurl>			# 改变远程分支的url
 prune [-n] <name>	# 删除与远程分支name相关的陈旧引用 
 	-n, --dry-run	# 只显示要删除的分支而不实际删除它们 
+update
 ```
 
 #### 用法

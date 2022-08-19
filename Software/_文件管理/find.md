@@ -34,7 +34,7 @@ find [options] [starting-point...] [expression]
 
 ##### 全局选项
 
-作用于命令行中所有位置的Tests和Actions操作，总是返回true。
+作用于命令行中所有位置的Tests和Actions操作，总是返回true。为防止混淆，全局选项应放在表达式的最前面。
 
 ```bash
 -d	# 等价于-depth，为了适应各种BSD Unix和MacOs X。

@@ -43,6 +43,12 @@ wget [option] [url]
 
 ##### 目录
 
+```
+-P, --directory-prefix=<prefix>	# 设置目录前缀为<prefix>。<prefix>实际上就是要保存的目录，默认值为当前目录。
+```
+
+
+
 ##### HTTP
 
 ```

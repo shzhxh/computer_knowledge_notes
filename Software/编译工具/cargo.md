@@ -56,22 +56,55 @@ build [options]	# 编译一个包。
 	# 注：使用"--release"时采用release配置
 	# 注：可以在Cargo.toml中使用[profile.*]覆盖任意设置的默认值。
 ## 包选项
+  -p <specs>
+  --workspace
+  --all
+  --exclude <SPECS>
 ## 目标选项
+  --lib
+  --bin <names>
+  --bins
+  --example <names>
+  --examples
+  --test <names>
+  --tests
+  --bench <names>
+  --benches
+  --all-targets
 ## 属性选项
+  -F <features>
+  --all-features
+  --no-default-features
 ## 编译选项
 	--traget <triple>	# 指定编译的架构(默认是主机的架构)。triple的格式为<arch><sub>-<vendor>-<sys>-<abi>。
 		# 也可以在配置文件里通过设置build.target实现同样的功能。
 		# 注：编译结果会放在不同的目录中。
-	--release	# 使用release配置来编译要优化的组件。
+	-r, --release	# 使用release配置来编译要优化的组件。
+	--profile <name>
+	--ignore-rust-version
+	--timings=<fmts>
 ## 输出选项
+  --target-dir <dir>
+  --out-dir <dir>
 ## 显示选项
+  -v, --verbose	# 输出详细信息。两次指定此参数可输出更详细的信息。
+  -q
+  --color <when>
+  --message-format <fmt>
+  --build-plan
 ## Manifest选项
 	--manifest-path <path>	# 指定Cargo.toml的路径。默认是从当前路径或任意父路径中查找。
+	--frozen, --locked
+	--offline
 ## 通用选项
 	+<toolchain>	# 指定工具链的名称。（如+stable，+nightly）。前提要求：cargo是通过rustup安装的，此参数为cargo的第一个参数。
+	--config <KEY=VALUE>
+	-h
 	-Z <flag>	# Unstable flags to Cargo。(仅用于nightly)
 ## 其它选项
 	-j, --jobs <N>
+	--keep-going
+	--future-incompat-report
 ```
 
 ##### check
