@@ -486,7 +486,7 @@ compare
 convert	[-f fmt] [-O output_fmt] <filename> <output_filename>
 
 # 创建镜像文件
-create [-f fmt] [-b backing_file] [-F backing_fmt] [-u] [-o options] <filename> [size]	
+create [-f fmt] [-b backing_file [-F backing_fmt]] [-u] [-o options] <filename> [size]	
 
 dd
 info	# 查看镜像的信息

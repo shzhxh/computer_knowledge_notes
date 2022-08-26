@@ -25,6 +25,7 @@ dpkg [options] <action>	# 管理debian包
 -l, --list <packages>	# 列出符合package的包
 -s, --status <packages>	# 打印指定包的状态
 -L, --listfiles <packages>	# 列出指定包安装在系统中的文件
+-S, --search <pattern...>	# 从已安装的包里搜索满足<pattern...>的文件
 ```
 
 

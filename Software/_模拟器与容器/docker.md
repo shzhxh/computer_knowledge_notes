@@ -352,6 +352,7 @@ docker rm [options] <containers> # 删除容器
 docker run [options] <image> [cmd] [args]
 	# 在一个新容器里运行命令，相当于create + start
 # 选项
+--entrypoint=""	# 覆盖默认的ENTRYPOINT,其实就是指定了[cmd]。
 -d, --detach	# 在后台运行容器，并打印容器的id
 -i, --interactive	# 即使没有attached也保持STDIN打开
 --mount <mount>	# 把一个文件系统挂载到容器

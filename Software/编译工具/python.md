@@ -5,7 +5,8 @@ python的三个特色：解释型的语言，面向对象，简洁的语法。
 #### 语法
 
 ```
-phthon [选项] [-c command | script | -] [arguments]
+python [选项] [-c command | script | -] [arguments]
+  # python还可以执行目录和zip文件，这将从__main__.py开始执行
 ```
 
 #### 选项
