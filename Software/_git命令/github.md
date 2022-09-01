@@ -89,6 +89,11 @@
 
   `cache-hit` - 一个布尔值，表示是否为键找到了确切的匹配。
 
+##### 例子：网页发布
+
+- `JamesIves/github-pages-deploy-action@v4`默认发布到gh-pages分支
+- 只需指定`folder`即可，该目录下的内容默认发布到ph-pages分支
+
 #### github packages
 
 #### github API

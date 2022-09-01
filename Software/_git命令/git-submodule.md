@@ -6,9 +6,22 @@ git submodule <command> [options]	# 初始化，更新或分析子模块
 
 ##### add
 
+```
+add [options] [--] <repo> [path]	# 添加子模块。
+# -b <branch>
+# -f, --force
+# --name <name>
+# --reference <repo>
+# --depth <depth>
+```
+
 ##### status
 
+显示子模块的状态。
+
 ##### init
+
+依据`.git/config`初始化子模块。
 
 ##### deinit
 
@@ -31,9 +44,15 @@ update [options] [--] [<path>...]
 
 ##### summary
 
+显示commit汇总。
+
 ##### foreach
 
+在每个子模块里执行指定的命令。
+
 ##### sync
+
+同步子模块。
 
 ##### absorbgitdirs
 

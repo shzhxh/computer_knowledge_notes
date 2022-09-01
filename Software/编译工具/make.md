@@ -65,3 +65,8 @@
 make SHELL="/bin/bash -x"	# 要了解详细的编译过程，但"make -n"又失效的时候，可试试这条命令
 ```
 
+#### 错误解决
+
+1. 不管执行什么命令都提示：No such file or directory.
+
+   原因分析：因为我在Makefile里错误地设置了PATH环境变量，导致make把那些命令都理解成了当前目录下的文件。
