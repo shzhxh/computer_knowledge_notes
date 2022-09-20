@@ -24,7 +24,7 @@ xorrisofs [options] [-o filename] <pathspecs>
 ##### 标准的扩展
 
 ```
--J, --joliet	# 除了Rock Ridge目录树，再添加Joliet目录树。
+-J, --joliet	# 除了Rock Ridge目录树，再添加Joliet目录树。为了与Windows兼容。
 -r, --rational-rock	# 类似于-R。不同之处是：它不保留文件的属主信息，而是把用户id和组id都置为0，并且文件的访问权限是只读。
 -R, --rock	# 开启Rock Ridge扩展。对于xorrisofs开说是默认开启的。
 ```

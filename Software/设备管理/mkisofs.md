@@ -1,0 +1,1 @@
+在Debian软件包里没有此应用`mkisofs`，应使用`xorrisofs`命令。

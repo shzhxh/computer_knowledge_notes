@@ -33,13 +33,19 @@ close <name>	# 删除映射的name，并消除内核空间里的key。
 
 ##### resize
 
+```
+resize [options] <name>	# 修改<name>的大小，其中<name>是一个活动的映射。
+```
+
+
+
 ##### refresh
 
 ##### reencrypt
 
-#### PLAIN
+#### PLAIN模式
 
-#### LUKS
+#### LUKS扩展
 
 ##### luksFormat
 
@@ -56,13 +62,13 @@ luksOpen <dev> <name>	# 旧语法
 
 
 
-#### loop-AES
+#### loop-AES扩展
 
-#### TCRYPT
+#### TCRYPT扩展
 
-#### BITLK
+#### BITLK扩展
 
-#### 杂项
+#### 其它动作
 
 #### 选项
 

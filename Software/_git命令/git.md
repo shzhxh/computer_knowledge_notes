@@ -26,7 +26,7 @@ git [optons] <command> [args]
 #### 选项
 
 ```
-
+-C <path>	# 指定git命令的执行目录。默认为当前目录。
 ```
 
 #### 高层命令(porcelain)

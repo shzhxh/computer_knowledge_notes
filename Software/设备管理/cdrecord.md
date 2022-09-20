@@ -1,0 +1,1 @@
+debian里没有`cdrecord`命令，应使用`xorrecord`命令。

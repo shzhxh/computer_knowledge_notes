@@ -35,6 +35,10 @@ sudo apt install ttf-mscorefonts-installer
 sudo cp -r fonts_dir /usr/share/fonts	# 直接把字体文件夹复制到对应目录下即可
 ```
 
+#### 审阅
+
+review -> track changes -> track changes开启审阅。
+
 #### 问题解决
 
 1. 无法输入中文

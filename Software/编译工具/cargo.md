@@ -185,13 +185,62 @@ update [options]	# 把Cargo.lock里的依赖更新到最新的版本。Cargo.loc
 
 #### 包命令
 
+##### search
+
 ```
-init [options] [path]	# 创建Cargo包
-install	# 构建和安装一个rust库。
-new	# 创建一个cargo包
+search [options] [query...]	# 从crates.io查找包
+```
+
+##### new
+
+```
+new [options] <path>	# 创建一个cargo包
 	--bin	# 默认选项。包里会有src/main.rs(二进制目标)。
 	--lib	# 包里会有src/lib.rs(库目标)。
-search [options] [query...]	# 从crates.io查找包
+```
+
+##### init
+
+```
+init [options] [path]	# 基于已有目录创建Cargo包
+	# 初始化选项
+	--bin	# 创建带有二进制目标(src/main.rs)的包。这是默认行为。
+	--lib	# 创建带有库目标(src/lib.rs)的包。
+	--edition <edition>	# 定义要使用的Rust版本。默认2021。
+	--name <name>	# 设置包名。默认为目录名。
+	--vcs <vcs>	#
+	--registry <reg>	#
+	# 显示选项
+	-v
+	-q
+	--color <when>
+	# 通用选项
+	+toolchain
+	--config <KEY=VALUE>
+	-h
+	-Z <flag>
+```
+
+##### install
+
+构建和安装一个rust二进制文件。只有包含**bin**和**example**对象的包才能被安装，所有的可执行文件都被安装在`bin`目录。
+
+```
+install [options] <crate>[@version]	# 从crate.io安装
+install [options] --path <path>		# 从本地路径安装
+install [options] --git <url> [crate]	# 从git仓库安装
+install [options] --list
+	# 安装选项
+	--git <url>	# 从<url>来安装指定的库。
+	--rev <sha>	# 从git仓库安装的时候指定commit号
+	--list		# 列出所有已安装的包和它们的版本号
+	-f, --force	# 如果库或二进制文件已存在，则覆盖它们。
+	# feature选项
+	# 编译选项
+	# 清单选项
+	# 其它选项
+	# 显示选项
+	# 普通选项
 ```
 
 

@@ -70,3 +70,11 @@ make SHELL="/bin/bash -x"	# 要了解详细的编译过程，但"make -n"又失�
 1. 不管执行什么命令都提示：No such file or directory.
 
    原因分析：因为我在Makefile里错误地设置了PATH环境变量，导致make把那些命令都理解成了当前目录下的文件。
+   
+2. 描述：recipe commences before first target.
+
+   原因分析：第一个以冒号结尾的字符串前面有空白字符，make命令把这个字符串识别为target了。
+   
+3. 描述：使用`ifeq`后提示`*** **missing separator**. Stop.`
+
+   原因分析：形如`ifeq(...)`是不行的，在`ifeq`和`(`之间需要有个空格。

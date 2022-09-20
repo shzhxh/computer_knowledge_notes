@@ -1,5 +1,6 @@
 ```
 dirname [option] <names>	# 给出name所在的目录。如name不包含'/'，则输出'.'以表明在当前目录。
+	# 注：如果要的是文件名则使用basename命令。
 ```
 
 选项

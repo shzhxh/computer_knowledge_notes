@@ -23,5 +23,7 @@ git reset <mode> [<commit>]	# 将当前分支的head指向commit
 ```
 git reset HEAD <file>	# 撤销对暂存区的修改
 git reset HEAD^			# 撤销最近一次提交
+git reset HEAD^^^		# 撤销最近三次提交
+git reset HEAD~3		# 撤销最近三次提交
 ```
 

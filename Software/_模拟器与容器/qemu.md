@@ -50,26 +50,30 @@ qemu-system-riscv64 [options] [disk_image]
 	# 使用"-device help"获取可用的设备名。使用"-device <drive>,help"获取某个设备的可用属性。
 	# 可用的prop有：
 	## Controller/Bridge/Hub设备
-	# usb-host:bus usb-bus
+	  usb-host:bus usb-bus
 	## USB设备
-	# qemu-xhci:bus PCI
+	  qemu-xhci:bus PCI
 	## 存储设备
-	# virtio-9p-pci:bus PCI, "virtio-9p"的别名
-	# virtio-blk-pic:bus PCI, 是"virtio-blk"的别名
+	  virtio-9p-pci:bus PCI, "virtio-9p"的别名
+	  virtio-blk-pic:bus PCI, 是"virtio-blk"的别名
 	## 网络设备
-	# e1000 : bus PCI,"e1000-82540em"的别名,desc "Intel Gigabit Ethernet"
+	  e1000 : bus PCI,"e1000-82540em"的别名,desc "Intel Gigabit Ethernet"
 	## 输入设备
-	# isa-serial:bus ISA
-	# usb-kbd:bus usb-bus
-	# usb-mouse:bus usb-bus
+	  isa-serial:bus ISA
+	  usb-kbd:bus usb-bus
+	  usb-mouse:bus usb-bus
 	## 显示设备
 	## 声音设备
 	## Misc设备
-	# ich9-intel-hda:bus PCI, desc "Intel HD Audio Controller (ich9)
-	# intel-hda:bus PCI, desc "Intel HD Audio Controller (ich6)"
-	# intel-iommu : bus系统，desc "Intel IOMMU (VT-d) DMA Remapping device"
-	# vhost-vsock-pci : bus PCI
+	  ich9-intel-hda:bus PCI, desc "Intel HD Audio Controller (ich9)
+	  intel-hda:bus PCI, desc "Intel HD Audio Controller (ich6)"
+	  intel-iommu : bus系统，desc "Intel IOMMU (VT-d) DMA Remapping device"
+	  loader : desc"通用loader"
+	    # file=<str> : 需指定<str>，代表要装载的文件
+	    # addr=<uint64> : 默认值0, 代表要装载的地址
+	  vhost-vsock-pci : bus PCI
 	## CPU设备
+	## 看门狗设备
 	## 未分类的设备
 -global driver.property=value
 -global driver=driver, property=property, value=value
@@ -554,3 +558,15 @@ other:包括VMDK, VDI, VHD (vpc), VHDX, qcow1 and QED
 解决方法：使用`strace`命令观察`qemu-system-*`执行过程的输出，发现打开了一个非系统的`libusb.so`库，删除那个库所属的应用，再次安装qemu，问题解决
 
 原因分析：使用了不正确的`libusb.so`库
+
+##### 问题三
+
+问题描述：`-kernel`、` -device loader`、` -bios`的区别。来源：[stackoverflow](https://stackoverflow.com/questions/58420670/qemu-bios-vs-kernel-vs-device-loader-file)
+
+解答：
+
+`-kernel`的意思是装载Linux内核。它会为当前架构使用最佳的装载和启动方式。对于x86架构，它只是把文件提供给BIOS，由BIOS做实际的装载工作。对于ARM，怎么加载内核取决于内核启动规则。
+
+`-device loader`是一个“通用loader”，它在所有架构上都是相同的行为。它仅仅是把ELF镜像加载进内存。如果一个镜像支持裸机启动，应该使用此选项。
+
+`-bios`的意思是装载BIOS镜像，依据机器模型和架构而不同。x86架构必须要加载BIOS，在用户没有指定的情况下会加载默认的二进制。如果是arm virt开发板，用户指定此选项才加载BIOS，否则不加载。注意，BIOS镜像不应该是ELF文件，而应该是原始的二进制文件，因为它们只是放进ROM或闪存中的原始数据，是硬件最初启动时的那段代码。还可以采用更正规的方式来指定BIOS镜像，比如`-drive if=pflash...`这样。

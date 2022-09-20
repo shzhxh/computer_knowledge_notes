@@ -37,3 +37,8 @@ mkimage [options] [image-name]		# 创建传统格式的镜像
 
 
 ##### 创建FIT镜像
+
+```
+-f [source-file | auto]	# [source-file]描述了FIT镜像的结构和内容。对于一些简单的情况可以使用[auto]来自动生成，这相当于使用了-d, -A, -O, -T, -C, -a, -e, 且不需要指定 .its 文件。
+```
+

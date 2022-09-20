@@ -8,6 +8,7 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 
 ```
 -c			# 不运行连接器，这样就只生成汇编器生成的目标文件。
+-pipe		# 各编译阶段之间使用管道通信，而不是使用临时文件通信。
 -S|-E	#
 -specs=<file>	# 编译器读取标准specs文件后再处理<file>,用来覆盖传给cc1,cc1plus,as,ld等的默认开关。
 -v	# 打印各个执行阶段所运行的命令。
@@ -16,8 +17,11 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 ##### C语言选项
 
 ```
+-ansi	# C模式下，等价于-std=c90。C++模式下，等价于-std=c++98。
 -fno-buitin	# 不使用C语言的内建函数
--std=<standard>	#
+-std=<standard>	# 定义语言的标准。
+	# c90 - ISO C90标准。
+	# c99 - ISO C99标准。
 ```
 
 ##### C++语言选项
@@ -38,6 +42,16 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 -w			# 不生成警告信息
 -Wall		# 生成所有警告信息
 -Werror		# 让所有的警告都变成错误
+-Werror=<switch>	# 让<switch>代表的警告变成错误。
+	# implicit-function-declaration
+	# implicit-int
+	# pointer-sign	# 使用不同的签名对指针参数进行传递或赋值
+	# pointer-arith	# 关于函数类型的大小或"void"的计算
+-Wno-missing-braces
+-Wno-overflow	# 当常量表达式在编译时溢出，不进行警告。
+-Wno-unknown-pragmas
+-Wno-unused		# 对于所有unused-*选项，都不进行警告。
+-Wno-unused-function
 -Wunused-function	# 
 -Wunused-label		# 当一个标签只声明而不使用时进行警告
 -Wunused-parameter	# 当函数参数未使用时进行警告
@@ -61,9 +75,11 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 -ffuction-sections
 -fdata-sections
 -fomit-frame-pointer	# 在不需要frame指针的函数中忽略frame指针。
+-fno-builtin	# 不以__builtin_为前缀的函数不被认为是内置函数(built-in function)
 -fno-omit-frame-pointer	# 看起来与-fomit-frame-pointer相反。
 -foptimize-sibling-calls	# 优化同级和尾部递归调用。
 -fno-optimize-sibling-calls	# 看起来与-foptimize-sibling-calls相反。
+-frounding-math		# 对于默认的浮点舍入行为，禁止转换和优化。
 -fno-stack-protector	# 禁用堆栈保护
 -O0		# 不进行优化
 -O1或-O	# 缺省优化
@@ -97,6 +113,7 @@ gcc一般会进行预处理，编译，汇编，连接四步。
 -pie	# 产生一个动态链接的位置无关可执行文件。为获得一个可预测的结果，还需要指定编译时对应的选项(-fpic, -fPIE, 或模型子选项)。
 -no-pie	# 不要产生动态链接的位置无关可执行文件。
 -l		# 指定要链接的库。默认为系统的库的路径。可查看/etc/ld.so.conf文件获取系统库路径的详情。
+-s	# 从可执行文件里删除所有的符号表和重定位(relocation)信息。
 -static	# 覆盖-pie选项，且不链接到共享库。
 -T		# 指定链接脚本。在没有操作系统的裸板上，可能需要-T选项来避免对未定义符号的引用。可以在搜索“lds链接脚本”关键字得到更详细信息。
 -Wl,option	# 把option作为选项传递给链接器。如果option里包含逗号，传递给链接器的时候逗号会被替换为空格，这个语法的好处是：可以传递多个选项过去，或者给选项指定一个参数。

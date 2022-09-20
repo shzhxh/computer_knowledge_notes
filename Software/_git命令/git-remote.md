@@ -15,7 +15,7 @@ add	<name> <url>	# 添加远程仓库,url是远程仓库的地址,name是远程�
 rename <old> <new>	# 将远程仓库的名称从old改为new
 remove <name>		# 删除对远程仓库name的追踪
 set-head <name>		# 为远程仓库设置或删除默认分支
-set-branches <name> <branch>	# 改变远程仓库的分支列表
+set-branches [--add] <name> <branchs>	# 改变远程仓库<name>所要追踪的分支列表。用于在初始化远程仓库之后追踪指定的分支。
 show <name>			# 显示远程仓库name与本地仓库之间分支的对应关系
 get-url <name>		# 检索远程分支的url
 set-url <name> <newurl>			# 改变远程分支的url
@@ -38,5 +38,8 @@ git push
 git remote add myrepo https://gitee.com/myname/newrepo.git
 git fetch myrepo
 git push myrepo local-branch
+
+# 仅追踪远程仓库abc的master分支
+git remote set-branches abc master
 ```
 
